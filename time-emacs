@@ -1,0 +1,3 @@
+#! /bin/sh
+
+time $(dirname $0)/run-emacs -l "$(dirname $0)/init.el" -batch --eval '(message "hello")'

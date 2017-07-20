@@ -1,0 +1,7 @@
+#! /bin/sh -e
+
+mkdir -p /tmp/emacs-config/
+ln -snf $(dirname $(readlink -e $0)) /tmp/emacs-config/.emacs.d
+
+nix-build default.nix
+HOME=/tmp/emacs-config ./result/bin/emacs "$@"
