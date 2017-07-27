@@ -4,9 +4,11 @@
 
 let
   myEmacs = pkgs.emacs;
-  emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+  emacsPackagesNg = (pkgs.emacsPackagesNgGen myEmacs);
+  emacsWithPackages = emacsPackagesNg.emacsWithPackages;
+  customPackages = import ./pkgs { inherit pkgs emacsPackagesNg; };
 in
-  emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
+  emacsWithPackages (epkgs: customPackages ++ (with epkgs.melpaStablePackages; [
   ]) ++ (with epkgs; [
     use-package
     diminish

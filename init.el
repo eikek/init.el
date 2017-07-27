@@ -541,7 +541,7 @@
   (setq org-clock-history-length 25)
   (setq org-clock-into-drawer t)
   (setq org-clock-out-remove-zero-time-clocks t)
-  (load-file (f-join user-emacs-directory "pkgs" "helm-org-clock" "helm-org-clock.el"))  
+  (load "helm-org-clock.el")
   (defun my/org-clock-id (id)
     (save-excursion
       (org-id-goto id)
