@@ -481,7 +481,9 @@
           ("e3" "Ausgabe Teilen CHF" entry (file+headline "~/org/expenses/2017.org" "Teilen")
            "** %^{what} %^g\n %^{date}p %^{chf}p" :prepend t :empty-lines 1)
           ("e4" "Ausgabe Teilen EUR" entry (file+headline "~/org/expenses/2017.org" "Teilen")
-           "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1))))
+           "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1)
+          ("e5" "Mittag BC" entry (file+headline "~/org/expenses/2017.org" "Sonstiges")
+           "** Mittag BC   :lebensbedarf:\n %^{date}p %^{chf}p" :prepend t :empty-lines 1))))
 
 (use-package org-bullets
   :if window-system
