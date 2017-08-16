@@ -505,7 +505,8 @@
   (setq org-agenda-files "~/org/agenda")
   (setq org-agenda-filter-preset '("-later"))
   (setq org-agenda-log-mode-items '(closed state clock))
-  (use-package org-contacts))
+  ;(use-package org-contacts)
+  )
 
 (use-package org-crypt
   :commands (org-encrypt-entries org-encrypt-entry org-decrypt-entries org-decrypt-entry)
