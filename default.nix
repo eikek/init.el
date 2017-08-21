@@ -9,7 +9,18 @@ let
   customPackages = import ./pkgs { inherit pkgs emacsPackagesNg; };
 in
   emacsWithPackages (epkgs: customPackages ++ (with epkgs.melpaStablePackages; [
-  ]) ++ (with epkgs; [
+  ]) ++ (with epkgs.orgPackages; [
+
+    org-plus-contrib
+
+  ]) ++ (with epkgs.elpaPackages; [
+
+    nlinum
+    rainbow-mode
+    auctex
+    excorporate
+
+  ]) ++ (with epkgs.melpaPackages; [
     use-package
     diminish
     dash
@@ -33,7 +44,7 @@ in
     which-key
     golden-ratio
     anzu
-    nlinum
+#    nlinum
 
     solarized-theme
     reykjavik-theme
@@ -52,7 +63,7 @@ in
     htmlize
     restclient
 
-    org-plus-contrib
+#    org-plus-contrib
     org-bullets
     ob-restclient
     ob-mongo
@@ -76,7 +87,7 @@ in
     helm-gtags
     emmet-mode
     web-mode
-    rainbow-mode
+#    rainbow-mode
     adoc-mode
     yaml-mode
     goto-chg
@@ -106,9 +117,9 @@ in
     elfeed
     undo-tree
     beacon
-    auctex
+#    auctex
     nameless
     slack
-    excorporate
+#    excorporate
     play-routes-mode
   ]))
