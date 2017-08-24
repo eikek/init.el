@@ -1228,6 +1228,15 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; hide-lines
+
+(use-package hide-lines
+  :commands (hide-lines-show-all
+             hide-lines
+             hide-lines-matching
+             hide-lines-not-matching))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; password-store
 
 (use-package password-store

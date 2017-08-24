@@ -31,6 +31,7 @@ in
     buffer-move
     eyebrowse
     rainbow-delimiters
+    hide-lines
 
     company
     company-auctex
@@ -44,7 +45,6 @@ in
     which-key
     golden-ratio
     anzu
-#    nlinum
 
     solarized-theme
     reykjavik-theme
@@ -63,7 +63,6 @@ in
     htmlize
     restclient
 
-#    org-plus-contrib
     org-bullets
     ob-restclient
     ob-mongo
@@ -87,7 +86,6 @@ in
     helm-gtags
     emmet-mode
     web-mode
-#    rainbow-mode
     adoc-mode
     yaml-mode
     goto-chg
@@ -117,9 +115,7 @@ in
     elfeed
     undo-tree
     beacon
-#    auctex
     nameless
     slack
-#    excorporate
     play-routes-mode
   ]))
