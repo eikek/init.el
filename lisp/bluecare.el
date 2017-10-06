@@ -42,6 +42,7 @@ in issue number."
                     ("L" . "LARNAGS")
                     ("B" . "BLUEC")
                     ("P" . "PATSTAMM")
+                    ("W" . "BIW")
                     ("H" . "HINCLIENT")))
         (tag (org-get-tags-at nil t)))
     (-each tag
