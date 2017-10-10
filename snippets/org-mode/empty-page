@@ -1,0 +1,12 @@
+# name: empty latex page
+# key: _empty
+# --
+#+title:
+#+options: toc:nil num:nil \n:nil @:t ::t |:t ^:{} _:{} *:t ':t TeX:t LaTeX:t
+#+latex_header: \usepackage[utf8x]{inputenc}
+#+latex_header: \usepackage[margin=1cm]{geometry}
+
+#+begin_latex
+\thispagestyle{empty}
+\pagestyle{empty}
+#+end_latex

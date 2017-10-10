@@ -1,0 +1,75 @@
+# -*- mode: org -*-
+# name: org mode letter template
+# key: letter
+# --
+* settings                                                         :noexport:
+
+This is not exported, as stated by the tag =noexport=.
+
+#+begin_src elisp :exports both
+(require 'ox-koma-letter)
+#+end_src
+
+**  Title and subject can be optionally set.
+#+TITLE:
+#+SUBJECT:
+
+**  Personal Settings
+#+AUTHOR: Eike Kettner
+#+EMAIL: eike.kettner@posteo.de
+#+PHONE_NUMBER: +41 76 2784160, +41 44 520 1153
+#+CLOSING: freundliche Grüsse
+#+PLACE: Winterthur
+#+SIGNATURE: Eike Kettner
+
+**  The latex class option file
+
+There are predefined ones by koma-script:
+
+| class           | description                                    |
+|-----------------+------------------------------------------------|
+| SN              | Switzerland                                    |
+| SNleft          | Switzerland, but receiver address printed left |
+| DIN             | DIN                                            |
+| DINmtext        | a variant of DIN, address placed more at top   |
+| UScommerial9    |                                                |
+| UScommercial9DW |                                                |
+| NF              |                                                |
+
+#+LCO: SN
+
+**  Language
+
+The default language has been set in emacs init file ("de"). Override
+it here eventually (note, de-de is ngerman)
+
+#+LANGUAGE: de-de
+
+**  Other options
+| option        | description                                     |
+|---------------+-------------------------------------------------|
+| backaddress:t | show the sender as small line in window address |
+| phone         | print sender phone number                       |
+| email         | print email address                             |
+
+#+OPTIONS: backaddress:t phone:nil
+
+# #+LATEX_HEADER: \setkomavar{firsthead}{}
+# #+LATEX_HEADER: \newkomavar*[Vers.-Nr.]{assurance}  add a new field to reference line
+# #+LATEX_HEADER: \setkomavar{assurance}{756.4769.8134.39}
+
+
+* absender adresse                                                     :from:
+Schützenstrasse 81
+CH-8400 Winterthur
+
+* empfänger                                                              :to:
+Ronny Schlumpfheim
+Oberer Gesangweg 13a
+87211 Rümpfnasenberg
+Deutschland
+
+* Lieber Ronny,
+
+es ist ja eine Ewigkeit her und nun endlich, schreibe ich nochmal. Ein
+riesen Mißt ißt daß.

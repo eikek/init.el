@@ -1,0 +1,10 @@
+# name: local database config template
+# key: ldb
+# --
+
+#+header: :engine postgresql
+#+header: :cmdline -h localhost -U java -d $1
+#+header: :dbpassword java
+#+begin_src sql
+$0
+#+end_src

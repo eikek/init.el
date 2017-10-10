@@ -1,0 +1,7 @@
+# name: mongo database src blockier
+# key: mongo
+# --
+
+#+begin_src mongo :db $1 :port 27018
+$0
+#+end_src
