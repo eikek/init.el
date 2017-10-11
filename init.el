@@ -396,6 +396,10 @@
   :disabled t
   :if (display-graphic-p))
 
+(use-package leuven-theme
+  :disabled t
+  :if (display-graphic-p))
+
 (use-package powerline
   :disabled t
   :config

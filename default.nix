@@ -52,6 +52,7 @@ in
     zerodark-theme
     boron-theme
     darktooth-theme
+    leuven-theme
     smart-mode-line
     smart-mode-line-powerline-theme
 
