@@ -361,7 +361,7 @@
   :disabled t)
 
 (use-package boron-theme
-;;  :disabled t
+  :disabled t
   :if (display-graphic-p)
   :config
   (transparency 95))
@@ -378,7 +378,9 @@
   :disabled t)
 
 (use-package darktooth-theme
-  :if (not (display-graphic-p)))
+  :disabled t
+;  :if (not (display-graphic-p))
+  )
 
 (use-package soft-stone-theme
   :disabled t
@@ -397,8 +399,9 @@
   :if (display-graphic-p))
 
 (use-package leuven-theme
-  :disabled t
-  :if (display-graphic-p))
+;;  :disabled t
+  :if (display-graphic-p)
+  )
 
 (use-package powerline
   :disabled t
