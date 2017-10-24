@@ -222,6 +222,34 @@ given."
    :subscribed-channels '(production random general)))
 
 
+(use-package sql
+  :config
+  (setq sql-ms-program "~/bin/sqsh")
+  (setq sql-sybase-program "~/bin/sqsh")
+  (setq sql-ms-options '("-w" "300" "-n" "on")))
+
+(defun sql-comint-ms (product options)
+  "Create comint buffer and connect to Microsoft SQL Server."
+  ;; Put all parameters to the program (if defined) in a list and call
+  ;; make-comint.
+  (let ((params options))
+    (if (not (string= "" sql-server))
+        (setq params (append (list "-S" sql-server) params)))
+    (if (not (string= "" sql-database))
+        (setq params (append (list "-D" sql-database) params)))
+    (if (not (string= "" sql-user))
+    (setq params (append (list "-U" sql-user) params)))
+    (if (not (string= "" sql-password))
+    (setq params (append (list "-P" sql-password) params))
+      (if (string= "" sql-user)
+      ;; if neither user nor password is provided, use system
+      ;; credentials.
+      (setq params (append (list "-E") params))
+    ;; If -P is passed to ISQL as the last argument without a
+    ;; password, it's considered null.
+    (setq params (append params (list "-P")))))
+    (sql-comint product params)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (provide 'bluecare)
