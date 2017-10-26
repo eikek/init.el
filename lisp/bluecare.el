@@ -43,7 +43,8 @@ in issue number."
                     ("B" . "BLUEC")
                     ("P" . "PATSTAMM")
                     ("W" . "BIW")
-                    ("H" . "HINCLIENT")))
+                    ("H" . "HINCLIENT")
+                    ("Z" . "ZRLA")))
         (tag (org-get-tags-at nil t)))
     (-each tag
       (lambda (name)
