@@ -49,7 +49,7 @@ in
     solarized-theme
     reykjavik-theme
     spike-theme
-    zerodark-theme
+#    zerodark-theme
     boron-theme
     darktooth-theme
     leuven-theme
