@@ -378,8 +378,8 @@
   :disabled t)
 
 (use-package darktooth-theme
-  :disabled t
-;  :if (not (display-graphic-p))
+;;  :disabled t
+;;  :if (not (display-graphic-p))
   )
 
 (use-package soft-stone-theme
@@ -399,7 +399,7 @@
   :if (display-graphic-p))
 
 (use-package leuven-theme
-;;  :disabled t
+  :disabled t
   :if (display-graphic-p)
   )
 
@@ -415,7 +415,7 @@
     :defer t)
   :config
   (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'light)
+  (setq sml/theme 'dark)
   (sml/setup))
 
 
