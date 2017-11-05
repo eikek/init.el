@@ -346,9 +346,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
-(use-package zenburn-theme
-  :disabled t)
-
 (use-package solarized-theme
   :config
   (load-theme 'solarized-dark t)
@@ -378,17 +375,21 @@
   :disabled t)
 
 (use-package darktooth-theme
-;;  :disabled t
-;;  :if (not (display-graphic-p))
-  )
+  :disabled t
+  :if (not (display-graphic-p)))
 
 (use-package soft-stone-theme
   :disabled t
   :if (display-graphic-p))
 
-(use-package sunny-day-theme
+(use-package soft-charcoal-theme
+  :config
+  (transparency 95))
+
+(use-package colonoscopy-theme
   :disabled t
-  :if (display-graphic-p))
+  :config
+  (transparency 95))
 
 (use-package deep-thought-theme
   :disabled t
@@ -400,8 +401,7 @@
 
 (use-package leuven-theme
   :disabled t
-  :if (display-graphic-p)
-  )
+  :if (display-graphic-p))
 
 (use-package powerline
   :disabled t

@@ -49,7 +49,9 @@ in
     solarized-theme
     reykjavik-theme
     spike-theme
-#    zerodark-theme
+    soft-stone-theme
+    soft-charcoal-theme
+    sublime-themes
     boron-theme
     darktooth-theme
     leuven-theme
