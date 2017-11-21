@@ -157,9 +157,7 @@ given."
               (mu4e-sent-folder . "/eknet/Sent")
               (mu4e-trash-folder . "/eknet/Trash")
               (mu4e-drafts-folder . "/eknet/Drafts")
-              (mu4e-compose-signature . ,(concat "gpg: AD7AC35E\n"
-                                                 "finger print: 137F BB0B 1639 D25F DC5D"
-                                                 " E59C B412 C5F5 AD7A C35E"))
+              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/sharry"))
               (smtpmail-smtp-server . "localhost")
               (smtpmail-smtp-user . ,(my/password-store-get-user "email/eknet.org"))
               (smtpmail-smtp-service . 2587)
@@ -181,9 +179,7 @@ given."
               (mu4e-sent-folder . "/posteo/Sent")
               (mu4e-trash-folder . "/posteo/Trash")
               (mu4e-drafts-folder . "/posteo/Drafts")
-              (mu4e-compose-signature . ,(concat "gpg: AD7AC35E\n"
-                                                 "finger print: 137F BB0B 1639 D25F DC5D"
-                                                 " E59C B412 C5F5 AD7A C35E"))
+              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/sharry"))
               (smtpmail-smtp-server . "localhost")
               (smtpmail-smtp-user . ,(my/password-store-get-user "email/posteo.de"))
               (smtpmail-smtp-service . 3587)
