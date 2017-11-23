@@ -19,6 +19,7 @@ in
     rainbow-mode
     auctex
     excorporate
+    hyperbole
 
   ]) ++ (with epkgs.melpaPackages; [
     use-package
@@ -73,6 +74,7 @@ in
 
     projectile
     helm-projectile
+    neotree
 
     dired-subtree
     dired-rainbow
@@ -91,6 +93,7 @@ in
     web-mode
     adoc-mode
     yaml-mode
+    sass-mode
     goto-chg
     geiser
     markdown-mode
