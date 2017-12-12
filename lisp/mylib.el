@@ -213,4 +213,8 @@ by using nxml's indentation rules."
     (my/duration-add "0:0" (format "0:%d"
                                    (/ (* 100 seconds) meters)))))
 
+(defun my/gen-uuid ()
+  (interactive)
+  (kill-new (s-trim (shell-command-to-string "uuidgen"))))
+
 (provide 'mylib)
