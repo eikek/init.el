@@ -56,6 +56,7 @@ in
     boron-theme
     darktooth-theme
     leuven-theme
+    sexy-monochrome-theme
     smart-mode-line
     smart-mode-line-powerline-theme
 

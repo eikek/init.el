@@ -346,6 +346,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
+(use-package sexy-monochrome-theme)
+
 (use-package solarized-theme
   :config
   (load-theme 'solarized-dark t)
@@ -383,6 +385,7 @@
   :if (display-graphic-p))
 
 (use-package soft-charcoal-theme
+  :disabled
   :config
   (transparency 95))
 
