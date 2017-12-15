@@ -57,6 +57,7 @@ in
     darktooth-theme
     leuven-theme
     sexy-monochrome-theme
+    badger-theme
     smart-mode-line
     smart-mode-line-powerline-theme
 
