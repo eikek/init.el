@@ -346,10 +346,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
-(use-package badger-theme)
-
-(use-package sexy-monochrome-theme
+(use-package badger-theme
   :disabled t)
+
+(use-package sexy-monochrome-theme)
 
 (use-package solarized-theme
   :config
