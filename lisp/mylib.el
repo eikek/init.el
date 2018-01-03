@@ -217,4 +217,16 @@ by using nxml's indentation rules."
   (interactive)
   (kill-new (s-trim (shell-command-to-string "uuidgen"))))
 
+(defun my/surround (value start end)
+  (goto-char end)
+  (insert value)
+  (goto-char start)
+  (insert value)
+  (goto-char (+ 2 end)))
+
+(defun my/surround-region (value)
+  (interactive "MValue: ")
+  (when (region-active-p)
+    (my/surround value (region-beginning) (region-end))))
+
 (provide 'mylib)
