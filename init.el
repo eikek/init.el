@@ -349,7 +349,8 @@
 (use-package badger-theme
   :disabled t)
 
-(use-package sexy-monochrome-theme)
+(use-package sexy-monochrome-theme
+  :disabled t)
 
 (use-package solarized-theme
   :config
@@ -364,14 +365,9 @@
 
 (use-package boron-theme
   :disabled t
-  :if (display-graphic-p)
+;;  :if (display-graphic-p)
   :config
-  (transparency 95))
-
-(use-package clues-theme
-  :disabled t
-  :config
-  (transparency 95))
+  (transparency 90))
 
 (use-package minimal-theme
   :disabled t)
@@ -380,8 +376,10 @@
   :disabled t)
 
 (use-package darktooth-theme
-  :disabled t
-  :if (not (display-graphic-p)))
+;;  :disabled t
+  ;;  :if (not (display-graphic-p))
+  :config
+  (transparency 90))
 
 (use-package soft-stone-theme
   :disabled t
