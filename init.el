@@ -350,7 +350,10 @@
   :disabled t)
 
 (use-package sexy-monochrome-theme
-  :disabled t)
+  ;;  :disabled t
+  :config
+  (transparency 85)
+  )
 
 (use-package solarized-theme
   :config
@@ -376,7 +379,7 @@
   :disabled t)
 
 (use-package darktooth-theme
-;;  :disabled t
+  :disabled t
   ;;  :if (not (display-graphic-p))
   :config
   (transparency 90))
@@ -1539,7 +1542,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; hyperbole
 
-(use-package hyperbole)
+(use-package hyperbole
+  :disabled t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; stuff for work
