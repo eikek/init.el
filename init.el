@@ -70,6 +70,11 @@
 
 (blink-cursor-mode 0)
 
+;; deactivate suspend keys in graphic mode
+(when (display-graphic-p)
+  (unbind-key "C-x C-z")
+  (unbind-key "C-z"))
+
 ;; set emacs window title
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
