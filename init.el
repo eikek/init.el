@@ -491,15 +491,15 @@
         org-reverse-note-order t)
   (setq org-capture-templates
         '(("e" "Ausgaben")
-          ("e1" "Ausgabe Sonstiges CHF" entry (file+headline "~/org/expenses/2017.org" "Sonstiges")
+          ("e1" "Ausgabe Sonstiges CHF" entry (file+headline "~/org/expenses/2018.org" "Sonstiges")
            "** %^{what} %^g\n %^{date}p %^{chf}p" :prepend t :empty-lines 1)
-          ("e2" "Ausgabe Sonstiges EUR" entry (file+headline "~/org/expenses/2017.org" "Sonstiges")
+          ("e2" "Ausgabe Sonstiges EUR" entry (file+headline "~/org/expenses/2018.org" "Sonstiges")
            "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1)
-          ("e3" "Ausgabe Teilen CHF" entry (file+headline "~/org/expenses/2017.org" "Teilen")
+          ("e3" "Ausgabe Teilen CHF" entry (file+headline "~/org/expenses/2018.org" "Teilen")
            "** %^{what} %^g\n %^{date}p %^{chf}p" :prepend t :empty-lines 1)
-          ("e4" "Ausgabe Teilen EUR" entry (file+headline "~/org/expenses/2017.org" "Teilen")
+          ("e4" "Ausgabe Teilen EUR" entry (file+headline "~/org/expenses/2018.org.org" "Teilen")
            "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1)
-          ("e5" "Mittag BC" entry (file+headline "~/org/expenses/2017.org" "Sonstiges")
+          ("e5" "Mittag BC" entry (file+headline "~/org/expenses/2018.org" "Sonstiges")
            "** Mittag BC   :lebensbedarf:\n %^{date}p %^{chf}p" :prepend t :empty-lines 1))))
 
 (use-package org-bullets
