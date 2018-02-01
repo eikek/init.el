@@ -49,7 +49,6 @@ in
 
     solarized-theme
     reykjavik-theme
-    spike-theme
     soft-stone-theme
     soft-charcoal-theme
     sublime-themes
