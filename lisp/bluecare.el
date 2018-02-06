@@ -249,4 +249,14 @@ given."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; logview settings
+
+(use-package logview
+  :init
+  (setq logview-additional-timestamp-formats
+        '(("Larnags Timestamp" (java-pattern . "yyyy-MM-dd HH:mm:ss.SSS+0100"))))
+  (setq logview-additional-submodes
+        '(("Larangs" (format . "TIMESTAMP [THREAD] [LEVEL] NAME -") (levels . "SLF4J")))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (provide 'bluecare)

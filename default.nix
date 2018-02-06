@@ -125,4 +125,5 @@ in
     nameless
     slack
     play-routes-mode
+    logview
   ]))
