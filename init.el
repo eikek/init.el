@@ -852,6 +852,7 @@
 
 (use-package web-mode
   :mode ("\\.phtml\\'"
+         "\\.scala.html\\'"
          "\\.tpl\\.php\\'"
          "\\.[agj]sp\\'"
          "\\.as[cp]x\\'"
