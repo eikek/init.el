@@ -351,19 +351,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
+(use-package eziam-dark-theme
+  :config
+  (transparency 90))
+
 (use-package badger-theme
   :disabled t)
 
 (use-package sexy-monochrome-theme
-  ;;  :disabled t
+  :disabled t
   :config
-  (transparency 85)
-  )
+  (transparency 85))
 
 (use-package solarized-theme
+  :disabled t
   :config
-  (load-theme 'solarized-dark t)
-  :disabled t)
+  (load-theme 'solarized-dark t))
 
 (use-package reykjavik-theme
   :disabled t)

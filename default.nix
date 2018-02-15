@@ -55,6 +55,7 @@ in
     boron-theme
     darktooth-theme
     leuven-theme
+    eziam-theme
     sexy-monochrome-theme
     badger-theme
     smart-mode-line
