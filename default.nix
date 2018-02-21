@@ -121,7 +121,7 @@ in
     dictcc
     jabber
     elfeed
-    undo-tree
+    #undo-tree
     beacon
     nameless
     slack
