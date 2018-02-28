@@ -353,7 +353,8 @@
 
 (use-package eziam-dark-theme
   :config
-  (transparency 90))
+  (transparency 90)
+  (setq rainbow-delimiters-max-face-count 3))
 
 (use-package badger-theme
   :disabled t)
