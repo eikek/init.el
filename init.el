@@ -597,6 +597,27 @@
 \[DEFAULT-PACKAGES]
 \[PACKAGES]
 \[EXTRA]"))
+
+    ;; moderncv
+    (add-to-list 'org-latex-classes
+                 '("mymoderncv"
+                   "\\documentclass\{moderncv\}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage[ngerman]{babel}
+\\name{Eike}{Kettner}
+\\social[github]{eikek}
+\\email{eike.kettner@posteo.de}
+\\homepage{https://eknet.org}
+\\phone[mobile]{+41~(76)~278~4160}
+\\address{Arbergstrasse 7c}{8405 Winterthur}{Schweiz}
+\[NO-DEFAULT-PACKAGES]
+\[NO-PACKAGES]
+\[EXTRA]"
+                   ("\\section{%s}" . "\\section{%s}")
+                   ("\\subsection{%s}" . "\\subsection{%s}")))
+
+
     (setq org-koma-letter-default-class "my-letter")))
 
 (use-package ox-publish

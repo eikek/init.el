@@ -73,6 +73,12 @@ in
     ob-restclient
     ob-mongo
     org-tree-slide
+    ox-asciidoc
+    ox-gfm
+    ox-jira
+    ox-mediawiki
+    ox-pandoc
+    ox-twbs
 
     projectile
     helm-projectile
