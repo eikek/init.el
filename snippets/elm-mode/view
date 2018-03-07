@@ -1,0 +1,13 @@
+# name: elm view file
+# key: eview
+# --
+module $1.View exposing (view)
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
+
+import $1.Data exposing (..)
+
+view: String -> Model -> Html Msg
+view lang model =
+    div [][]

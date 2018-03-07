@@ -1,0 +1,14 @@
+# name: elm model file
+# key: edata
+# --
+module $1.Data exposing (..)
+
+type alias Model =
+    {
+    }
+
+empty: Model
+empty = {}
+
+type Msg
+    = Dummy

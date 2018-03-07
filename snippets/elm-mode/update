@@ -1,0 +1,10 @@
+# name: elm update file
+# key: eupdate
+# --
+module $1.Update exposing (update)
+
+import $1.Data exposing (..)
+
+update: Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+    model ! []
