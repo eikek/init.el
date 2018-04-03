@@ -853,9 +853,13 @@
 ;;         Abort and go back to the location where the search was started.
 (use-package ggtags
   :commands ggtags-mode
-  :mode  (("\\.java" . ggtags-mode))
   :config
-  (use-package helm-gtags :demand t))
+  (use-package helm-gtags :demand t)
+  :init
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                (ggtags-mode 1)))))
 
 
 
