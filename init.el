@@ -352,7 +352,7 @@
 ;;; theme
 
 (use-package eziam-dark-theme
-  :disabled t
+;;  :disabled t
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
@@ -395,7 +395,7 @@
   (transparency 90))
 
 (use-package soft-stone-theme
-;;  :disabled t
+  :disabled t
   :if (display-graphic-p))
 
 (use-package soft-charcoal-theme
