@@ -229,4 +229,19 @@ by using nxml's indentation rules."
   (when (region-active-p)
     (my/surround value (region-beginning) (region-end))))
 
+(defun my/replace-region (start end func)
+  "Run a function over the region and replace the content with
+  the result (current buffer)."
+  (save-excursion
+    (let ((text (delete-and-extract-region start end)))
+      (insert (funcall func text)))))
+
+(defun my/urlencode-region (start end)
+  (interactive "r")
+  (my/replace-region start end 'url-hexify-string))
+
+(defun my/urldecode-region (start end)
+  (interactive "r")
+  (my/replace-region start end 'url-unhex-string))
+
 (provide 'mylib)
