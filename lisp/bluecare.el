@@ -253,9 +253,13 @@ given."
 
 (use-package logview
   :init
-  (setq logview-additional-timestamp-formats
-        '(("Larnags Timestamp" (java-pattern . "yyyy-MM-dd HH:mm:ss.SSS+0100"))))
-  (setq logview-additional-submodes
+  (let ((sec (car (current-time-zone))))
+    (if (= sec 7200) ;; summer time
+        (setq logview-additional-timestamp-formats
+              '(("Larnags Timestamp" (java-pattern . "yyyy-MM-dd HH:mm:ss.SSS+0200"))))
+      (setq logview-additional-timestamp-formats
+            '(("Larnags Timestamp" (java-pattern . "yyyy-MM-dd HH:mm:ss.SSS+0100"))))))
+  ( logview-additional-submodes
         '(("Larangs" (format . "TIMESTAMP [THREAD] [LEVEL] NAME -") (levels . "SLF4J")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
