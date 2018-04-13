@@ -259,7 +259,7 @@ given."
               '(("Larnags Timestamp" (java-pattern . "yyyy-MM-dd HH:mm:ss.SSS+0200"))))
       (setq logview-additional-timestamp-formats
             '(("Larnags Timestamp" (java-pattern . "yyyy-MM-dd HH:mm:ss.SSS+0100"))))))
-  ( logview-additional-submodes
+  (setq logview-additional-submodes
         '(("Larangs" (format . "TIMESTAMP [THREAD] [LEVEL] NAME -") (levels . "SLF4J")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
