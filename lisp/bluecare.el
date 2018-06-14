@@ -44,6 +44,7 @@ in issue number."
                     ("P" . "PATSTAMM")
                     ("W" . "BIW")
                     ("H" . "HINCLIENT")
+                    ("R" . "ZRC")
                     ("Z" . "ZRLA")))
         (tag (org-get-tags-at nil t)))
     (-each tag
