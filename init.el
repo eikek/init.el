@@ -489,6 +489,7 @@
   ;; running scala code with ammonite
   (setq org-babel-scala-command "amm")
   (setq org-babel-scala-wrapper-method "%s")
+  (load-file (concat user-emacs-directory "lisp/ob-scala.el"))
 
   (let ((ditaa-path (s-trim (shell-command-to-string "nix-shell -p ditaa --run 'realpath -e \"$(dirname $(which ditaa))/../lib/ditaa.jar\"'"))))
     (setq org-ditaa-jar-path ditaa-path))
