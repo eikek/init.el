@@ -1460,7 +1460,7 @@
   ;;(setq mu4e-compose-context-policy nil)
   
   (setq mu4e-contexts (my/mu4e-make-contexts))
-  (set-face-foreground 'mu4e-unread-face "#4169e1")
+  (set-face-foreground 'mu4e-unread-face "deep sky blue")
   (setq message-send-mail-function 'smtpmail-send-it)
   (setq mu4e-maildir "~/Mail")
   (setq mail-user-agent 'mu4e-user-agent)

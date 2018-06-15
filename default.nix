@@ -62,7 +62,6 @@ in
     smart-mode-line-powerline-theme
 
     magit
-    git-timemachine
     git-gutter
     git-gutter-fringe
 
