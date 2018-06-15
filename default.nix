@@ -46,6 +46,7 @@ in
     which-key
     golden-ratio
     anzu
+    nyan-mode
 
     solarized-theme
     reykjavik-theme
