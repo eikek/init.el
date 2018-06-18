@@ -89,7 +89,7 @@ by using nxml's indentation rules."
 
 (defun my/td-search-tid (tid)
   (interactive "MTid: ")
-  (helm-swoop :$query (format "%x" (string-to-int tid))))
+  (helm-swoop :$query (format "%x" (string-to-number tid))))
 
 (defun my/td-count-threads ()
   (let ((c 0))
@@ -171,8 +171,8 @@ by using nxml's indentation rules."
                                     (reverse (s-split ":" a t))
                                     (reverse (s-split ":" b t)))))
          (sums (-map (lambda (pair)
-                       (+ (string-to-int (car pair))
-                          (string-to-int (cdr pair))))
+                       (+ (string-to-number (car pair))
+                          (string-to-number (cdr pair))))
                      parts))
          (result (-non-nil (-reduce-r-from
                             (lambda (n l)
@@ -207,7 +207,7 @@ by using nxml's indentation rules."
          (-reduce-from
           (lambda (secs pair)
             (+ secs (* (car pair)
-                       (string-to-int (cdr pair)))))
+                       (string-to-number (cdr pair)))))
           0
           (-zip-fill "0" (list 1 60 3600) (reverse (s-split ":" duration))))))
     (my/duration-add "0:0" (format "0:%d"
