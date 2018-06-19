@@ -190,6 +190,8 @@ by using nxml's indentation rules."
      ((= 3 (length result)) (format "%s:%02d:%02d" (car result) (second result) (third result))))))
 
 (defun my/duration-add (&rest a)
+  "Add duration strings like `1:33' and `2:45' (in min:sec or
+hour:min:sec format)."
   (if (null a)
       nil
     (-reduce 'my/duration-add1 a)))
