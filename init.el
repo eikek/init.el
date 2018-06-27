@@ -352,7 +352,7 @@
 ;;; theme
 
 (use-package eziam-dark-theme
-;;  :disabled t
+  :disabled t
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
@@ -417,8 +417,11 @@
   :if (display-graphic-p))
 
 (use-package leuven-theme
-  :disabled t
-  :if (display-graphic-p))
+;;  :disabled t
+  :if (display-graphic-p)
+  :config
+  (transparency 90)
+  (setq rainbow-delimiters-max-face-count 3))
 
 (use-package powerline
   :disabled t
@@ -511,7 +514,10 @@
           ("e4" "Ausgabe Teilen EUR" entry (file+headline "~/org/expenses/2018.org.org" "Teilen")
            "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1)
           ("e5" "Mittag BC" entry (file+headline "~/org/expenses/2018.org" "Sonstiges")
-           "** Mittag BC   :lebensbedarf:\n %^{date}p %^{chf}p" :prepend t :empty-lines 1))))
+           "** Mittag BC   :lebensbedarf:\n %^{date}p %^{chf}p" :prepend t :empty-lines 1)
+          ("t" "Telefon")
+          ("t1" "Telefon HIN" entry (file+headline "~/org/bluecare/orgmode-pres.org" "Telefon")
+           "** TODO %^{what}\n %T\n%a\n\n%?" :prepend t :empty-lines 1))))
 
 (use-package org-bullets
   :if window-system
