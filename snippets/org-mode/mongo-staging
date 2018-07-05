@@ -1,0 +1,7 @@
+# name: mongo database src block
+# key: mongo-staging
+# --
+
+#+begin_src mongo :db $1 :port 27017 :host 192.168.13.80 :user bcuser :password CHANGEME
+$0
+#+end_src
