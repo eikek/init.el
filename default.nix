@@ -133,4 +133,5 @@ in
     slack
     play-routes-mode
     logview
+    swagger-to-org
   ]))
