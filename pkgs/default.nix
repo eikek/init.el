@@ -6,4 +6,5 @@
   (import ./colonoscopy-theme.nix {inherit pkgs emacsPackagesNg;})
   (import ./ox-cv.nix {inherit pkgs emacsPackagesNg;})
   (import ./git-timemachine.nix {inherit pkgs emacsPackagesNg;})
+  (import ./swagger-mode.nix {inherit pkgs emacsPackagesNg;})
 ]
