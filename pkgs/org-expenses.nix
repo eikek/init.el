@@ -1,6 +1,6 @@
 { pkgs, emacsPackagesNg }:
 
-emacsPackagesNg.melpaBuild rec {
+emacsPackagesNg.trivialBuild rec {
 
   pname = "org-expenses";
 
