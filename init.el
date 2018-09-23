@@ -511,7 +511,7 @@
            "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1)
           ("e3" "Ausgabe Teilen CHF" entry (file+headline "~/org/expenses/2018.org" "Teilen")
            "** %^{what} %^g\n %^{date}p %^{chf}p" :prepend t :empty-lines 1)
-          ("e4" "Ausgabe Teilen EUR" entry (file+headline "~/org/expenses/2018.org.org" "Teilen")
+          ("e4" "Ausgabe Teilen EUR" entry (file+headline "~/org/expenses/2018.org" "Teilen")
            "** %^{what} %^g\n %^{date}p %^{eur}p" :prepend t :empty-lines 1)
           ("e5" "Mittag BC" entry (file+headline "~/org/expenses/2018.org" "Sonstiges")
            "** Mittag BC   :lebensbedarf:\n %^{date}p %^{chf}p" :prepend t :empty-lines 1))))
