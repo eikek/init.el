@@ -352,7 +352,7 @@
 ;;; theme
 
 (use-package eziam-dark-theme
-;;  :disabled t
+  :disabled t ;; last 
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
@@ -417,7 +417,7 @@
   :if (display-graphic-p))
 
 (use-package leuven-theme
-  :disabled t
+;;  :disabled t
   :if (display-graphic-p)
   :config
   (transparency 90)
