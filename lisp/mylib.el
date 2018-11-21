@@ -164,6 +164,15 @@ by using nxml's indentation rules."
   (define-key m (kbd "M-SPC") 'my/td-next-thread))
 
 
+(defun my/duration-to-minutes (duration)
+  "Converts a duration string in format `mm:ss' or `hh:mm:ss'
+into minutes."
+  (let ((pairs (-zip-fill 0 (-map 'string-to-number
+                                  (reverse (s-split ":" duration)))
+                          `(,(/ 1.0 60) 1 60))))
+    (-sum (-map (lambda (p) (* (car p) (cdr p))) pairs))))
+
+
 (defun my/duration-add1 (a b)
   "Add duration strings like `1:33' and `2:45' that are in
 `minute:second' or `hour:minute:second' format."
@@ -215,7 +224,16 @@ hour:min:sec format)."
     (my/duration-add "0:0" (format "0:%d"
                                    (/ (* 100 seconds) meters)))))
 
+(defun my/swim-stroke-rate (duration strokes)
+  "Calculate stroke rate give a duration string in `mm:ss' or
+`hh:mm:ss' and the number of strokes."
+  (/ strokes (my/duration-to-minutes duration)))
+
+(defun my/swim-stroke-length (meter strokes)
+  (/ (float meter) (float strokes)))
+
 (defun my/gen-uuid ()
+  "Generate random uuid and put it in the kill ring."
   (interactive)
   (kill-new (s-trim (shell-command-to-string "uuidgen"))))
 
