@@ -264,4 +264,33 @@ hour:min:sec format)."
   (interactive "r")
   (my/replace-region start end 'url-unhex-string))
 
+(defun my/get-screen-size ()
+  "Return the size of connected screen in mm in a cons cell where
+  car is x and cdr is y."
+  (read (shell-command-to-string "xrandr |grep -w connected |head -n1 | awk '{print \"( \" $12 \" . \" $14 \")\"}' | sed 's/m//g'")))
+
+(defun my/get-screen-size-inch ()
+  (let* ((sz (my/get-screen-size))
+         (x (/ (car sz) 10.0 2.54))
+         (y (/ (cdr sz) 10.0 2.54)))
+    `(,x . ,y)))
+
+(defun my/get-screen-resolution ()
+  "Return the screen resolution in dots as a cons cell where car
+  is x and cdr is y."
+  (read (shell-command-to-string "xrandr | grep -w connected|head -n1|awk '{print $3}' | awk -F'[x+]' '{print \"(\" $1 \" . \" $2 \")\"}'")))
+
+(defun my/get-optimal-dpi ()
+  (let ((size (my/get-screen-size-inch))
+        (reso (my/get-screen-resolution)))
+    `(,(/ (car reso) (car size)) ,(/ (cdr reso) (cdr size)))))
+
+(defun my/set-dpi (dpi)
+  (let ((cmd (format "xrandr --dpi %s ; echo 'Xft.dpi: %s' | xrdb -merge" dpi dpi)))
+    (shell-command-to-string cmd)))
+
+(defun my/set-optimal-dpi ()
+  (let ((dpi (floor (car (my/get-optimal-dpi)))))
+    (my/set-dpi dpi)))
+
 (provide 'mylib)
