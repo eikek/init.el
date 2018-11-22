@@ -390,7 +390,7 @@
 
 (use-package darktooth-theme
   :disabled t
-  ;;  :if (not (display-graphic-p))
+  :if (not (display-graphic-p))
   :config
   (transparency 90))
 
