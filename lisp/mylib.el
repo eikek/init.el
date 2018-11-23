@@ -267,7 +267,7 @@ hour:min:sec format)."
 (defun my/get-screen-size ()
   "Return the size of connected screen in mm in a cons cell where
   car is x and cdr is y."
-  (read (shell-command-to-string "xrandr |grep -w connected |head -n1 | awk '{print \"( \" $12 \" . \" $14 \")\"}' | sed 's/m//g'")))
+  (read (shell-command-to-string "xrandr |grep -w connected |tail -n1 | awk '{print \"( \" $12 \" . \" $14 \")\"}' | sed 's/m//g'")))
 
 (defun my/get-screen-size-inch ()
   (let* ((sz (my/get-screen-size))
@@ -278,7 +278,7 @@ hour:min:sec format)."
 (defun my/get-screen-resolution ()
   "Return the screen resolution in dots as a cons cell where car
   is x and cdr is y."
-  (read (shell-command-to-string "xrandr | grep -w connected|head -n1|awk '{print $3}' | awk -F'[x+]' '{print \"(\" $1 \" . \" $2 \")\"}'")))
+  (read (shell-command-to-string "xrandr | grep -w connected|tail -n1|awk '{print $3}' | awk -F'[x+]' '{print \"(\" $1 \" . \" $2 \")\"}'")))
 
 (defun my/get-optimal-dpi ()
   (let ((size (my/get-screen-size-inch))
