@@ -70,9 +70,11 @@ in
     restclient
 
     org-bullets
+    org-tree-slide
+    org-journal
+    org-jira
     ob-restclient
     ob-mongo
-    org-tree-slide
     ox-asciidoc
     ox-gfm
     ox-jira
