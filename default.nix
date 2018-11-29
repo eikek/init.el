@@ -74,6 +74,7 @@ in
     org-journal
     org-jira
     ob-restclient
+    ob-elvish
     ob-mongo
     ox-asciidoc
     ox-gfm
@@ -115,6 +116,7 @@ in
     ensime
     elm-mode
     clojure-mode
+    elvish-mode
     monroe
     cider
     slime
