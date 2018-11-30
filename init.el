@@ -351,8 +351,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
+(use-package flucui-dark-theme
+;;  :disabled t
+  :load-path "./lisp"
+  :config
+  (transparency 90))
+
 (use-package eziam-dark-theme
-;  :disabled t ;; last 
+  :disabled t ;; last 
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
