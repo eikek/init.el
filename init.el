@@ -493,6 +493,7 @@
      (ditaa . t)
      (plantuml . t)
      (dot . t)
+     (elvish . t)
      (C . t)
      (R . t)))
   ;; running scala code with ammonite
