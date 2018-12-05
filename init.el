@@ -1286,6 +1286,7 @@
     :config
     (helm-projectile-on))
 
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'helm)
   (setq projectile-remember-window-configs t)
   (setq projectile-switch-project-action 'helm-projectile)
@@ -1293,7 +1294,7 @@
   (setq projectile-mode-line '(:eval
                                (format " Ƥ[%s]"
                                        (projectile-project-name))))
-  (projectile-global-mode))
+  (projectile-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
