@@ -1,0 +1,6 @@
+# name: xsd complex type
+# key: xct
+# --
+<xs:complexType name="${1:name}">
+  $0
+</xs:complexType>

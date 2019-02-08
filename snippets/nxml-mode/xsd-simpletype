@@ -1,0 +1,6 @@
+# name: xsd simple type
+# key: xst
+# --
+<xs:simpleType name="${1:name}">
+  $0
+</xs:simpleType>
