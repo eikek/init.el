@@ -1183,7 +1183,7 @@
             browse-url-generic-program "open"
             browse-url-generic-args '("-a" "/Applications/Firefox.app"))
     (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program "conkeror")))
+          browse-url-generic-program "qutebrowser")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; magit
