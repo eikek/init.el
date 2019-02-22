@@ -1660,6 +1660,8 @@
           `(lambda ()
              (let ((elapsed (float-time (time-subtract (current-time)
                                                        my/emacs-start-time))))
+               (message "Auto save org buffers every 10 minutes")
+               (run-at-time "5 minutes" 600 'org-save-all-org-buffers)
                (message "Loading %s...done (%.3fs) [after-init]"
                         ,load-file-name elapsed)))
           t)
