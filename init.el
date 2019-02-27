@@ -27,8 +27,9 @@
 
 (use-package mylib
   :load-path "lisp"
-  :commands (my/host-p my/host-starts-with-p transparency)
+  :commands (my/host-p my/host-starts-with-p transparency my/copy-to-terminal)
   :bind (("M-j" . my/join-line)
+         ("C-x C-y" . my/copy-to-terminal)
          ("C-h C-f" . find-function)))
 
 ;; backup stuff

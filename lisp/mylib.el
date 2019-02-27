@@ -293,4 +293,22 @@ hour:min:sec format)."
   (let ((dpi (floor (car (my/get-optimal-dpi)))))
     (my/set-dpi dpi)))
 
+(defun my/eval-stumpwm (s)
+  "Use stumpish to evaluate some sexp in stumpwm."
+  (message "%s"
+           (with-temp-buffer
+             (call-process stumpwm-shell-program nil (current-buffer) nil
+                           "eval"
+                           s)
+             (delete-char -1)
+             (buffer-string))))
+
+(defun my/copy-to-terminal (start end)
+  "Paste the current region into the terminal. Requires stumpwmrc
+to contain the corresponding functions."
+  (interactive "r")
+  (copy-region-as-kill start end)
+  (my/eval-stumpwm "(progn (ror-terminal) (keys-to-terminal '(\"C-a\" \"C-y\")))"))
+
+
 (provide 'mylib)
