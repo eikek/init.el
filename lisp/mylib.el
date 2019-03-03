@@ -295,6 +295,7 @@ hour:min:sec format)."
 
 (defun my/eval-stumpwm (s)
   "Use stumpish to evaluate some sexp in stumpwm."
+  (require 'stumpwm-mode)
   (message "%s"
            (with-temp-buffer
              (call-process stumpwm-shell-program nil (current-buffer) nil
@@ -308,7 +309,6 @@ hour:min:sec format)."
 to contain the corresponding functions."
   (interactive "r")
   (copy-region-as-kill start end)
-  (my/eval-stumpwm "(progn (ror-terminal) (keys-to-terminal '(\"C-a\" \"C-y\")))"))
-
+  (my/eval-stumpwm "(progn (in-package :stumpwm) (ror-terminal) (keys-to-terminal '(\"C-a\" \"C-y\")))"))
 
 (provide 'mylib)
