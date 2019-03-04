@@ -1585,8 +1585,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; neotree
 
+(defun my/neotree-toggle ()
+  (interactive)
+  (if (eq major-mode 'neotree-mode)
+      (neotree-hide)
+    (neotree)))
+
 (use-package neotree
-  :bind* ("<f8>" . neotree))
+  :bind* ("<f8>" . my/neotree-toggle))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; hyperbole
