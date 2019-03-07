@@ -1141,6 +1141,19 @@
     (kill-new (s-trim sha))
     (message "sha256: %s" (s-trim sha))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; scad-mode (for OpenSCAD)
+(use-package scad-mode
+  :mode (("\\.scad" . scad-mode))
+  :config
+  (add-hook 'scad-mode-hook (lambda () (setq c-basic-offset 2))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Ansible
+
+(use-package ansible
+  :commands (ansible))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ess
@@ -1649,7 +1662,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (oauth2 use-package)))
+ '(package-selected-packages (quote (ansible oauth2 use-package)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

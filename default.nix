@@ -138,4 +138,6 @@ in
     play-routes-mode
     logview
     swagger-to-org
+    scad-mode
+    ansible
   ]))
