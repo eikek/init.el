@@ -1146,7 +1146,17 @@
 (use-package scad-mode
   :mode (("\\.scad" . scad-mode))
   :config
-  (add-hook 'scad-mode-hook (lambda () (setq c-basic-offset 2))))
+  (add-hook 'scad-mode-hook (lambda () (setq c-basic-offset 2)))
+  (defun my/increment-number-at-point-and-save (arg)
+    (interactive "p")
+    (my/increment-number-at-point arg)
+    (save-buffer))
+  (defun my/decrement-number-at-point-and-save (arg)
+    (interactive "p")
+    (my/decrement-number-at-point arg)
+    (save-buffer))
+  (bind-key "M-<up>" 'my/increment-number-at-point-and-save scad-mode-map)
+  (bind-key "M-<down>" 'my/decrement-number-at-point-and-save scad-mode-map))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

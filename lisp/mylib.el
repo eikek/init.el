@@ -311,4 +311,25 @@ to contain the corresponding functions."
   (copy-region-as-kill start end)
   (my/eval-stumpwm "(progn (in-package :stumpwm) (ror-terminal) (keys-to-terminal '(\"C-a\" \"C-y\")))"))
 
+(defun my/change-number-at-point (change)
+  (let ((n (thing-at-point 'number))
+        (bounds (bounds-of-thing-at-point 'word)))
+    (when (and n bounds)
+      (delete-region (car bounds) (cdr bounds))
+      (insert (number-to-string (funcall change n)))
+      (message "%s" n))))
+
+(defun my/increment-number-at-point (arg)
+  (interactive "p")
+  (my/change-number-at-point
+   (lambda (n)
+     (+ (or arg 1) n))))
+
+(defun my/decrement-number-at-point (arg)
+  (interactive "p")
+  (my/change-number-at-point
+   (lambda (n)
+     (- n (or arg 1)))))
+
+
 (provide 'mylib)
