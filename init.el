@@ -30,7 +30,8 @@
   :commands (my/host-p my/host-starts-with-p transparency my/copy-to-terminal)
   :bind (("M-j" . my/join-line)
          ("C-x C-y" . my/copy-to-terminal)
-         ("C-h C-f" . find-function)))
+         ("C-h C-f" . find-function)
+         ("<f1>" . my/visit-now)))
 
 ;; backup stuff
 (use-package files
@@ -573,9 +574,7 @@
   :bind (("C-c C-x C-i" . org-clock-in)
          ("C-c C-x C-o" . org-clock-out)
          ("C-c C-x C-x" . org-clock-in-last)
-         ("C-c C-x C-q" . org-clock-cancel)
-         ("<f1>" . my/org-clock-admin)
-         ("<f2>" . my/org-clock-bc-org))
+         ("C-c C-x C-q" . org-clock-cancel))
   :config
   (setq org-clock-persist t)
   (org-clock-persistence-insinuate)
@@ -1338,6 +1337,7 @@
              my/password-store-get-entry
              my/password-store-get-key
              my/password-store-get-user)
+  :bind (("<f2>" . password-store-copy))
   :defer 2
   :init
   (defun my/password-store-get-entry (entry)
@@ -1663,6 +1663,11 @@
 	   (server-file (expand-file-name server-name server-dir)))
       (unless (f-exists? server-file)
         (server-start)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; open important file
+
+(my/visit-now)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; customize stuff by emacs

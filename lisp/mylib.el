@@ -331,5 +331,8 @@ to contain the corresponding functions."
    (lambda (n)
      (- n (or arg 1)))))
 
+(defun my/visit-now ()
+  (interactive)
+  (find-file "~/org/now.org"))
 
 (provide 'mylib)
