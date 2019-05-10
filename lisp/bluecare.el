@@ -146,28 +146,6 @@ given."
                                              ,(my/password-store-get-user "bluecare/login")
                                              ,(password-store-get "bluecare/login")))))
     ,(make-mu4e-context
-      :name "eknet.org"
-      :enter-func (lambda () (mu4e-message "Switch to eknet.org context"))
-      :match-func (lambda (msg)
-                    (when msg
-                      (mu4e-message-contact-field-matches msg
-                                                          '(:to :cc :bcc)
-                                                          "@eknet.org$")))
-      :vars `((user-mail-address . "eike@eknet.org")
-              (user-full-name . "Eike")
-              (mu4e-maildir . "~/Mail")
-              (mu4e-sent-folder . "/eknet/Sent")
-              (mu4e-trash-folder . "/eknet/Trash")
-              (mu4e-drafts-folder . "/eknet/Drafts")
-              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/mpc4s"))
-              (smtpmail-smtp-server . "localhost")
-              (smtpmail-smtp-user . ,(my/password-store-get-user "email/eknet.org"))
-              (smtpmail-smtp-service . 2587)
-              (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/eknet.org" "mailhost")
-                                             25
-                                             ,(my/password-store-get-user "email/eknet.org")
-                                             ,(password-store-get "email/eknet.org")))))
-    ,(make-mu4e-context
       :name "posteo.de"
       :enter-func (lambda () (mu4e-message "Switch to posteo.de context"))
       :match-func (lambda (msg)
