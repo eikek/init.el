@@ -1498,6 +1498,7 @@
   (add-to-list 'mu4e-view-actions
                '("View in browser" . my/mu4e-msgv-action-view-in-browser) t)
 
+  ;; see https://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries
   (add-to-list 'mu4e-bookmarks
                `(,(concat "date:2w..now AND NOT m:/eknet/spam AND NOT "
                           "m:/eknet/LearnSpam AND NOT "
