@@ -1622,7 +1622,7 @@
 
 (use-package bluecare
   :load-path "lisp"
-  :if (my/host-starts-with-p "bluecare")
+  :if (my/host-starts-with-p "n76")
   :demand t
   :init
   (add-hook 'org-mode-hook
