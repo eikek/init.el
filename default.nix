@@ -140,4 +140,5 @@ in
     swagger-to-org
     scad-mode
     ansible
+    fish-mode
   ]))
