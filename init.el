@@ -63,7 +63,6 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(line-number-mode t)
 (column-number-mode t)
 
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -316,11 +315,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; linum
 
-(use-package nlinum
+(use-package display-line-numbers 
   :commands (nlinum-mode)
   :defer 2
   :config
-  (add-hook 'prog-mode-hook 'nlinum-mode))
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -354,13 +353,19 @@
 ;;; theme
 
 (use-package flucui-dark-theme
-;;  :disabled t
+  :disabled t
   :load-path "./lisp"
   :config
   (transparency 90))
 
 (use-package eziam-dark-theme
-  :disabled t ;; last 
+  :disabled t ;; last
+  :config
+  (transparency 90)
+  (setq rainbow-delimiters-max-face-count 3))
+
+(use-package eziam-light-theme
+  :disabled t 
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
@@ -426,6 +431,27 @@
 
 (use-package leuven-theme
   :disabled t
+  :if (display-graphic-p)
+  :config
+  (transparency 90)
+  (setq rainbow-delimiters-max-face-count 3))
+
+(use-package spacemacs-light-theme
+  :disabled t
+  :if (display-graphic-p)
+  :config
+  (transparency 90)
+  (setq rainbow-delimiters-max-face-count 3))
+
+(use-package gruvbox-light-medium-theme
+  :disabled t
+  :if (display-graphic-p)
+  :config
+  (transparency 90)
+  (setq rainbow-delimiters-max-face-count 3))
+
+(use-package autumn-light-theme
+;  :disabled t
   :if (display-graphic-p)
   :config
   (transparency 90)
@@ -1262,6 +1288,7 @@
 ;;; emms
 
 (use-package emms
+  :disabled t
   :commands (emms emms-play-dired emms-add-dired)
   :bind (("<XF86AudioNext>" . emms-next)
          ("<XF86AudioPrev>" . emms-pause)

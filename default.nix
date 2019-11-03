@@ -61,8 +61,12 @@ in
     badger-theme
     smart-mode-line
     smart-mode-line-powerline-theme
+    spacemacs-theme
+    gruvbox-theme
+    autumn-light-theme
 
     magit
+    forge
     git-gutter
     git-gutter-fringe
 
@@ -113,7 +117,6 @@ in
     groovy-mode
     js2-mode
     scala-mode
-    ensime
     elm-mode
     clojure-mode
     elvish-mode
