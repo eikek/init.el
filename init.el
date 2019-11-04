@@ -1,4 +1,9 @@
 ;;; init.el -- emacs magic
+;;;
+;;; Commentary:
+;;;   My Emacs config file.
+;;;
+;;; Code:
 
 (defconst my/emacs-start-time (current-time))
 
@@ -42,6 +47,10 @@
      kept-new-versions 6
      kept-old-versions 2
      version-control t)))
+
+(use-package window
+  :bind* (("C-–" . other-window)
+          ("C-•" . other-window)))
 
 ;; some emacs gui tweaks
 (setq use-file-dialog nil)
@@ -102,34 +111,62 @@
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
 (defun transparency (value)
-   "Sets the transparency of the frame window. 0=transparent/100=opaque"
+   "Set the transparency value of the frame window. `VALUE' may be
+0=transparent to 100=opaque."
    (interactive "nTransparency Value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
 
-(use-package autumn-light-theme
+(use-package moody
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
+(use-package minions
+  :config (minions-mode 1))
+
+(use-package gruvbox-dark-hard-theme
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
-(use-package smart-mode-line
-  :demand t
-  :init
-  (use-package rich-minority
-    :defer t)
-  :config
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'dark)
-  (sml/setup))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; show parens
 (use-package paren
   :config
   (show-paren-mode t))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ivy / counsel / swiper
+
+(use-package ivy
+  :demand t
+  :diminish (ivy-mode)
+  :config
+  (ivy-mode 1)
+  (setq ivy-height 15)
+  (setq ivy-use-virtual-buffers t))
+
+(use-package swiper
+  :bind (("C-s" . swiper)
+         ("C-c C-r" . ivy-resume)))
+
+(use-package counsel
+  :bind (("C-x C-f" . counsel-find-file)
+         ("C-x b" . counsel-switch-buffer)
+         ("C-x C-b" . counsel-ibuffer)
+         ("M-x" . counsel-M-x)
+         ("C-x l" . counsel-locate)
+         ("C-h f" . counsel-describe-function)
+         ("C-h v" . counsel-describe-variable)
+         (:map counsel-find-file-map
+               ("C-." . counsel-up-directory))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -151,11 +188,32 @@
 
 (use-package eyebrowse
   :diminish eyebrowse-mode
-  :commands (eyebrowse-switch-to-window-config-2)
+  :commands (eyebrowse-switch-to-window-config-2 eyebrowse-prev-window-config eyebrowse-next-window-config)
   :bind* (("C-<" . eyebrowse-prev-window-config)
           ("C->" . eyebrowse-next-window-config))
   :config
   (eyebrowse-mode t))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; windmove
+
+(use-package windmove
+  :bind (("s-C-<right>" . windmove-right)
+         ("s-C-<left>" . windmove-left)
+         ("s-C-<up>" . windmove-up)
+         ("s-C-<down>" . windmove-down)
+         ("S-C-<up>" . enlarge-window)
+         ("S-C-<down>" . shrink-window)
+         ("S-C-<right>" . enlarge-window-horizontally)
+         ("S-C-<left>" . shrink-window-horizontally)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; golden-ratio-mode
+
+(use-package golden-ratio-mode
+  :commands (golden-ratio-mode golden-ratio))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -171,7 +229,6 @@
 ;;; rainbow-delimiters
 
 (use-package rainbow-delimiters
-  :defer 2
   :commands rainbow-delimiters-mode
   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
@@ -242,8 +299,7 @@
 
 (use-package display-line-numbers
   :commands (display-line-numbers-mode)
-  :defer 2
-  :config
+  :init
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 
@@ -251,9 +307,7 @@
 ;;; which-key (replaces guide-key)
 
 (use-package which-key
-  :defer 2
   :diminish which-key-mode
-  :commands which-key-mode
   :config
   (which-key-setup-side-window-bottom)
   (which-key-mode))
@@ -272,7 +326,6 @@
 
 (use-package whitespace-cleanup-mode
   :diminish whitespace-cleanup-mode
-  :defer 2
   :config
   (global-whitespace-cleanup-mode))
 
@@ -282,8 +335,7 @@
 
 (use-package delsel
   :config
-  (pending-delete-mode 1)
-  :defer 2)
+  (pending-delete-mode 1))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -299,7 +351,6 @@
 ;;; yasnippet setup
 
 (use-package yasnippet
-  :defer 2
   :diminish yas-minor-mode
   :commands (yas-expand yas-minor-mode yas-reload-all)
   :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
@@ -350,20 +401,25 @@
 
 (use-package dired
   :commands (dired dired-jump)
+  :bind (("C-x C-d" . dired-jump)
+	 ("C-x d" . dired-jump))
   :config
   (setq dired-listing-switches "-alh")
   (setq dired-dwim-target t)
   (use-package dired-filter
     :config
-    (bind-key "f" dired-filter-mark-map dired-mode-map))
-  (use-package dired-subtree
-    :demand t
-    :bind (:map dired-mode-map
-           ("i" . dired-subtree-cycle)))
-  (use-package dired-rainbow
-    :demand t))
+    (bind-key "f" dired-filter-mark-map dired-mode-map)))
+
+(use-package dired-rainbow
+  :after dired)
+
+(use-package dired-subtree
+  :after dired
+  :bind (:map dired-mode-map
+	      ("i" . dired-subtree-cycle)))
 
 (use-package stripe-buffer
+  :disabled t
   :commands (turn-on-stripe-buffer-mode stripe-listify-buffer)
   :init
   (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
@@ -404,10 +460,8 @@
 ;;; projectile
 
 (use-package projectile
-  :defer 2
   :bind (("C-c pp" . ivy-projectile-switch-project))
   :config
-
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-remember-window-configs t)
@@ -415,8 +469,11 @@
   (setq projectile-find-dir-includes-top-level t)
   (setq projectile-mode-line '(:eval
                                (format " Ƥ[%s]"
-                                       (projectile-project-name))))
-  (projectile-mode))
+                                       (projectile-project-name)))))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -424,32 +481,6 @@
 
 (use-package restclient
   :commands (restclient-mode))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ivy / counsel / swiper
-
-(use-package ivy
-  :demand t
-  :diminish (ivy-mode)
-  :config
-  (ivy-mode 1)
-  (setq ivy-height 20)
-  (setq ivy-use-virtual-buffers t))
-
-(use-package swiper
-  :bind (("C-s" . swiper)
-         ("C-c C-r" . ivy-resume)))
-
-(use-package counsel
-  :bind (("C-x C-f" . counsel-find-file)
-         ("C-x b" . counsel-ibuffer)
-         ("M-x" . counsel-M-x)
-         ("C-x l" . counsel-locate)
-         ("C-h f" . counsel-describe-function)
-         ("C-h v" . counsel-describe-variable)
-         (:map counsel-find-file-map
-               ("C-." . counsel-up-directory))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -480,7 +511,7 @@
 ;;; nyan-mode (the cat… ;-))
 
 (use-package nyan-mode
-  :defer 2
+  :disabled t
   :config
   (nyan-mode))
 
@@ -496,12 +527,9 @@
 ;;; password-store
 
 (use-package password-store
-  :commands (password-store-get
-             my/password-store-get-entry
-             my/password-store-get-key
-             my/password-store-get-user)
+  :demand t
+  :commands (password-store-get)
   :bind (("<f2>" . password-store-copy))
-  :defer 2
   :init
   (defun my/password-store-get-entry (entry)
     (s-lines (password-store--run-show entry)))
@@ -530,6 +558,29 @@
     (setq browse-url-browser-function 'browse-url-generic
           browse-url-generic-program "qutebrowser")))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; keycast
+
+(use-package keycast
+  :commands (keycast-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; vterm
+
+(use-package vterm
+  :commands (vterm))
+
+(use-package vterm-toggle
+  :bind (("<f6>" . vterm-toggle)
+         ("C-<f6>" . vterm-toggle-cd)
+         (:map vterm-mode-map
+               ("s-n" . vterm-toggle-forward)
+               ("s-p" . vterm-toggle-backward)
+               ("<f6>" . vterm-toggle-cd)))
+  :init
+  (setq vterm-toggle-fullscreen-p nil))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; org mode
@@ -553,8 +604,7 @@
   (setq org-loop-over-headlines-in-active-region t)
   (setq org-ellipsis " ⤵");; ⤵ ≫
   (use-package ob-restclient
-    :commands (org-babel-execute:restclient)
-    :defer t)
+    :commands (org-babel-execute:restclient))
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -585,8 +635,6 @@
                       "nix-shell -p ditaa --run 'realpath -e \"$(dirname $(which ditaa))/../lib/ditaa.jar\"'"))))
     (setq org-ditaa-jar-path ditaa-path))
 
-  ;; org-habit
-  (add-to-list 'org-modules 'org-habit t)
   ;; show all habits in the agenda, press K to hide/show habit items
   (setq org-habit-show-habits-only-for-today nil)
   (setq org-refile-targets '((nil . (:maxlevel . 3)))
@@ -704,7 +752,6 @@
 
 (use-package presentation
   :load-path "lisp"
-  :defer t
   :commands (my/presentation-enable my/presentation-disable my/presentation-mode))
 
 (use-package org-expenses
@@ -814,7 +861,12 @@
    mu4e-view-show-addresses t
    mu4e-use-fancy-chars t
    mu4e-view-show-images t
-   mu4e-view-image-max-width 800)
+   mu4e-view-image-max-width 800
+   mu4e-compose-crypto-reply-plain-policy 'sign
+   mu4e-compose-dont-reply-to-self t)
+  (-each '("eike.kettner@eknet.org" "eike@eknet.org")
+    (lambda (addr)
+      (add-to-list 'mu4e-user-mail-address-list addr)))
   ;; setup helm to find email addresses from mu4e
   (setq my/mu4e-emails-helm-source
         '((name . "Emails")
@@ -1057,6 +1109,7 @@
 (use-package ansible
   :commands (ansible))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ess
 
@@ -1092,10 +1145,6 @@
       (unless (f-exists? server-file)
         (server-start)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; open important file
-
-;;(my/visit-now)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; customize stuff by emacs

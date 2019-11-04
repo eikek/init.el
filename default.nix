@@ -15,7 +15,6 @@ in
 
   ]) ++ (with epkgs.elpaPackages; [
 
-    nlinum
     rainbow-mode
     auctex
     excorporate
@@ -46,9 +45,11 @@ in
 
     which-key
     golden-ratio
-    anzu
     nyan-mode
+    keycast
 
+    moody
+    minions
     solarized-theme
     reykjavik-theme
     soft-stone-theme
@@ -70,6 +71,7 @@ in
     forge
     git-gutter
     git-gutter-fringe
+    git-timemachine
 
     htmlize
     restclient
@@ -84,13 +86,11 @@ in
     ox-asciidoc
     ox-gfm
     ox-jira
-    ox-mediawiki
     ox-pandoc
     ox-twbs
 
     projectile
-    helm-projectile
-    neotree
+    counsel-projectile
 
     dired-subtree
     dired-rainbow
@@ -100,12 +100,10 @@ in
     whitespace-cleanup-mode
     move-text
     yasnippet
-    helm-c-yasnippet
     expand-region
     multiple-cursors
     paredit
     ggtags
-    helm-gtags
     emmet-mode
     web-mode
     adoc-mode
@@ -138,7 +136,6 @@ in
     dictcc
     jabber
     elfeed
-    #undo-tree
     beacon
     nameless
     slack
@@ -153,4 +150,7 @@ in
     lsp-ui
     company-lsp
     dap-mode
+    vterm
+    vterm-toggle
+
   ]))

@@ -2,7 +2,11 @@
 
 I install emacs using [nix](https://nixos.org/nix), a package manager
 available for Linux and OSX. It allows to install emacs and all
-desired packages and keep it updated as you wish.
+desired packages and keep it up-to-date.
+
+Packages are taken from the
+[nixpkgs](https://github.com/NixOS/nixpkgs) collection, which creates
+them from melpa and other sources.
 
 Emacs and its packages are defined in `default.nix`. It can be build using
 
@@ -33,9 +37,9 @@ in
 }
 ```
 
-The list of paths to `default.nix` must be adjusted as
-appropriate. Then using `nix-env -iA myemacs` (or `nix-env -iA
-nixos.myemacs`) installs this specific emacs in you local environment.
+The list of paths to `default.nix` must be adjusted as appropriate.
+Then using `nix-env -iA myemacs` (or `nix-env -iA nixos.myemacs`)
+installs this specific emacs in your local environment.
 
 More information about how to install emacs this way is in
 the
