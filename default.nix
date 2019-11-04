@@ -39,9 +39,10 @@ in
     company-nixos-options
     company-quickhelp
 
-    helm
-    helm-ag
-    helm-swoop
+    ivy
+    ivy-hydra
+    counsel
+    swiper
 
     which-key
     golden-ratio
@@ -94,6 +95,7 @@ in
     dired-subtree
     dired-rainbow
     dired-filter
+    editorconfig
     stripe-buffer
     whitespace-cleanup-mode
     move-text
@@ -113,10 +115,12 @@ in
     geiser
     markdown-mode
     flymd
+    flycheck
     plantuml-mode
     groovy-mode
     js2-mode
     scala-mode
+    sbt-mode
     elm-mode
     clojure-mode
     elvish-mode
@@ -144,4 +148,9 @@ in
     scad-mode
     ansible
     fish-mode
+    lsp-mode
+    lsp-java
+    lsp-ui
+    company-lsp
+    dap-mode
   ]))
