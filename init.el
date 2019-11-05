@@ -103,7 +103,7 @@
 (setq-default tab-width 2
               indent-tabs-mode nil)
 
-(define-key global-map (kbd "RET") 'newline-and-indent)
+;;(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
@@ -558,11 +558,14 @@
     (setq browse-url-browser-function 'browse-url-generic
           browse-url-generic-program "qutebrowser")))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; keycast
 
 (use-package keycast
-  :commands (keycast-mode))
+  :commands (keycast-mode)
+  :config
+  (setq keycast-insert-after 'moody-mode-line-buffer-identification))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -901,7 +904,8 @@
          (java-mode . lsp))
   :config (setq lsp-prefer-flymake nil))
 
-(use-package lsp-ui)
+(use-package lsp-ui
+  :after lsp)
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp
@@ -911,6 +915,7 @@
   :after lsp)
 
 (use-package lsp-java-boot
+  :after lsp-java
   :hook ((lsp-mode . lsp-lense-mode)
          (java-mode . lsp-java-boot-lens-mode)))
 
@@ -969,7 +974,8 @@
 ;;; yaml mode
 
 (use-package yaml-mode
-  :mode "\\.yml")
+  :mode "\\.yml"
+  :config (setq yaml-indent-offset 2))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; goto-chg
