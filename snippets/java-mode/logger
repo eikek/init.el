@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: logger
+# key: logger
+# --
+private static final Logger logger = LoggerFactory.getLogger($0.class);

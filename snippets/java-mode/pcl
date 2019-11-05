@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pcl
+# key: pcl
+# --
+public final class $0 {
+
+}
