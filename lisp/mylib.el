@@ -82,7 +82,7 @@ by using nxml's indentation rules."
 
 (defun my/td-search-tid (tid)
   (interactive "MTid: ")
-  (helm-swoop :$query (format "%x" (string-to-number tid))))
+  (swiper (format "%x" (string-to-number tid))))
 
 (defun my/td-count-threads ()
   (let ((c 0))

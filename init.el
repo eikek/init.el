@@ -701,7 +701,6 @@
   (setq org-clock-history-length 25)
   (setq org-clock-into-drawer t)
   (setq org-clock-out-remove-zero-time-clocks t)
-  (load "helm-org-clock.el")
   (defun my/org-clock-id (id)
     (save-excursion
       (org-id-goto id)
@@ -866,19 +865,7 @@
    mu4e-compose-dont-reply-to-self t)
   (-each '("eike.kettner@eknet.org" "eike@eknet.org")
     (lambda (addr)
-      (add-to-list 'mu4e-user-mail-address-list addr)))
-  ;; setup helm to find email addresses from mu4e
-  (setq my/mu4e-emails-helm-source
-        '((name . "Emails")
-          (candidates . mu4e~contacts-for-completion)
-          (action . (lambda (candidate)
-                      (insert candidate)
-                      (message "%s" candidate)))))
-
-  (defun my/mu4e-find-email ()
-    (interactive)
-    (helm :sources 'my/mu4e-emails-helm-source)))
-
+      (add-to-list 'mu4e-user-mail-address-list addr))))
 
 
 
@@ -1066,9 +1053,7 @@
 (use-package nix-mode
   :mode "\\.nix"
   :config
-  (use-package helm-nixos-options
-    :bind (:map nix-mode-map
-                ("C-c C-n" . helm-nixos-options)))
+
   (use-package company-nixos-options
     :disabled t
     :commands (company-nixos-options)

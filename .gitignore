@@ -21,3 +21,5 @@ workspace/
 logview-*
 magnatune/
 result
+emojis/
+.edbi-*
