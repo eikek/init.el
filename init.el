@@ -123,7 +123,9 @@
   (moody-replace-vc-mode))
 
 (use-package minions
-  :config (minions-mode 1))
+  :config
+  (minions-mode 1)
+  (setq minions-direct '(projectile-mode)))
 
 (use-package gruvbox-dark-hard-theme
   :config
@@ -465,15 +467,14 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'ivy)
   (setq projectile-remember-window-configs t)
-  (setq projectile-switch-project-action 'magit-status)
   (setq projectile-find-dir-includes-top-level t)
-  (setq projectile-mode-line '(:eval
-                               (format " Ƥ[%s]"
-                                       (projectile-project-name)))))
+  (setq projectile-mode-line-prefix " Ƥ"))
 
 (use-package counsel-projectile
   :config
-  (counsel-projectile-mode))
+  (counsel-projectile-mode)
+;  (setq counsel-projectile-switch-project-action 'magit-status)
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -566,6 +567,12 @@
   :commands (keycast-mode)
   :config
   (setq keycast-insert-after 'moody-mode-line-buffer-identification))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; beacon
+(use-package beacon
+  :commands (beacon-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -899,10 +906,9 @@
 
 
 (use-package lsp-mode
-  ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
-         (java-mode . lsp)
-         (yaml-mode . lsp))
+         (yaml-mode . lsp)
+         (elm-mode . lsp))
   :commands (lsp)
   :config
   (setq lsp-prefer-flymake nil))
@@ -910,30 +916,52 @@
 (use-package lsp-ui
   :commands (lsp-ui-mode)
   :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (setq lsp-ui-peek-list-width 80)
+  (setq lsp-ui-doc-max-width 100)
+  (setq lsp-ui-doc-max-height 40)
+  (setq lsp-ui-flycheck-enable t)
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-doc-delay 0)
+
+  (defvar-local my/lsp-ui-doc-toggle-var nil)
+  (defun my/lsp-ui-doc-toggle ()
+    (interactive)
+    (if (not my/lsp-ui-doc-toggle-var)
+        (progn
+          (lsp-ui-doc-show)
+          (setq my/lsp-ui-doc-toggle-var t))
+      (progn
+        (lsp-ui-doc-hide)
+        (setq my/lsp-ui-doc-toggle-var nil))))
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)  
+  (bind-key "C-q" 'my/lsp-ui-doc-toggle lsp-ui-mode-map)
+  (bind-key "M-." 'lsp-ui-peek-find-definitions lsp-ui-mode-map)
+  (bind-key "M-?" 'lsp-ui-peek-find-references lsp-ui-mode-map)
+  (bind-key "M-@" 'lsp-ui-peek-find-implementation lsp-ui-mode-map))
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp
   :commands (company-lsp)
   :init (push 'company-lsp company-backends))
 
-(use-package lsp-treemacs
-  :commands (lsp-treemacs-errors-list))
-
 (use-package lsp-java
-  :after lsp-mode)
-
-(use-package lsp-yaml
+  :after lsp  
   :config
-  (setq lsp-yaml-server-command `(,(format "%sbin/yaml-language-server" user-emacs-directory) "--stdio")))
+  (add-hook 'java-mode-hook 'lsp)
+  (bind-key "M-*" 'lsp-treemacs-errors-list java-mode-map))
 
-(use-package lsp-java-boot
-  :disabled t  ;; this is for spring only
-  :after lsp-java
-  :hook ((lsp-mode . lsp-lense-mode)
-         (java-mode . lsp-java-boot-lens-mode)))
+(use-package lsp-elm)
 
+(use-package treemacs
+  :commands (treemacs)
+  :bind (("<f8>" . treemacs)
+         (:map treemacs-mode-map
+               ("<f8>" . treemacs-quit))))
 
+(use-package lsp-treemacs
+  :commands (lsp-treemacs-errors-list lsp-treemacs-symbols lsp-treemacs-java-deps-list))
 
 (use-package dap-mode
   :after lsp-mode
@@ -1161,7 +1189,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (ansible oauth2 use-package)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
