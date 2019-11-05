@@ -148,6 +148,8 @@ in
     lsp-mode
     lsp-java
     lsp-ui
+    lsp-treemacs
+    treemacs
     company-lsp
     dap-mode
     vterm
