@@ -901,23 +901,39 @@
 (use-package lsp-mode
   ;; Optional - enable lsp-mode automatically in scala files
   :hook ((scala-mode . lsp)
-         (java-mode . lsp))
-  :config (setq lsp-prefer-flymake nil))
+         (java-mode . lsp)
+         (yaml-mode . lsp))
+  :commands (lsp)
+  :config
+  (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
-  :after lsp)
+  :commands (lsp-ui-mode)
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp
+  :commands (company-lsp)
   :init (push 'company-lsp company-backends))
 
+(use-package lsp-treemacs
+  :commands (lsp-treemacs-errors-list))
+
 (use-package lsp-java
-  :after lsp)
+  :after lsp-mode)
+
+(use-package lsp-yaml
+  :config
+  (setq lsp-yaml-server-command `(,(format "%sbin/yaml-language-server" user-emacs-directory) "--stdio")))
 
 (use-package lsp-java-boot
+  :disabled t  ;; this is for spring only
   :after lsp-java
   :hook ((lsp-mode . lsp-lense-mode)
          (java-mode . lsp-java-boot-lens-mode)))
+
+
 
 (use-package dap-mode
   :after lsp-mode
