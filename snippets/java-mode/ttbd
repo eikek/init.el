@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ttbd
+# key: ttbd
+# --
+throw new UnsupportedOperationException("not implemented");
