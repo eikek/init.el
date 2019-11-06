@@ -50,22 +50,21 @@ in
 
     moody
     minions
-    solarized-theme
-    reykjavik-theme
-    soft-stone-theme
-    soft-charcoal-theme
-    sublime-themes
+    autumn-light-theme
+    badger-theme
     boron-theme
     darktooth-theme
-    leuven-theme
     eziam-theme
-    sexy-monochrome-theme
-    badger-theme
-    smart-mode-line
-    smart-mode-line-powerline-theme
-    spacemacs-theme
     gruvbox-theme
-    autumn-light-theme
+    leuven-theme
+    reykjavik-theme
+    sexy-monochrome-theme
+    soft-charcoal-theme
+    soft-stone-theme
+    solarized-theme
+    spacemacs-theme
+    sublime-themes
+    zenburn-theme
 
     magit
     forge
@@ -88,6 +87,7 @@ in
     ox-jira
     ox-pandoc
     ox-twbs
+    counsel-org-clock
 
     projectile
     counsel-projectile
