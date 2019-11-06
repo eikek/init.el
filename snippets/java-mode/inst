@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: inst
+# key: inst
+# --
+if ($1 instanceof $2) {
+   $2 ${3:value} = ($2) $1;
+   $0
+}

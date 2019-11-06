@@ -950,7 +950,13 @@
   :after lsp  
   :config
   (add-hook 'java-mode-hook 'lsp)
-  (bind-key "M-*" 'lsp-treemacs-errors-list java-mode-map))
+  (bind-key "C-M-e" 'lsp-treemacs-errors-list java-mode-map)
+  (bind-key "C-M-o" 'lsp-java-organize-imports java-mode-map)
+  (bind-key "C-M-a" 'lsp-java-add-import java-mode-map)
+  (bind-key "C-M-v" 'lsp-java-extract-to-local-variable java-mode-map)
+  (bind-key "C-M-r" 'lsp-rename java-mode-map)
+  (bind-key "M-n" 'flycheck-next-error java-mode-map)
+  (bind-key "M-p" 'flycheck-previous-error java-mode-map))
 
 (use-package lsp-elm)
 
