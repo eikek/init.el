@@ -27,12 +27,12 @@ nothing but whitespace between them.  It then indents the markup
 by using nxml's indentation rules."
   (interactive "r")
   (save-excursion
-      (nxml-mode)
-      (goto-char begin)
-      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
-        (backward-char) (insert "\n"))
-      (indent-region begin end))
-    (message "Ah, much better!"))
+    (nxml-mode)
+    (goto-char begin)
+    (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+      (backward-char) (insert "\n"))
+    (indent-region begin end))
+  (message "Ah, much better!"))
 
 ;; see http://stackoverflow.com/questions/23378271/how-do-i-display-ansi-color-codes-in-emacs-for-any-mode#23382008
 (defun display-ansi-colors ()
@@ -267,6 +267,13 @@ hour:min:sec format)."
          (x (/ (car sz) 10.0 2.54))
          (y (/ (cdr sz) 10.0 2.54)))
     `(,x . ,y)))
+
+(defun my/get-screen-width ()
+  "Return the diagonal of the connected screen in inches."
+  (let* ((c (my/get-screen-size-inch))
+         (x (car c))
+         (y (cdr c)))
+    (sqrt (+ (* x x) (* y y)))))
 
 (defun my/get-screen-resolution ()
   "Return the screen resolution in dots as a cons cell where car

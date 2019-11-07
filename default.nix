@@ -128,20 +128,17 @@ in
     nix-mode
     ess
     stumpwm-mode
-    emms
     password-store
     pass
     magnatune
     chee
     dictcc
-    jabber
     elfeed
     beacon
     nameless
     slack
     play-routes-mode
     logview
-    swagger-to-org
     scad-mode
     ansible
     fish-mode

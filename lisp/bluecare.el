@@ -76,40 +76,6 @@ given."
       (kill-new (buffer-string)))))
 
 
-(defun my/pdf-extract-text (file &optional method)
-  "Extract text from a pdf (doing ocr)."
-  (interactive (list (buffer-file-name) (completing-read "Via: " '(pdfbox jpedal) nil t)))
-  (unless (f-exists? file)
-    (user-error "file does not exist"))
-  (let* ((pdfimage (executable-find "pdfimage.scsh"))
-         (tesseract (executable-find "tesseract"))
-         (via (or method "pdfbox"))
-         (tempimagedir (make-temp-file "pdf-extract" t))
-         (outimage (f-join tempimagedir (concat (file-name-base file)
-                                                "-" via ".jpg")))
-         (buf (get-buffer-create (format "*%s-%s*" (file-name-base file) via))))
-    (message "convert first page of pdf to an image …")
-    (shell-command (concat pdfimage " "
-                           (if (s-equals-p via "pdfbox") "--no-jpedal " "--no-pdfbox ")
-                           file " "
-                           tempimagedir))
-    (unless (f-exists? outimage)
-      (error "output image file not found: %s" outimage))
-    (with-current-buffer buf
-      (erase-buffer)
-      (message "Doing OCR with tesseract …")
-      (shell-command (concat tesseract " "
-                             outimage " "
-                             "stdout "
-                             "-l deu -psm 1 "
-                             "--tessdata /run/current-system/sw/share/tessdata")
-                     (current-buffer)
-                     (current-buffer))
-      (mark-whole-buffer)
-      (fill-paragraph nil t))
-    (switch-to-buffer buf nil t)))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; settings
 
@@ -117,7 +83,7 @@ given."
   :commands (excorporate)
   :init
   (setq excorporate-configuration
-        '("eike.kettner@bluecare.ch" . "https://webmail/ews/exchange.asmx"))
+        '("eike.kettner@bluecare.ch" . "https://mail.bluecare.ch/ews/exchange.asmx"))
   :config
   (require 'excorporate-org))
 
@@ -177,14 +143,7 @@ given."
 
 
 (use-package play-routes-mode
-  :mode "routes")
-
-(with-eval-after-load 'jabber
-  (setq jabber-account-list
-        `(("eike@eknet.org"
-           (:password . ,(password-store-get "eknet.org/www"))
-           (:connection-type . starttls)
-           (:network-server . "localhost")))))
+  :mode ("routes" ".routes$"))
 
 (use-package slack
   :commands (slack-start)

@@ -106,7 +106,26 @@
 ;;(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; lisp/mylib
+
+(use-package mylib
+  :load-path "lisp"
+;  :commands (my/host-p my/host-starts-with-p my/copy-to-terminal)
+  :demand t
+  :bind (("M-j" . my/join-line)
+         ("C-x C-y" . my/copy-to-terminal)
+         ("C-h C-f" . find-function)
+         ("<f1>" . my/visit-now)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
+
+
+(let ((size (if (> (my/get-screen-width) 30)
+                120
+              110)))
+  (set-face-attribute 'default nil :font "Hack" :height size))
 
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
@@ -115,6 +134,8 @@
 0=transparent to 100=opaque."
    (interactive "nTransparency Value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
+
+(transparency 90)
 
 (use-package moody
   :config
@@ -170,20 +191,6 @@
          (:map counsel-find-file-map
                ("C-." . counsel-up-directory))))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; lisp/mylib
-
-(use-package mylib
-  :load-path "lisp"
-  :commands (my/host-p my/host-starts-with-p my/copy-to-terminal)
-  :demand t
-  :bind (("M-j" . my/join-line)
-         ("C-x C-y" . my/copy-to-terminal)
-         ("C-h C-f" . find-function)
-         ("<f1>" . my/visit-now))
-  :config
-  (transparency 90))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; eyebrowse – a window config manager
@@ -638,7 +645,6 @@
   ;; running scala code with ammonite
   (setq org-babel-scala-command "amm")
   (setq org-babel-scala-wrapper-method "%s")
-  (load-file (concat user-emacs-directory "lisp/ob-scala.el"))
 
   (let ((ditaa-path (s-trim
                      (shell-command-to-string
@@ -925,21 +931,30 @@
   (setq lsp-ui-doc-delay 0)
 
   (defvar-local my/lsp-ui-doc-toggle-var nil)
-  (defun my/lsp-ui-doc-toggle ()
-    (interactive)
-    (if (not my/lsp-ui-doc-toggle-var)
+  (defun my/lsp-ui-doc-toggle (arg)
+    (interactive "P")
+    (if arg
+        (lsp-describe-thing-at-point)
+      (if (not my/lsp-ui-doc-toggle-var)
+          (progn
+            (lsp-ui-doc-show)
+            (setq my/lsp-ui-doc-toggle-var t))
         (progn
-          (lsp-ui-doc-show)
-          (setq my/lsp-ui-doc-toggle-var t))
-      (progn
-        (lsp-ui-doc-hide)
-        (setq my/lsp-ui-doc-toggle-var nil))))
+          (lsp-ui-doc-hide)
+          (setq my/lsp-ui-doc-toggle-var nil)))))
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)  
   (bind-key "C-q" 'my/lsp-ui-doc-toggle lsp-ui-mode-map)
   (bind-key "M-." 'lsp-ui-peek-find-definitions lsp-ui-mode-map)
   (bind-key "M-?" 'lsp-ui-peek-find-references lsp-ui-mode-map)
-  (bind-key "M-@" 'lsp-ui-peek-find-implementation lsp-ui-mode-map))
+  (bind-key "M-@" 'lsp-ui-peek-find-implementation lsp-ui-mode-map)
+  (bind-key "M-s x" 'lsp-treemacs-errors-list lsp-ui-mode-map)
+  (bind-key "M-g a" 'lsp-ui-flycheck-list lsp-ui-mode-map)
+  (bind-key "M-n" 'flycheck-next-error lsp-ui-mode-map)
+  (bind-key "M-p" 'flycheck-previous-error lsp-ui-mode-map)
+  (bind-key "M-s r" 'lsp-rename lsp-ui-mode-map)
+  (bind-key "M-s F" 'lsp-format-buffer)
+  (bind-key "M-s f" 'lsp-format-region))
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp
@@ -950,13 +965,17 @@
   :after lsp  
   :config
   (add-hook 'java-mode-hook 'lsp)
-  (bind-key "C-M-e" 'lsp-treemacs-errors-list java-mode-map)
-  (bind-key "C-M-o" 'lsp-java-organize-imports java-mode-map)
-  (bind-key "C-M-a" 'lsp-java-add-import java-mode-map)
-  (bind-key "C-M-v" 'lsp-java-extract-to-local-variable java-mode-map)
-  (bind-key "C-M-r" 'lsp-rename java-mode-map)
-  (bind-key "M-n" 'flycheck-next-error java-mode-map)
-  (bind-key "M-p" 'flycheck-previous-error java-mode-map))
+  (bind-key "M-s o" 'lsp-java-organize-imports java-mode-map)
+  (bind-key "M-s v" 'lsp-java-extract-to-local-variable java-mode-map)
+  (bind-key "M-s a" 'lsp-java-add-import java-mode-map)
+  (bind-key "M-s i" 'lsp-java-add-unimplemented-methods java-mode-map)
+  (bind-key "M-s I" 'lsp-java-generate-overrides java-mode-map)
+  (bind-key "M-s t" 'lsp-java-add-throws java-mode-map)
+  (bind-key "M-s m" 'lsp-java-extract-method java-mode-map)
+  (bind-key "M-s c" 'lsp-java-extract-to-constant java-mode-map)
+  (bind-key "M-s E" 'lsp-java-generate-equals-and-hash-code)
+  (bind-key "M-s G" 'lsp-java-generate-getters-and-setters)
+  (bind-key "M-s S" 'lsp-java-generate-to-string))
 
 (use-package lsp-elm)
 
@@ -1196,12 +1215,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(send-mail-function (quote smtpmail-send-it)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:height 110 :family "DejaVu Sans Mono")))))
 
 
 (let ((elapsed (float-time (time-subtract (current-time)
@@ -1217,3 +1230,9 @@
                (message "Loading %s...done (%.3fs) [after-init]"
                         ,load-file-name elapsed)))
           t)
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:slant normal :weight normal :height 120 :width semi-expanded :foundry "SRC" :family "Hack")))))
