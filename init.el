@@ -596,7 +596,7 @@
                ("s-p" . vterm-toggle-backward)
                ("<f6>" . vterm-toggle-cd)))
   :init
-  (setq vterm-toggle-fullscreen-p nil))
+  (setq vterm-toggle-fullscreen-p t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
