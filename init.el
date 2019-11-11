@@ -843,22 +843,14 @@
   (setq mu4e-contexts (my/mu4e-make-contexts))
   (set-face-foreground 'mu4e-unread-face "deep sky blue")
   (setq message-send-mail-function 'smtpmail-send-it)
+  (setq smtpmail-stream-type 'starttls)
   (setq mu4e-maildir "~/Mail")
   (setq mail-user-agent 'mu4e-user-agent)
   (setq mml2015-use 'epg) ;; enable gpg/mime over epg
-  (setq org-mu4e-convert-to-html t)
-  (eval-after-load 'org
-    '(require 'org-mu4e))
   (setq mu4e-get-mail-command "offlineimap")
   (setq mu4e-update-interval nil)
 
-  (defun my/mu4e-render-html-message ()
-    (let ((dom (libxml-parse-html-region (point-min) (point-max))))
-      (erase-buffer)
-      (shr-insert-document dom)
-      (goto-char (point-min))))
-
-  (setq mu4e-html2text-command 'my/mu4e-render-html-message)
+  (setq mu4e-html2text-command 'mu4e-shr2text)
   ;;  (setq mu4e-html2text-command 'mu4e-shr2text)  later in mu4e…
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
@@ -883,6 +875,34 @@
     (lambda (addr)
       (add-to-list 'mu4e-user-mail-address-list addr))))
 
+(use-package org-mu4e
+  :commands (org-mail org-mu4e-compose-org-mode)
+  :config
+  (setq org-mu4e-convert-to-html t)
+  (defalias 'org-mail 'org-mu4e-compose-org-mode)
+
+  ;; redefine org~mu4e-mime-convert-to-html-maybe to use custom
+  ;; function when exporting to HTML; this is to add more export
+  ;; settings, i.e. disable the TOC.
+  (defun my/org-mu4e-mime-convert-to-html ()
+    (let ((org-export-with-author nil)
+          (org-export-with-date nil)
+          (org-export-with-email nil)
+          (org-export-with-section-numbers nil)
+          (org-export-with-title nil)
+          (org-export-with-toc nil))
+      (org~mu4e-mime-convert-to-html)))
+
+  ;; this is copy&paste from org-mu4e.el; replacing the last function
+  ;; call.
+  (defun org~mu4e-mime-convert-to-html-maybe ()
+    "Convert to html if `org-mu4e-convert-to-html' is non-nil.
+This function is called when sending a message (from
+`message-send-hook') and, if non-nil, sends the message as the
+rich-text version of what is assumed to be an org mode body."
+    (when org-mu4e-convert-to-html
+      (mu4e-message "Converting to html")
+      (my/org-mu4e-mime-convert-to-html))))
 
 
 
