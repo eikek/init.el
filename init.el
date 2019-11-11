@@ -121,11 +121,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
-
 (let ((size (if (> (my/get-screen-width) 30)
-                120
-              110)))
-  (set-face-attribute 'default nil :font "Hack" :height size))
+                135
+              120)))
+  (set-face-attribute 'default nil :font "AnonymousPro" :height size))
 
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
@@ -1139,6 +1138,7 @@ rich-text version of what is assumed to be an org mode body."
   :mode "\\.elm"
   :config
   (add-to-list 'company-backends 'company-elm)
+  (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
   (setq elm-tags-on-save nil))
 
 
