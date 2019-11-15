@@ -122,9 +122,11 @@
 ;;; theme
 
 (let ((size (if (> (my/get-screen-width) 30)
-                135
+                150
               120)))
-  (set-face-attribute 'default nil :font "AnonymousPro" :height size))
+  (set-face-attribute 'default nil
+                      :font "AnonymousPro"
+                      :height size))
 
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
