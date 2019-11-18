@@ -3,8 +3,8 @@
 # --
 module $1.Update exposing (update)
 
-import $1.Data exposing (..)
+import $1.Data exposing (Model, Msg(..))
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-    model ! []
+    (model, Cmd.none)

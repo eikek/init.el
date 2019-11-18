@@ -6,8 +6,8 @@ module $1.View exposing (view)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-import $1.Data exposing (..)
+import $1.Data exposing (Model, Msg(..))
 
-view: String -> Model -> Html Msg
-view lang model =
+view: Model -> Html Msg
+view model =
     div [][]

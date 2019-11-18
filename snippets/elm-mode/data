@@ -1,14 +1,14 @@
 # name: elm model file
 # key: edata
 # --
-module $1.Data exposing (..)
+module $1.Data exposing (Model, Msg(..), emptyModel)
 
 type alias Model =
     {
     }
 
-empty: Model
-empty = {}
+emptyModel: Model
+emptyModel = {}
 
 type Msg
     = Dummy
