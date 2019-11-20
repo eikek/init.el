@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: responses
+# key: responses
+# --
+responses:
+  200:
+    description: Ok
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/$0"
