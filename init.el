@@ -652,10 +652,14 @@
                       "nix-shell -p ditaa --run 'realpath -e \"$(dirname $(which ditaa))/../lib/ditaa.jar\"'"))))
     (setq org-ditaa-jar-path ditaa-path))
 
-  ;; show all habits in the agenda, press K to hide/show habit items
-  (setq org-habit-show-habits-only-for-today nil)
-  (setq org-refile-targets '((nil . (:maxlevel . 3)))
+  (defvar my-org-project-files nil)
+  (defun my/org-project-files ()
+     my-org-project-files)
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))
+                             (my/org-project-files . (:maxlevel . 2))
+                             (nil . (:maxlevel . 2)))
         org-reverse-note-order t)
+
   (setq org-capture-templates
         '(("e" "Ausgaben")
           ("e1" "Ausgabe Sonstiges CHF" entry (file+headline "~/org/expenses/2019.org" "Sonstiges")

@@ -1,5 +1,10 @@
 ;;; bluecare --- some fns regarding bc
 
+(add-to-list 'my-org-project-files
+             "~/org/bluecare2/blueconnect.org" t)
+(add-to-list 'my-org-project-files
+             "~/org/bluecare2/bluemedication.org" t)
+
 (defun bc/pretty-print-mongo-json (&optional n)
   (interactive (list 2))
   (let ((objregexp "\\s-*\\({\\|\\[\\)")
