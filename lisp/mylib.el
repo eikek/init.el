@@ -231,11 +231,21 @@ hour:min:sec format)."
   (kill-new (s-trim (shell-command-to-string "uuidgen"))))
 
 (defun my/random-string (len)
-  "Generates a random string of given bytes length and puts it in
+  "Generates a random string of LEN bytes length."
+  (let ((cmd (format "head --bytes %s /dev/urandom | base64 -w0" len)))
+    (s-replace-all '(("/" . "-") ("+" . "~")) (s-trim (shell-command-to-string cmd)))))
+
+(defun my/kill-random-string (len)
+  "Generates a random string of LEN bytes length and puts it in
 the kill ring."
   (interactive "nBytes: ")
-  (let ((cmd (format "head --bytes %s /dev/urandom | base64 -w0" len)))
-    (kill-new (s-trim (shell-command-to-string cmd)))))
+  (kill-new (my/random-string len)))
+
+(defun my/insert-random-string (len)
+  "Generates a random string of LEN bytes length and inserts it
+at point."
+  (interactive "nBytes: ")
+  (insert (my/random-string len)))
 
 (defun my/surround (value start end)
   (goto-char end)
