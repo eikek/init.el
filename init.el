@@ -1145,6 +1145,10 @@ rich-text version of what is assumed to be an org mode body."
   :config
   (add-to-list 'company-backends 'company-elm)
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+  (defun my/elm-compile-buffer ()
+    (interactive)
+    (elm-compile-buffer "/dev/null"))
+  (bind-key "C-c C-c" 'my/elm-compile-buffer elm-mode-map)
   (setq elm-tags-on-save nil))
 
 
