@@ -881,7 +881,7 @@
       (add-to-list 'mu4e-user-mail-address-list addr))))
 
 (use-package org-mu4e
-  :commands (org-mail org-mu4e-compose-org-mode)
+  :commands (org-store-link org-mail org-mu4e-compose-org-mode)
   :config
   (setq org-mu4e-convert-to-html t)
   (defalias 'org-mail 'org-mu4e-compose-org-mode)
