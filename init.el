@@ -149,7 +149,7 @@
   (minions-mode 1)
   (setq minions-direct '(projectile-mode)))
 
-(use-package gruvbox-dark-hard-theme
+(use-package autumn-light-theme
   :config
   (transparency 90)
   (setq rainbow-delimiters-max-face-count 3))
