@@ -277,7 +277,7 @@ at point."
 (defun my/get-screen-size ()
   "Return the size of connected screen in mm in a cons cell where
   car is x and cdr is y."
-  (read (shell-command-to-string "xrandr |grep -w connected |tail -n1 | awk '{print \"( \" $(NF - 2) \" . \" $NF \")\"}' | sed 's/m//g'")))
+  (read (shell-command-to-string "xrandr |grep -w connected | grep mm |tail -n1 | awk '{print \"( \" $(NF - 2) \" . \" $NF \")\"}' | sed 's/m//g'")))
 
 (defun my/get-screen-size-inch ()
   (let* ((sz (my/get-screen-size))
