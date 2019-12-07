@@ -473,6 +473,7 @@
   :bind (("C-c pp" . ivy-projectile-switch-project))
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-indexing-method 'hybrid)
   (setq projectile-completion-system 'ivy)
   (setq projectile-remember-window-configs t)
   (setq projectile-find-dir-includes-top-level t)
