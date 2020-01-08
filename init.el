@@ -1148,8 +1148,14 @@ rich-text version of what is assumed to be an org mode body."
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
   (defun my/elm-compile-buffer ()
     (interactive)
-    (elm-compile-buffer "/dev/null"))
+    (let ((elm-compile-arguments '("--output=/dev/null")))
+      (elm-compile-buffer)))
+  (defun my/elm-compile-buffer-html ()
+    (interactive)
+    (let ((elm-compile-arguments '("--output=index.html")))
+      (elm-compile-buffer)))
   (bind-key "C-c C-c" 'my/elm-compile-buffer elm-mode-map)
+  (bind-key "C-c h" 'my/elm-compile-buffer-html elm-mode-map)
   (setq elm-tags-on-save nil))
 
 
