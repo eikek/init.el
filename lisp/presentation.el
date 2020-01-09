@@ -49,7 +49,7 @@
   ;;     2))
   (my/set-fringe-background)
 
-  (text-scale-adjust 5)
+  (text-scale-adjust 3)
   (delete-other-windows)
   (my/hidden-mode-line-mode)
   (org-display-inline-images)
@@ -57,7 +57,6 @@
 
 (defun my/presentation-disable ()
   (text-scale-adjust 0)
-
   (set-fringe-style nil)
   (org-toggle-inline-images)
   (org-tree-slide-mode 0)

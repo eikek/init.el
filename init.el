@@ -943,6 +943,9 @@ rich-text version of what is assumed to be an org mode body."
          (elm-mode . lsp))
   :commands (lsp)
   :config
+  (setq lsp-file-watch-threshold nil)
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]elm-stuff$")
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]_site$")
   (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
