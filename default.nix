@@ -54,6 +54,7 @@ in
     badger-theme
     boron-theme
     darktooth-theme
+    doom-themes
     eziam-theme
     gruvbox-theme
     leuven-theme
