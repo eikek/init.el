@@ -152,5 +152,6 @@ in
     dap-mode
     vterm
     vterm-toggle
+    clipetty
 
   ]))
