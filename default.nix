@@ -3,7 +3,9 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  myEmacs = pkgs.emacs;
+  myEmacs = pkgs.emacs.override {
+    withXwidgets = true;
+  };
   emacsPackagesNg = (pkgs.emacsPackagesNgGen myEmacs);
   emacsWithPackages = emacsPackagesNg.emacsWithPackages;
   customPackages = import ./pkgs { inherit pkgs emacsPackagesNg; };
@@ -152,6 +154,6 @@ in
     dap-mode
     vterm
     vterm-toggle
-    clipetty
+#    clipetty
 
   ]))
