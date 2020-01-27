@@ -50,13 +50,14 @@ in
     nyan-mode
     keycast
 
-    moody
+#    moody
     minions
     autumn-light-theme
     badger-theme
     boron-theme
     darktooth-theme
     doom-themes
+    doom-modeline
     eziam-theme
     gruvbox-theme
     leuven-theme
@@ -68,6 +69,9 @@ in
     spacemacs-theme
     sublime-themes
     zenburn-theme
+    all-the-icons
+    all-the-icons-ivy
+    all-the-icons-dired
 
     magit
     forge
@@ -154,6 +158,7 @@ in
     dap-mode
     vterm
     vterm-toggle
+    solaire-mode
 #    clipetty
 
   ]))

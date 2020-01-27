@@ -139,6 +139,7 @@
 (transparency 90)
 
 (use-package moody
+  :disabled t
   :config
   (setq x-underline-at-descent-line t)
   (moody-replace-mode-line-buffer-identification)
@@ -152,9 +153,14 @@
 (use-package doom-themes
   :config
   (transparency 90)
-  (load-theme 'doom-gruvbox t)
+  (load-theme 'doom-outrun-electric t)
   (setq rainbow-delimiters-max-face-count 3))
 
+;; must run: `M-x' `all-the-icons-install-fonts'
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
@@ -599,7 +605,7 @@
                ("s-p" . vterm-toggle-backward)
                ("<f6>" . vterm-toggle-cd)))
   :init
-  (setq vterm-toggle-fullscreen-p t))
+  (setq vterm-toggle-fullscreen-p nil))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1203,6 +1209,17 @@ rich-text version of what is assumed to be an org mode body."
   (bind-key "M-<up>" 'my/increment-number-at-point-and-save scad-mode-map)
   (bind-key "M-<down>" 'my/decrement-number-at-point-and-save scad-mode-map))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; solaire-mode
+
+(use-package solaire-mode
+  :hook
+  ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  (minibuffer-setup . solaire-mode-in-minibuffer)
+  :config
+  (solaire-global-mode +1)
+  (solaire-mode-swap-bg))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ansible
