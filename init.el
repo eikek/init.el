@@ -136,7 +136,13 @@
    (interactive "nTransparency Value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
 
-(transparency 90)
+(defun set-transparency ()
+  (when (display-graphic-p)
+    (transparency 90))
+  (unless (display-graphic-p)
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'set-transparency)
 
 (use-package moody
   :disabled t
