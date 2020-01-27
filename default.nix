@@ -159,6 +159,6 @@ in
     vterm
     vterm-toggle
     solaire-mode
-#    clipetty
-
+    gif-screencast
+    clipetty
   ]))

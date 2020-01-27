@@ -1227,6 +1227,15 @@ rich-text version of what is assumed to be an org mode body."
   (solaire-global-mode +1)
   (solaire-mode-swap-bg))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; clipetty
+
+(use-package clipetty
+  :if (not (display-graphic-p))
+  :config
+  (global-clipetty-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ansible
 
