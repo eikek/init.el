@@ -950,6 +950,18 @@ rich-text version of what is assumed to be an org mode body."
    minibuffer-local-completion-map))
 
 
+;;; https://scalameta.org/metals/docs/editors/emacs.html
+;; curl -L -o coursier https://git.io/coursier
+;; chmod +x coursier
+;; ./coursier bootstrap \
+;;   --java-opt -Xss4m \
+;;   --java-opt -Xms100m \
+;;   --java-opt -Dmetals.client=emacs \
+;;   org.scalameta:metals_2.12:0.8.0 \
+;;   -r bintray:scalacenter/releases \
+;;   -r sonatype:snapshots \
+;;   -o /usr/local/bin/metals-emacs -f
+
 (use-package lsp-mode
   :hook ((scala-mode . lsp)
          (yaml-mode . lsp)
