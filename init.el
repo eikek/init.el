@@ -103,7 +103,7 @@
 (setq-default tab-width 2
               indent-tabs-mode nil)
 
-;;(define-key global-map (kbd "RET") 'newline-and-indent)
+(add-to-list 'exec-path "~/bin")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; lisp/mylib
