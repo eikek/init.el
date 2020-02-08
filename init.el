@@ -159,7 +159,7 @@
 (use-package doom-themes
   :config
   (transparency 90)
-  (load-theme 'doom-outrun-electric t)
+  (load-theme 'doom-oceanic-next t)
   (setq rainbow-delimiters-max-face-count 3))
 
 ;; must run: `M-x' `all-the-icons-install-fonts'
@@ -1227,6 +1227,23 @@ rich-text version of what is assumed to be an org mode body."
   (bind-key "M-<up>" 'my/increment-number-at-point-and-save scad-mode-map)
   (bind-key "M-<down>" 'my/decrement-number-at-point-and-save scad-mode-map))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; fish-mode / shell things
+(use-package fish-mode)
+
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
+
+(use-package fish-completion
+  :config
+  (global-fish-completion-mode))
+
+(use-package eshell-git-prompt
+  :config
+  (eshell-git-prompt-use-theme 'git-radar))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; solaire-mode

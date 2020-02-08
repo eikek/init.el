@@ -161,4 +161,7 @@ in
     solaire-mode
     gif-screencast
     clipetty
+    exec-path-from-shell
+    fish-completion
+    eshell-git-prompt
   ]))
