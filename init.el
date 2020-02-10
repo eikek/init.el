@@ -1249,6 +1249,7 @@ rich-text version of what is assumed to be an org mode body."
 ;;; solaire-mode
 
 (use-package solaire-mode
+  :disabled t
   :hook
   ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
   (minibuffer-setup . solaire-mode-in-minibuffer)
