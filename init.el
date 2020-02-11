@@ -159,7 +159,7 @@
 (use-package doom-themes
   :config
   (transparency 90)
-  (load-theme 'doom-oceanic-next t)
+  (load-theme 'doom-Iosvkem t)
   (setq rainbow-delimiters-max-face-count 3))
 
 ;; must run: `M-x' `all-the-icons-install-fonts'
