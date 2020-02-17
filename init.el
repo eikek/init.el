@@ -1169,6 +1169,7 @@ rich-text version of what is assumed to be an org mode body."
   :commands (plantuml-mode)
   :mode "\\.puml"
   :init
+  (setq plantuml-default-exec-mode 'jar)
   (setq plantuml-jar-path
         (-find 'f-exists?
                '("/run/current-system/sw/lib/plantuml.jar"
