@@ -188,6 +188,7 @@
   :config
   (ivy-mode 1)
   (setq ivy-height 15)
+  (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t))
 
 (use-package swiper
