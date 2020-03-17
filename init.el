@@ -824,6 +824,10 @@
        html))
     (browse-url (concat "file://" tmpfile))))
 
+(defun my/mu4e-msgv-action-import-docspell (msg attachnum)
+  (interactive)
+  (mu4e-view-open-attachment-with msg attachnum "ds"))
+
 (eval-and-compile
   (defvar my/mu4e-find-load-path
     (let ((cand '("~/.nix-profile/share/emacs/site-lisp/mu4e"
@@ -898,6 +902,8 @@
     (imagemagick-register-types))
   (add-to-list 'mu4e-view-actions
                '("View in browser" . my/mu4e-msgv-action-view-in-browser) t)
+  (add-to-list 'mu4e-view-attachment-actions
+               '("Docspell" . my/mu4e-msgv-action-import-docspell))
 
   ;; see https://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries
   (add-to-list 'mu4e-bookmarks
