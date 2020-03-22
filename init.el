@@ -828,6 +828,22 @@
   (interactive)
   (mu4e-view-open-attachment-with msg attachnum "ds"))
 
+(defun my/mu4e-msgv-action-import-mail-docspell (msg)
+  (interactive)
+  (let* ((ds-cmd "ds")
+         (subj (mu4e-message-field msg :subject))
+         (path (mu4e-message-field msg :path))
+         (temp (expand-file-name (concat subj ".eml"))))
+    ;; need to copy it, because curl has problems with maildir
+    ;; filenames; it also is nicer, since the name is then the subject
+    ;; and not some cryptic crap
+    (copy-file path temp 1)
+    (shell-command-to-string
+	     (concat ds-cmd " "
+	       (shell-quote-argument temp)
+	       " 2> /dev/null"))
+    (delete-file temp)))
+
 (eval-and-compile
   (defvar my/mu4e-find-load-path
     (let ((cand '("~/.nix-profile/share/emacs/site-lisp/mu4e"
@@ -902,6 +918,8 @@
     (imagemagick-register-types))
   (add-to-list 'mu4e-view-actions
                '("View in browser" . my/mu4e-msgv-action-view-in-browser) t)
+  (add-to-list 'mu4e-view-actions
+               '("Import Docspell" . my/mu4e-msgv-action-import-mail-docspell) t)
   (add-to-list 'mu4e-view-attachment-actions
                '("Docspell" . my/mu4e-msgv-action-import-docspell))
 
