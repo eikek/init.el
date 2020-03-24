@@ -109,12 +109,13 @@ given."
               (mu4e-trash-folder . "/bluecare/Trash")
               (mu4e-drafts-folder . "/bluecare/Drafts")
               (mu4e-compose-signature . ,(concat "http://www.bluecare.ch\n"))
-              (smtpmail-smtp-server . ,(my/password-store-get-key "bluecare/login" "mailhost"))
-              (smtpmail-smtp-user . ,(my/password-store-get-user "bluecare/login"))
-              (smtpmail-smtp-service . 25)
-              (smtpmail-auth-credentials . '(,(my/password-store-get-key "bluecare/login" "mailhost")
-                                             25
-                                             ,(my/password-store-get-user "bluecare/login")
+              (smtpmail-smtp-server . "localhost")
+              (smtpmail-smtp-user . ,(concat "bluecare/" (my/password-store-get-user "bluecare/login")))
+              (smtpmail-stream-type . nil)
+              (smtpmail-smtp-service . 1025)
+              (smtpmail-auth-credentials . '("localhost"
+                                             1025
+                                             ,(concat "bluecare/" (my/password-store-get-user "bluecare/login"))
                                              ,(password-store-get "bluecare/login")))))
     ,(make-mu4e-context
       :name "posteo.de"
@@ -130,12 +131,12 @@ given."
               (mu4e-sent-folder . "/posteo/Sent")
               (mu4e-trash-folder . "/posteo/Trash")
               (mu4e-drafts-folder . "/posteo/Drafts")
-              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/mpc4s"))
-              (smtpmail-smtp-server . "localhost")
+              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/docspell"))
+              (smtpmail-smtp-server . ,(my/password-store-get-key "email/posteo.de" "mailhost"))
               (smtpmail-smtp-user . ,(my/password-store-get-user "email/posteo.de"))
-              (smtpmail-smtp-service . 3587)
-              (smtpmail-auth-credentials . '("localhost"
-                                             3587
+              (smtpmail-smtp-service . 587)
+              (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/posteo.de" "mailhost")
+                                             587
                                              ,(my/password-store-get-user "email/posteo.de")
                                              ,(password-store-get "email/posteo.de")))))))
 
