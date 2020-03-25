@@ -274,10 +274,22 @@ at point."
   (interactive "r")
   (my/replace-region start end 'url-unhex-string))
 
+(defun my/get-screen-sizes ()
+  "Return the size of all connected screens in mm in a list of
+  cons cells where car is x and cdr is y."
+  (let* ((cells (shell-command-to-string
+                 "xrandr |grep -w connected | grep mm | awk '{print \"( \" $(NF - 2) \" . \" $NF \")\"}' | sed 's/m//g'"))
+         (plist (concat "(" cells ")")))
+    (read plist)))
+
 (defun my/get-screen-size ()
-  "Return the size of connected screen in mm in a cons cell where
-  car is x and cdr is y."
-  (read (shell-command-to-string "xrandr |grep -w connected | grep mm |tail -n1 | awk '{print \"( \" $(NF - 2) \" . \" $NF \")\"}' | sed 's/m//g'")))
+  "Return the size of the largest connected screen in mm in a
+  cons cell where car is x and cdr is y."
+  (let ((sizes (my/get-screen-sizes)))
+    (-max-by (lambda (a b)
+               (> (* (car a) (cdr a))
+                  (* (car b) (cdr b))))
+             sizes)))
 
 (defun my/get-screen-size-inch ()
   (let* ((sz (my/get-screen-size))
