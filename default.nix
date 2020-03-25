@@ -164,4 +164,6 @@ in
     exec-path-from-shell
     fish-completion
     eshell-git-prompt
+    vue-mode
+    vue-html-mode
   ]))
