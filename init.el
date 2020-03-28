@@ -842,8 +842,7 @@
 	     (concat ds-cmd " "
 	       (shell-quote-argument temp)
 	       " 2> /dev/null"))
-    ;(delete-file temp)
-    ))
+    (delete-file temp)))
 
 (eval-and-compile
   (defvar my/mu4e-find-load-path
