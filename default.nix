@@ -166,4 +166,7 @@ in
     eshell-git-prompt
     vue-mode
     vue-html-mode
+    docker
+    docker-compose-mode
+    dockerfile-mode
   ]))
