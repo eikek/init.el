@@ -169,4 +169,5 @@ in
     docker
     docker-compose-mode
     dockerfile-mode
+    impatient-mode
   ]))

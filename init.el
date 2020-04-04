@@ -1173,12 +1173,19 @@ rich-text version of what is assumed to be an org mode body."
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-(use-package flymd
-  :commands (flymd-flyit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; impatient-mode
+(use-package impatient-mode
+  :commands (impatient-mode)
   :config
-  (setq
-   flymd-close-buffer-delete-temp-files t
-   flymd-output-directory temporary-file-directory))
+  ;;; Tell impatient mode to use it: M-x imp-set-user-filter RET
+  ;;; my/imp-markdown-html RET.
+  (defun my/imp-markdown-html (buffer)
+    (princ (with-current-buffer buffer
+             (format "<!DOCTYPE html><html><title>Impatient Markdown</title><xmp theme=\"united\" style=\"display:none;\"> %s  </xmp><script src=\"http://strapdownjs.com/v/0.2/strapdown.js\"></script></html>" (buffer-substring-no-properties (point-min) (point-max))))
+           (current-buffer))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; rec-mode
