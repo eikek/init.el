@@ -1179,6 +1179,7 @@ rich-text version of what is assumed to be an org mode body."
 (use-package impatient-mode
   :commands (impatient-mode)
   :config
+  ;;; Start the server with M-x httpd-start
   ;;; Tell impatient mode to use it: M-x imp-set-user-filter RET
   ;;; my/imp-markdown-html RET.
   (defun my/imp-markdown-html (buffer)
