@@ -1098,6 +1098,28 @@ rich-text version of what is assumed to be an org mode body."
   :after (lsp-java))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; purescript
+
+(use-package purescript-mode
+  :commands (purescript-mode)
+  :mode (("\\.purs$" . purescript-mode))
+  :config
+  (add-hook 'purescript-mode-hook
+            (lambda ()
+              (turn-on-purescript-indentation))))
+
+(use-package psc-ide
+  :config
+  (add-hook 'purescript-mode-hook
+            (lambda ()
+              (psc-ide-mode)
+              (company-mode)
+              (flycheck-mode)))
+  (bind-key "M-SPC" 'company-complete)
+  (bind-key "M-n" 'flycheck-next-error psc-ide-mode-map)
+  (bind-key "M-p" 'flycheck-previous-error psc-ide-mode-map))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; emmet mode

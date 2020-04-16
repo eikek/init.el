@@ -171,6 +171,9 @@ in
     dockerfile-mode
     impatient-mode
     purescript-mode
+    psci
+    psc-ide
+    dhall-mode
     haskell-mode
     nix-haskell-mode
     lsp-haskell
