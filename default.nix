@@ -170,4 +170,8 @@ in
     docker-compose-mode
     dockerfile-mode
     impatient-mode
+    purescript-mode
+    haskell-mode
+    nix-haskell-mode
+    lsp-haskell
   ]))
