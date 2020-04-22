@@ -121,7 +121,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
-(let ((size (if (> (my/get-screen-width) 30)
+(let ((size (if (and (display-graphic-p) (> (my/get-screen-width) 30))
                 150
               120)))
   (set-face-attribute 'default nil
