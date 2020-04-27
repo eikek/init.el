@@ -579,8 +579,8 @@
       (setq browse-url-browser-function 'browse-url-generic
             browse-url-generic-program "open"
             browse-url-generic-args '("-a" "/Applications/Firefox.app"))
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program "qutebrowser")))
+    (setq browse-url-browser-function 'browse-url-firefox
+          browse-url-generic-program "firefox")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -833,7 +833,11 @@
   (let* ((ds-cmd "ds")
          (subj (mu4e-message-field msg :subject))
          (path (mu4e-message-field msg :path))
-         (temp (expand-file-name (concat subj ".eml"))))
+         (subject (s-trim
+                   (s-replace-regexp "[ \t\r\n]+" " "
+                                     (s-replace-regexp "[^ a-zA-Z0-9._\\-]" ""
+                                                       (s-replace-all '( ("/" . "-")) subj)))))
+         (temp (expand-file-name (concat "/tmp/" subject ".eml"))))
     ;; need to copy it, because curl has problems with maildir
     ;; filenames; it also is nicer, since the name is then the subject
     ;; and not some cryptic crap
