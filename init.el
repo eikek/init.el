@@ -209,6 +209,14 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; avy
+
+(use-package avy
+  :bind (("M-g g" . avy-goto-line)
+         ("C-S-s" . avy-goto-char-timer)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; eyebrowse – a window config manager
 
 (use-package eyebrowse
