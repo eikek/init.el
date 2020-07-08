@@ -132,11 +132,11 @@ given."
               (mu4e-trash-folder . "/posteo/Trash")
               (mu4e-drafts-folder . "/posteo/Drafts")
               (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/docspell"))
-              (smtpmail-smtp-server . ,(my/password-store-get-key "email/posteo.de" "mailhost"))
+              (smtpmail-smtp-server . "localhost")
               (smtpmail-smtp-user . ,(my/password-store-get-user "email/posteo.de"))
-              (smtpmail-smtp-service . 587)
-              (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/posteo.de" "mailhost")
-                                             587
+              (smtpmail-smtp-service . 3587)
+              (smtpmail-auth-credentials . '("localhost"
+                                             3587
                                              ,(my/password-store-get-user "email/posteo.de")
                                              ,(password-store-get "email/posteo.de")))))))
 
