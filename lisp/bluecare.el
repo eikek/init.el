@@ -131,7 +131,7 @@ given."
               (mu4e-sent-folder . "/posteo/Sent")
               (mu4e-trash-folder . "/posteo/Trash")
               (mu4e-drafts-folder . "/posteo/Drafts")
-              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://eikek.github.io/docspell"))
+              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . "localhost")
               (smtpmail-smtp-user . ,(my/password-store-get-user "email/posteo.de"))
               (smtpmail-smtp-service . 3587)
