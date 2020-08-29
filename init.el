@@ -1024,7 +1024,6 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package lsp-mode
   :hook ((scala-mode . lsp)
-         (yaml-mode . lsp)
          (elm-mode . lsp))
   :commands (lsp)
   :config
@@ -1179,7 +1178,7 @@ rich-text version of what is assumed to be an org mode body."
 ;;; yaml mode
 
 (use-package yaml-mode
-  :mode "\\.yml"
+  :mode "\\.yml\\'"
   :config (setq yaml-indent-offset 2))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
