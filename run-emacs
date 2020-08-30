@@ -1,4 +1,4 @@
-#! /bin/sh -e
+#!/usr/bin/env bash
 
 mkdir -p /tmp/emacs-config/
 ln -snf $(dirname $(readlink -e $0)) /tmp/emacs-config/.emacs.d

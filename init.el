@@ -782,7 +782,6 @@
 \\name{Eike}{Kettner}
 \\social[github]{eikek}
 \\email{eike.kettner@posteo.de}
-\\homepage{https://eknet.org}
 \\phone[mobile]{+41~(76)~278~4160}
 \\address{Arbergstrasse 7c}{8405 Winterthur}{Schweiz}
 \[NO-DEFAULT-PACKAGES]
