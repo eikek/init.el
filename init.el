@@ -138,7 +138,7 @@
 
 (defun set-transparency ()
   (when (display-graphic-p)
-    (transparency 85))
+    (transparency 93))
   (unless (display-graphic-p)
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
@@ -158,9 +158,9 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-gruvbox t)
+  (load-theme 'doom-opera t)
   (set-background-color "#111")
-  (transparency 85)
+  (set-transparency)
   (setq rainbow-delimiters-max-face-count 3))
 
 ;; must run: `M-x' `all-the-icons-install-fonts'
