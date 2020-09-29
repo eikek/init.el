@@ -145,7 +145,17 @@ given."
                '("maildir:/bluecare/*" "BlueCare" ?b))
   (add-to-list 'mu4e-user-mail-address-list "eike.kettner@bluecare.ch")
   (setq mu4e-compose-crypto-reply-plain-policy nil)
-  (setq mu4e-get-mail-command "offlineimap -c ~/.offlineimap-bluecarerc"))
+  (setq mu4e-get-mail-command "offlineimap -c ~/.offlineimap-bluecarerc")
+
+  (defun my/-mu4e-message-delete-match (msg param)
+    (let* ((regex "\\(jenkins\\|PRTG\\)"))
+      (mu4e-message-contact-field-matches msg '(:from) regex)))
+
+  (defun my/mu4e-remove-nonsense ()
+    (interactive)
+    (mu4e-headers-mark-for-each-if
+     '(delete)
+     'my/-mu4e-message-delete-match)))
 
 
 (use-package play-routes-mode
