@@ -148,7 +148,7 @@ given."
   (setq mu4e-get-mail-command "offlineimap -c ~/.offlineimap-bluecarerc")
 
   (defun my/-mu4e-message-delete-match (msg param)
-    (let* ((regex "\\(jenkins\\|PRTG\\)"))
+    (let* ((regex "\\(jenkins\\|PRTG\\|NR SWISS AG\\)"))
       (mu4e-message-contact-field-matches msg '(:from) regex)))
 
   (defun my/mu4e-remove-nonsense ()
