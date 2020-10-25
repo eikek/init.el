@@ -941,6 +941,8 @@
   (setq mml2015-use 'epg) ;; enable gpg/mime over epg
   (setq mu4e-get-mail-command "offlineimap")
   (setq mu4e-update-interval nil)
+  (setq message-citation-line-format "On %a %d.%m.%Y at %R, %f writes:\n")
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
 
   (setq mu4e-html2text-command 'mu4e-shr2text)
   ;;  (setq mu4e-html2text-command 'mu4e-shr2text)  later in mu4e…
