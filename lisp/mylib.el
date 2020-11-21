@@ -138,25 +138,6 @@ by using nxml's indentation rules."
     (my/td-make-threads-report (current-buffer) buf)
     (pop-to-buffer buf nil t)))
 
-(define-minor-mode my/td-mode
-  :init-value nil
-  :global nil
-  :keymap (let ((m (make-sparse-keymap)))
-            (define-key m (kbd "M-n") 'my/td-find-forward)
-            (define-key m (kbd "M-p") 'my/td-find-backward)
-            (define-key m (kbd "M-SPC") 'my/td-next-thread)
-            (define-key m (kbd "C-c t") 'my/td-show-threads-report)
-            (define-key m (kbd "C-c s") 'my/td-search-tid)
-            m))
-
-(let ((m my/td-mode-map))
-  (define-key m (kbd "M-n") 'my/td-find-forward)
-  (define-key m (kbd "M-p") 'my/td-find-backward)
-  (define-key m (kbd "C-c t") 'my/td-show-threads-report)
-  (define-key m (kbd "C-c s") 'my/td-search-tid)
-  (define-key m (kbd "M-SPC") 'my/td-next-thread))
-
-
 (defun my/duration-to-minutes (duration)
   "Converts a duration string in format `mm:ss' or `hh:mm:ss'
 into minutes."
