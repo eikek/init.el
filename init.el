@@ -969,9 +969,10 @@
    mu4e-view-image-max-width 800
    mu4e-compose-crypto-reply-plain-policy 'sign
    mu4e-compose-dont-reply-to-self t)
-  (-each '("eike.kettner@eknet.org" "eike@eknet.org")
-    (lambda (addr)
-      (add-to-list 'mu4e-user-mail-address-list addr))))
+  ;; (-each '("eike.kettner@eknet.org" "eike@eknet.org")
+  ;;   (lambda (addr)
+  ;; (add-to-list 'mu4e-user-mail-address-list addr)))
+  )
 
 (use-package org-mu4e
   :commands (org-store-link org-mail org-mu4e-compose-org-mode)
@@ -1043,6 +1044,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package lsp-mode
   :hook ((scala-mode . lsp)
+         (lsp-mode . lsp-lens-mode)
          (elm-mode . lsp))
   :commands (lsp)
   :config
@@ -1050,6 +1052,10 @@ rich-text version of what is assumed to be an org mode body."
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]elm-stuff$")
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]_site$")
   (setq lsp-prefer-flymake nil))
+
+;; Add metals backend for lsp-mode
+(use-package lsp-metals
+  :config (setq lsp-metals-treeview-show-when-views-received t))
 
 (use-package lsp-ui
   :commands (lsp-ui-mode)
