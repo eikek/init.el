@@ -1044,7 +1044,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package lsp-mode
   :hook ((scala-mode . lsp)
-         (lsp-mode . lsp-lens-mode)
+;         (lsp-mode . lsp-lens-mode)
          (elm-mode . lsp))
   :commands (lsp)
   :config
