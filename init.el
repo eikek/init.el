@@ -1094,10 +1094,10 @@ rich-text version of what is assumed to be an org mode body."
   (bind-key "M-s F" 'lsp-format-buffer)
   (bind-key "M-s f" 'lsp-format-region))
 
-;; Add company-lsp backend for metals
-(use-package company-lsp
-  :commands (company-lsp)
-  :init (push 'company-lsp company-backends))
+;; Add company-capf backend for metals (supersedes company-lsp)
+(use-package company-capf
+  :commands (company-capf)
+  :init (push 'company-capf company-backends))
 
 (use-package lsp-java
   :after lsp  
