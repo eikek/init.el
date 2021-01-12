@@ -639,6 +639,7 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-footer "Have a nice day!")
   (setq show-week-agenda-p t)
+  (setq dashboard-filter-agenda-entry dashboard-no-filter-agenda)
   (setq dashboard-set-file-icons t)
   (dashboard-setup-startup-hook))
 
