@@ -143,7 +143,7 @@ given."
 (with-eval-after-load 'mu4e
   (add-to-list 'mu4e-bookmarks
                '("maildir:/bluecare/*" "BlueCare" ?b))
-  (add-to-list 'mu4e-user-mail-address-list "eike.kettner@bluecare.ch")
+;;  (add-to-list 'mu4e-user-mail-address-list "eike.kettner@bluecare.ch")
   (setq mu4e-compose-crypto-reply-plain-policy nil)
   (setq mu4e-get-mail-command "offlineimap -c ~/.offlineimap-bluecarerc")
 
