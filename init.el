@@ -643,6 +643,14 @@
   (dashboard-setup-startup-hook))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; fill-column helper
+
+(use-package fill-column-indicator)
+(use-package hl-fill-column)
+(use-package visual-fill-column)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; org mode
 (use-package org
   :mode  (("\\.org" . org-mode)
