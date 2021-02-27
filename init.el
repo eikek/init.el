@@ -158,7 +158,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-opera t)
+  (load-theme 'doom-gruvbox t)
   (set-background-color "#111")
   (set-transparency)
   (setq rainbow-delimiters-max-face-count 3))
@@ -1050,97 +1050,19 @@ rich-text version of what is assumed to be an org mode body."
 ;;   -r sonatype:snapshots \
 ;;   -o /usr/local/bin/metals-emacs -f
 
-(use-package lsp-mode
-  :hook ((scala-mode . lsp)
-;         (lsp-mode . lsp-lens-mode)
-         (elm-mode . lsp))
-  :commands (lsp)
-  :config
-  (setq lsp-file-watch-threshold nil)
-  (add-to-list 'lsp-file-watch-ignored "[/\\\\]elm-stuff$")
-  (add-to-list 'lsp-file-watch-ignored "[/\\\\]_site$")
-  (setq lsp-prefer-flymake nil))
+(use-package eglot
+  :commands (eglot)
+  :bind (:map eglot-mode-map
+              ("M-n" . flymake-goto-next-error)
+              ("M-s f" . eglot-format)))
 
-;; Add metals backend for lsp-mode
-(use-package lsp-metals
-  :config (setq lsp-metals-treeview-show-when-views-received t))
-
-(use-package lsp-ui
-  :commands (lsp-ui-mode)
-  :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (setq lsp-ui-peek-list-width 80)
-  (setq lsp-ui-doc-max-width 100)
-  (setq lsp-ui-doc-max-height 40)
-  (setq lsp-ui-flycheck-enable t)
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-delay 0)
-
-  (defvar-local my/lsp-ui-doc-toggle-var nil)
-  (defun my/lsp-ui-doc-toggle (arg)
-    (interactive "P")
-    (if arg
-        (lsp-describe-thing-at-point)
-      (if (not my/lsp-ui-doc-toggle-var)
-          (progn
-            (lsp-ui-doc-show)
-            (setq my/lsp-ui-doc-toggle-var t))
-        (progn
-          (lsp-ui-doc-hide)
-          (setq my/lsp-ui-doc-toggle-var nil)))))
-  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)  
-  (bind-key "C-q" 'my/lsp-ui-doc-toggle lsp-ui-mode-map)
-  (bind-key "M-." 'lsp-ui-peek-find-definitions lsp-ui-mode-map)
-  (bind-key "M-?" 'lsp-ui-peek-find-references lsp-ui-mode-map)
-  (bind-key "M-@" 'lsp-ui-peek-find-implementation lsp-ui-mode-map)
-  (bind-key "M-s x" 'lsp-treemacs-errors-list lsp-ui-mode-map)
-  (bind-key "M-g a" 'lsp-ui-flycheck-list lsp-ui-mode-map)
-  (bind-key "M-n" 'flycheck-next-error lsp-ui-mode-map)
-  (bind-key "M-p" 'flycheck-previous-error lsp-ui-mode-map)
-  (bind-key "M-s r" 'lsp-rename lsp-ui-mode-map)
-  (bind-key "M-s F" 'lsp-format-buffer)
-  (bind-key "M-s f" 'lsp-format-region))
-
-;; Add company-capf backend for metals (supersedes company-lsp)
-(use-package company-capf
-  :commands (company-capf)
-  :init (push 'company-capf company-backends))
-
-(use-package lsp-java
-  :after lsp  
-  :config
-  (add-hook 'java-mode-hook 'lsp)
-  (bind-key "M-s o" 'lsp-java-organize-imports java-mode-map)
-  (bind-key "M-s v" 'lsp-java-extract-to-local-variable java-mode-map)
-  (bind-key "M-s a" 'lsp-java-add-import java-mode-map)
-  (bind-key "M-s i" 'lsp-java-add-unimplemented-methods java-mode-map)
-  (bind-key "M-s I" 'lsp-java-generate-overrides java-mode-map)
-  (bind-key "M-s t" 'lsp-java-add-throws java-mode-map)
-  (bind-key "M-s m" 'lsp-java-extract-method java-mode-map)
-  (bind-key "M-s c" 'lsp-java-extract-to-constant java-mode-map)
-  (bind-key "M-s E" 'lsp-java-generate-equals-and-hash-code)
-  (bind-key "M-s G" 'lsp-java-generate-getters-and-setters)
-  (bind-key "M-s S" 'lsp-java-generate-to-string))
-
-(use-package lsp-elm)
+(use-package flymake)
 
 (use-package treemacs
   :commands (treemacs)
   :bind (("<f8>" . treemacs)
          (:map treemacs-mode-map
                ("<f8>" . treemacs-quit))))
-
-(use-package lsp-treemacs
-  :commands (lsp-treemacs-errors-list lsp-treemacs-symbols lsp-treemacs-java-deps-list))
-
-(use-package dap-mode
-  :after lsp-mode
-  :config
-  (dap-mode t))
-
-(use-package dap-java
-  :after (lsp-java))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
