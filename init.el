@@ -1055,7 +1055,8 @@ rich-text version of what is assumed to be an org mode body."
   :commands (eglot)
   :bind (:map eglot-mode-map
               ("M-n" . flymake-goto-next-error)
-              ("M-s f" . eglot-format)))
+              ("M-s f" . eglot-format)
+              ("M-RET" . eglot-code-actions)))
 
 (use-package flymake)
 
