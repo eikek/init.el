@@ -159,7 +159,7 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-gruvbox t)
+  (load-theme 'doom-monokai-spectrum t)
   (set-background-color "#111")
   (set-transparency)
   (setq rainbow-delimiters-max-face-count 3))
