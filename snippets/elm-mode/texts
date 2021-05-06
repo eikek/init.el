@@ -1,0 +1,13 @@
+# name: elm texts file
+# key: etexts
+# --
+module Messages.$1 exposing (..)
+
+
+type alias Texts =
+    {}
+
+
+gb : Texts
+gb =
+    {}

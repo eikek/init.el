@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: src
+# key: src
+# --
+\`\`\` ${1:lang}
+$0
+\`\`\`
