@@ -692,6 +692,7 @@
      (plantuml . t)
      (dot . t)
      (elvish . t)
+     (rust . t)
      (C . t)
      (R . t)))
   ;; running scala code with ammonite
@@ -1088,6 +1089,14 @@ rich-text version of what is assumed to be an org mode body."
   (bind-key "M-SPC" 'company-complete)
   (bind-key "M-n" 'flycheck-next-error psc-ide-mode-map)
   (bind-key "M-p" 'flycheck-previous-error psc-ide-mode-map))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Rust
+
+(use-package rustic
+  :config
+  (setq rustic-format-on-save t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
