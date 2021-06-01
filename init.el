@@ -122,13 +122,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; theme
 
-(let ((size (if (and (display-graphic-p) (> (my/get-screen-width) 30))
-                150
-              120)))
-  (set-face-attribute 'default nil
-                      :font "AnonymousPro"
-                      :height size))
-
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
 (defun transparency (value)
@@ -169,6 +162,13 @@
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode))
+
+(let ((size (if (and (display-graphic-p) (> (my/get-screen-width) 30))
+                150
+              120)))
+  (set-face-attribute 'default nil
+                      :font "AnonymousPro"
+                      :height size))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
@@ -1149,10 +1149,10 @@ rich-text version of what is assumed to be an org mode body."
   :bind (("C-." . goto-last-change)
          ("C-," . goto-last-change-reverse)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; geiser (scheme)
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;; geiser (scheme)
 
-(use-package geiser)
+;; (use-package geiser)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; markdown
