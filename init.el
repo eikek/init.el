@@ -698,6 +698,7 @@
   ;; running scala code with ammonite
   (setq org-babel-scala-command "amm")
   (setq org-babel-scala-wrapper-method "%s")
+  (setq org-babel-clojure-backend 'cider)
 
   (let ((ditaa-path (s-trim
                      (shell-command-to-string
