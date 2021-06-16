@@ -1386,7 +1386,9 @@ rich-text version of what is assumed to be an org mode body."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(send-mail-function (quote smtpmail-send-it)))
+ '(package-selected-packages
+   '(zenburn-theme whitespace-cleanup-mode which-key web-mode vue-mode vterm-toggle visual-fill-column use-package sublime-themes stumpwm-mode stripe-buffer spacemacs-theme solarized-theme solaire-mode soft-stone-theme soft-charcoal-theme slime sexy-monochrome-theme scala-mode scad-mode sbt-mode sass-mode rustic reykjavik-theme rainbow-mode rainbow-delimiters psci psc-ide poly-R plantuml-mode pass paredit ox-twbs ox-pandoc ox-jira ox-gfm ox-asciidoc org-tree-slide org-plus-contrib org-journal org-jira org-bullets ob-rust ob-restclient ob-mongo ob-elvish nyan-mode nix-haskell-mode nameless multiple-cursors move-text monroe minions magnatune lsp-haskell logview leuven-theme kotlin-mode keycast js2-mode ivy-hydra impatient-mode hl-fill-column hide-lines gruvbox-theme groovy-mode goto-chg golden-ratio git-timemachine git-gutter-fringe ggtags forge flymd flycheck-rust flycheck-kotlin fish-mode fish-completion fill-column-indicator eziam-theme eyebrowse expand-region exec-path-from-shell ess eshell-git-prompt emmet-mode elvish-mode elm-mode elfeed eglot editorconfig edit-server doom-themes doom-modeline dockerfile-mode docker-compose-mode docker direnv dired-subtree dired-rainbow dired-filter diminish dictcc dhall-mode dashboard darktooth-theme darcula-theme dap-mode counsel-projectile counsel-org-clock company-quickhelp company-nixos-options company-auctex clipetty cider chee buffer-move boron-theme beacon badger-theme autumn-light-theme ansible all-the-icons-ivy all-the-icons-dired adoc-mode excorporate))
+ '(send-mail-function 'smtpmail-send-it))
 
 
 (let ((elapsed (float-time (time-subtract (current-time)
@@ -1408,3 +1410,9 @@ rich-text version of what is assumed to be an org mode body."
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  '(default ((t (:slant normal :weight normal :height 120 :width semi-expanded :foundry "SRC" :family "Hack")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil)))))
