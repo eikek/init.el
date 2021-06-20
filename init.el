@@ -119,56 +119,6 @@
          ("<f1>" . my/visit-now)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; theme
-
-;; needs a compositing wm, e.g.
-;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
-(defun transparency (value)
-   "Set the transparency value of the frame window. `VALUE' may be
-0=transparent to 100=opaque."
-   (interactive "nTransparency Value 0 - 100 opaque:")
-   (set-frame-parameter (selected-frame) 'alpha value))
-
-(defun set-transparency ()
-  (when (display-graphic-p)
-    (transparency 93))
-  (unless (display-graphic-p)
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-
-(add-hook 'window-setup-hook 'set-transparency)
-
-(use-package moody
-  :disabled t
-  :config
-  (setq x-underline-at-descent-line t)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
-
-(use-package minions
-  :config
-  (minions-mode 1)
-  (setq minions-direct '(projectile-mode)))
-
-(use-package doom-themes
-  :config
-  (load-theme 'doom-nord t)
-  (set-background-color "#111")
-  (set-transparency)
-  (setq rainbow-delimiters-max-face-count 3))
-
-;; must run: `M-x' `all-the-icons-install-fonts'
-(use-package all-the-icons)
-
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode))
-
-(let ((size (if (and (display-graphic-p) (> (my/get-screen-width) 30))
-                150
-              120)))
-  (set-face-attribute 'default nil
-                      :font "AnonymousPro"
-                      :height size))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
@@ -672,6 +622,7 @@
   (setq org-src-fontify-natively t)
   (setq org-loop-over-headlines-in-active-region t)
   (setq org-ellipsis " ⤵");; ⤵ ≫
+  (setq org-startup-folded t)
   (use-package ob-restclient
     :commands (org-babel-execute:restclient))
   (org-babel-do-load-languages
@@ -1350,6 +1301,56 @@ rich-text version of what is assumed to be an org mode body."
                (local-set-key (kbd "C-c C-<return>") 'bc/org-browse-jira))))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; theme
+
+;; needs a compositing wm, e.g.
+;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
+(defun transparency (value)
+   "Set the transparency value of the frame window. `VALUE' may be
+0=transparent to 100=opaque."
+   (interactive "nTransparency Value 0 - 100 opaque:")
+   (set-frame-parameter (selected-frame) 'alpha value))
+
+(defun set-transparency ()
+  (when (display-graphic-p)
+    (transparency 93))
+  (unless (display-graphic-p)
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'set-transparency)
+
+(use-package moody
+  :disabled t
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
+(use-package minions
+  :config
+  (minions-mode 1)
+  (setq minions-direct '(projectile-mode)))
+
+(use-package doom-themes
+  :config
+  (load-theme 'doom-nord t)
+  (set-background-color "#111")
+  (set-transparency)
+  (setq rainbow-delimiters-max-face-count 3))
+
+;; must run: `M-x' `all-the-icons-install-fonts'
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
+
+(let ((size (if (and (display-graphic-p) (> (my/get-screen-width) 30))
+                150
+              120)))
+  (set-face-attribute 'default nil
+                      :font "AnonymousPro"
+                      :height size))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; edit-server
@@ -1386,8 +1387,6 @@ rich-text version of what is assumed to be an org mode body."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(zenburn-theme whitespace-cleanup-mode which-key web-mode vue-mode vterm-toggle visual-fill-column use-package sublime-themes stumpwm-mode stripe-buffer spacemacs-theme solarized-theme solaire-mode soft-stone-theme soft-charcoal-theme slime sexy-monochrome-theme scala-mode scad-mode sbt-mode sass-mode rustic reykjavik-theme rainbow-mode rainbow-delimiters psci psc-ide poly-R plantuml-mode pass paredit ox-twbs ox-pandoc ox-jira ox-gfm ox-asciidoc org-tree-slide org-plus-contrib org-journal org-jira org-bullets ob-rust ob-restclient ob-mongo ob-elvish nyan-mode nix-haskell-mode nameless multiple-cursors move-text monroe minions magnatune lsp-haskell logview leuven-theme kotlin-mode keycast js2-mode ivy-hydra impatient-mode hl-fill-column hide-lines gruvbox-theme groovy-mode goto-chg golden-ratio git-timemachine git-gutter-fringe ggtags forge flymd flycheck-rust flycheck-kotlin fish-mode fish-completion fill-column-indicator eziam-theme eyebrowse expand-region exec-path-from-shell ess eshell-git-prompt emmet-mode elvish-mode elm-mode elfeed eglot editorconfig edit-server doom-themes doom-modeline dockerfile-mode docker-compose-mode docker direnv dired-subtree dired-rainbow dired-filter diminish dictcc dhall-mode dashboard darktooth-theme darcula-theme dap-mode counsel-projectile counsel-org-clock company-quickhelp company-nixos-options company-auctex clipetty cider chee buffer-move boron-theme beacon badger-theme autumn-light-theme ansible all-the-icons-ivy all-the-icons-dired adoc-mode excorporate))
  '(send-mail-function 'smtpmail-send-it))
 
 
@@ -1410,9 +1409,4 @@ rich-text version of what is assumed to be an org mode body."
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  '(default ((t (:slant normal :weight normal :height 120 :width semi-expanded :foundry "SRC" :family "Hack")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background nil)))))
+
