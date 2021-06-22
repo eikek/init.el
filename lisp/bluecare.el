@@ -158,8 +158,8 @@ given."
      'my/-mu4e-message-delete-match)))
 
 
-(use-package play-routes-mode
-  :mode ("routes" ".routes$"))
+;; (use-package play-routes-mode
+;;   :mode ("routes" ".routes$"))
 
 (use-package slack
   :commands (slack-start)
