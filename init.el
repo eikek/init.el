@@ -456,8 +456,7 @@
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode)
-;  (setq counsel-projectile-switch-project-action 'magit-status)
-  )
+  (setq counsel-projectile-switch-project-action 'magit-status))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
