@@ -1046,8 +1046,17 @@ rich-text version of what is assumed to be an org mode body."
 ;;; Rust
 
 (use-package rustic
+  :mode (("\\.rs$" . rustic-mode))
   :config
   (setq rustic-format-on-save t))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; direnv
+
+(use-package direnv
+  :config
+  (direnv-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
