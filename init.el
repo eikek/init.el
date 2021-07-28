@@ -1048,6 +1048,7 @@ rich-text version of what is assumed to be an org mode body."
 (use-package rustic
   :mode (("\\.rs$" . rustic-mode))
   :config
+  (setq rustic-lsp-client 'eglot)
   (setq rustic-format-on-save t))
 
 
