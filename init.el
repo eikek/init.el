@@ -813,11 +813,11 @@
 
 (defun my/mu4e-msgv-action-import-docspell (msg attachnum)
   (interactive)
-  (mu4e-view-open-attachment-with msg attachnum "ds"))
+  (mu4e-view-open-attachment-with msg attachnum "dsc upload"))
 
 (defun my/mu4e-msgv-action-import-mail-docspell (msg)
   (interactive)
-  (let* ((ds-cmd "ds")
+  (let* ((ds-cmd "dsc")
          (subj (mu4e-message-field msg :subject))
          (path (mu4e-message-field msg :path))
          (subject (s-trim
@@ -830,7 +830,7 @@
     ;; and not some cryptic crap
     (copy-file path temp 1)
     (shell-command-to-string
-	     (concat ds-cmd " "
+	     (concat ds-cmd " upload "
 	       (shell-quote-argument temp)
 	       " 2> /dev/null"))
     (delete-file temp)))
