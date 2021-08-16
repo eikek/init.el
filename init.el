@@ -1343,7 +1343,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-nord t)
+  (load-theme 'doom-homage-black t)
   (set-background-color "#111")
   (set-transparency)
   (setq rainbow-delimiters-max-face-count 3))
