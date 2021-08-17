@@ -1323,7 +1323,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (defun set-transparency ()
   (when (display-graphic-p)
-    (transparency 93))
+    (transparency 96))
   (unless (display-graphic-p)
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
