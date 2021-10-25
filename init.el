@@ -1,3 +1,4 @@
+
 ;;; init.el -- emacs magic
 ;;;
 ;;; Commentary:
@@ -858,11 +859,11 @@
               (mu4e-drafts-folder . "/posteo/Drafts")
               (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/posteo.de" "mailhost"))
-              (smtpmail-smtp-user . ,(my/password-store-get-user "email/posteo.de"))
+              (smtpmail-smtp-user . ,(my/password-store-get-key "email/posteo.de" "user"))
               (smtpmail-smtp-service . 587)
               (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/posteo.de" "mailhost")
                                              587
-                                             ,(my/password-store-get-user "email/posteo.de")
+                                             ,(my/password-store-get-key "email/posteo.de" "user")
                                              ,(password-store-get "email/posteo.de")))))
     ,(make-mu4e-context
       :name "gmx.de"
@@ -880,11 +881,11 @@
               (mu4e-drafts-folder . "/gmx/Entw&APw-rfe")
               (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/gmx.de" "smtphost"))
-              (smtpmail-smtp-user . ,(my/password-store-get-user "email/gmx.de"))
+              (smtpmail-smtp-user . ,(my/password-store-get-key "email/gmx.de" "user"))
               (smtpmail-smtp-service . 587)
               (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/gmx.de" "smtphost")
                                              587
-                                             ,(my/password-store-get-user "email/gmx.de")
+                                             ,(my/password-store-get-key "email/gmx.de" "user")
                                              ,(password-store-get "email/gmx.de")))))))
 (use-package mu4e
   :load-path my/mu4e-find-load-path
