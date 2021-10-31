@@ -1351,12 +1351,15 @@ rich-text version of what is assumed to be an org mode body."
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode))
 
-(let ((size (if (and (display-graphic-p) (> (my/get-screen-width) 30))
+(let ((size (if (display-graphic-p)
                 150
-              120)))
+              120))
+      (fontname (if (my/host-starts-with-p "Eikes")
+                    "Anonymous Pro"
+                  "AnonymousPro")))
   (set-face-attribute 'default nil
-                      :font "AnonymousPro"
-                      :height size))
+                          :font "Anonymous Pro"
+                          :height size))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; edit-server
