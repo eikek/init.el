@@ -1301,14 +1301,10 @@ rich-text version of what is assumed to be an org mode body."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; stuff for work
 
-(use-package bluecare
+(use-package work
   :load-path "lisp"
-  :if (my/host-starts-with-p "n76")
-  :demand t
-  :init
-  (add-hook 'org-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "C-c C-<return>") 'bc/org-browse-jira))))
+  :if (my/host-starts-with-p "Eikes")
+  :demand t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

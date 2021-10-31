@@ -1,4 +1,5 @@
 ;;; bluecare --- some fns regarding bc
+;;; DEPRECATED.
 
 (add-to-list 'my-org-project-files
              "~/org/bluecare2/blueconnect.org" t)
