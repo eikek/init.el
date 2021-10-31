@@ -1,4 +1,3 @@
-
 ;;; init.el -- emacs magic
 ;;;
 ;;; Commentary:
