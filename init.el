@@ -1360,6 +1360,14 @@ rich-text version of what is assumed to be an org mode body."
                           :font "Anonymous Pro"
                           :height size))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; MacOS tweaks
+(when (eq system-type 'darwin)
+  (setq ns-right-alternate-modifier 'none)
+  (setq ns-right-command-modifier 'none)
+  (setq ns-command-modifier 'meta))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; edit-server
 
