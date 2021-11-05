@@ -1357,7 +1357,7 @@ rich-text version of what is assumed to be an org mode body."
                     "Anonymous Pro"
                   "AnonymousPro")))
   (set-face-attribute 'default nil
-                          :font "Anonymous Pro"
+                          :font fontname
                           :height size))
 
 
