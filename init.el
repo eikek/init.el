@@ -1351,7 +1351,7 @@ rich-text version of what is assumed to be an org mode body."
   :hook (after-init . doom-modeline-mode))
 
 (let ((size (if (display-graphic-p)
-                150
+                130
               120))
       (fontname (if (my/host-starts-with-p "Eikes")
                     "Anonymous Pro"
