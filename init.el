@@ -972,7 +972,10 @@ rich-text version of what is assumed to be an org mode body."
 
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
-  :commands (flycheck-mode))
+  :init (global-flycheck-mode)
+  :bind (:map flycheck-mode-map
+              ("M-n" . flycheck-next-error)
+              ("M-p" . flycheck-previous-error)))
 
 (use-package scala-mode
   :mode "\\.s\\(cala\\|bt\\)$")
@@ -1003,14 +1006,37 @@ rich-text version of what is assumed to be an org mode body."
 ;;   -r sonatype:snapshots \
 ;;   -o /usr/local/bin/metals-emacs -f
 
-(use-package eglot
-  :commands (eglot)
-  :bind (:map eglot-mode-map
-              ("M-n" . flymake-goto-next-error)
-              ("M-s f" . eglot-format)
-              ("M-RET" . eglot-code-actions)))
+;; (use-package eglot
+;;   :commands (eglot)
+;;   :bind (:map eglot-mode-map
+;;               ("M-n" . flymake-goto-next-error)
+;;               ("M-s f" . eglot-format)
+;;               ("M-RET" . eglot-code-actions)))
+(use-package lsp-mode
+  :hook
+  (scala-mode . lsp)
+  (lsp-mode . lsp-lens-mode)
+
+  :bind (:map lsp-mode-map
+              ("M-s f" . lsp-format-buffer))
+
+  :config
+  (setq lsp-prefer-flymake nil))
+
+(use-package lsp-metals)
+
+(use-package lsp-ui
+  :bind (:map lsp-ui-mode-map
+              ("C-q" . lsp-ui-doc-show)
+              ("M-RET" . lsp-ui-sideline-apply-code-actions))
+  :config
+  (lsp-ui-doc-mode nil)
+  (setq lsp-ui-doc-use-childframe (display-graphic-p)))
 
 (use-package flymake)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; treemacs
 
 (use-package treemacs
   :commands (treemacs)
@@ -1037,9 +1063,7 @@ rich-text version of what is assumed to be an org mode body."
               (psc-ide-mode)
               (company-mode)
               (flycheck-mode)))
-  (bind-key "M-SPC" 'company-complete)
-  (bind-key "M-n" 'flycheck-next-error psc-ide-mode-map)
-  (bind-key "M-p" 'flycheck-previous-error psc-ide-mode-map))
+  (bind-key "M-SPC" 'company-complete))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
