@@ -798,7 +798,7 @@
 ;; from emacs wiki: http://www.emacswiki.org/emacs/mu4e
  ;;; message view action
 (defun my/mu4e-msgv-action-view-in-browser (msg)
-  "View the body of the message in a web browser."
+  "View the body of the message MSG in a web browser."
   (interactive)
   (let ((html (mu4e-msg-field (mu4e-message-at-point t) :body-html))
         (tmpfile (format "%s/%d.html" temporary-file-directory (random))))
@@ -812,10 +812,12 @@
     (browse-url (concat "file://" tmpfile))))
 
 (defun my/mu4e-msgv-action-import-docspell (msg attachnum)
+  "Import the attachment given as ATTACHNUM from MSG to docspell."
   (interactive)
   (mu4e-view-open-attachment-with msg attachnum "dsc upload"))
 
 (defun my/mu4e-msgv-action-import-mail-docspell (msg)
+  "Import the complete MSG to docspell."
   (interactive)
   (let* ((ds-cmd "dsc")
          (subj (mu4e-message-field msg :subject))
@@ -995,26 +997,8 @@ rich-text version of what is assumed to be an org mode body."
 
 
 ;;; https://scalameta.org/metals/docs/editors/emacs.html
-;; curl -L -o coursier https://git.io/coursier
-;; chmod +x coursier
-;; ./coursier bootstrap \
-;;   --java-opt -Xss4m \
-;;   --java-opt -Xms100m \
-;;   --java-opt -Dmetals.client=emacs \
-;;   org.scalameta:metals_2.12:0.8.0 \
-;;   -r bintray:scalacenter/releases \
-;;   -r sonatype:snapshots \
-;;   -o /usr/local/bin/metals-emacs -f
-
-;; (use-package eglot
-;;   :commands (eglot)
-;;   :bind (:map eglot-mode-map
-;;               ("M-n" . flymake-goto-next-error)
-;;               ("M-s f" . eglot-format)
-;;               ("M-RET" . eglot-code-actions)))
 (use-package lsp-mode
   :hook
-  (scala-mode . lsp)
   (lsp-mode . lsp-lens-mode)
 
   :bind (:map lsp-mode-map
@@ -1245,7 +1229,7 @@ rich-text version of what is assumed to be an org mode body."
 (defun my/nix-prefetch-url (url)
   (interactive (list (browse-url-url-at-point)))
   (unless url
-    (user-error "No url found at point."))
+    (user-error "No url found at point"))
   (let ((sha (shell-command-to-string
               (format "nix-prefetch-url '%s' 2>/dev/null | tail -n1" url))))
     (kill-new (s-trim sha))
@@ -1336,14 +1320,14 @@ rich-text version of what is assumed to be an org mode body."
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
 (defun transparency (value)
-   "Set the transparency value of the frame window. `VALUE' may be
+   "Set the transparency value of the frame window, `VALUE' may be
 0=transparent to 100=opaque."
    (interactive "nTransparency Value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
 
 (defun set-transparency ()
   (when (display-graphic-p)
-    (transparency 96))
+    (transparency 95))
   (unless (display-graphic-p)
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
@@ -1363,8 +1347,8 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-homage-black t)
-  (set-background-color "#111")
+  (load-theme 'gruvbox-dark-medium t)
+  (set-background-color "#191919")
   (set-transparency)
   (setq rainbow-delimiters-max-face-count 3))
 
@@ -1449,4 +1433,7 @@ rich-text version of what is assumed to be an org mode body."
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  '(default ((t (:slant normal :weight normal :height 120 :width semi-expanded :foundry "SRC" :family "Hack")))))
+
+(provide 'init)
+;;; init.el ends here
 
