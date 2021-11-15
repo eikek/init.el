@@ -998,14 +998,21 @@ rich-text version of what is assumed to be an org mode body."
 
 ;;; https://scalameta.org/metals/docs/editors/emacs.html
 (use-package lsp-mode
+  :commands lsp
+  :init
+  (setq lsp-keymap-prefix "C-z")
   :hook
   (lsp-mode . lsp-lens-mode)
+  (lsp-mode . lsp-enable-which-key-integration)
+  (scala-mode . lsp)
 
-  :bind (:map lsp-mode-map
-              ("M-s f" . lsp-format-buffer))
-
-  :config
+ :config
   (setq lsp-prefer-flymake nil))
+
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol
+  :bind (:map lsp-mode-map
+              ("M-s f" . lsp-ivy-workspace-symbol)))
 
 (use-package lsp-metals)
 
