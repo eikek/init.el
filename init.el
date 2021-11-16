@@ -980,7 +980,7 @@ rich-text version of what is assumed to be an org mode body."
               ("M-p" . flycheck-previous-error)))
 
 (use-package scala-mode
-  :mode "\\.s\\(cala\\|bt\\)$")
+  :mode "\\.s\\(cala\\|bt\\|c\\)$")
 
 (use-package cc-mode
   :mode ("\\.java" . java-mode))
@@ -1005,9 +1005,16 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
   (scala-mode . lsp)
+  (elm-mode . lsp)
 
- :config
-  (setq lsp-prefer-flymake nil))
+  :config
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-enable-file-watchers t)
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]target\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bloop\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.elm-stuff\\'")
+  (setq lsp-file-watch-threshold 1500))
 
 (use-package lsp-ivy
   :commands lsp-ivy-workspace-symbol
@@ -1204,7 +1211,7 @@ rich-text version of what is assumed to be an org mode body."
   :commands (elm-mode)
   :mode "\\.elm"
   :config
-  (add-to-list 'company-backends 'company-elm)
+;  (add-to-list 'company-backends 'company-elm)
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
   (defun my/elm-compile-buffer ()
     (interactive)
