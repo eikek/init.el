@@ -1039,6 +1039,7 @@ rich-text version of what is assumed to be an org mode body."
 (use-package treemacs
   :commands (treemacs)
   :bind (("<f8>" . treemacs)
+         ("C-z C-z" . treemacs)
          (:map treemacs-mode-map
                ("<f8>" . treemacs-quit))))
 
