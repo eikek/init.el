@@ -1360,19 +1360,6 @@ rich-text version of what is assumed to be an org mode body."
   (minions-mode 1)
   (setq minions-direct '(projectile-mode)))
 
-(use-package doom-themes
-  :config
-  (load-theme 'gruvbox-dark-medium t)
-  (set-background-color "#191919")
-  (set-transparency)
-  (setq rainbow-delimiters-max-face-count 3))
-
-;; must run: `M-x' `all-the-icons-install-fonts'
-(use-package all-the-icons)
-
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode))
-
 (let ((size (if (display-graphic-p)
                 130
               120))
@@ -1382,6 +1369,21 @@ rich-text version of what is assumed to be an org mode body."
   (set-face-attribute 'default nil
                           :font fontname
                           :height size))
+
+(use-package doom-themes)
+
+(use-package kaolin-themes
+    :config
+    (load-theme 'kaolin-aurora t)
+    ;;(set-background-color "#191919")
+    (set-transparency)
+    (setq rainbow-delimiters-max-face-count 3))
+
+;; must run: `M-x' `all-the-icons-install-fonts'
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
