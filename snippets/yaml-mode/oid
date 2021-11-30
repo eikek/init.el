@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: oid
+# key: oid
+# --
+operationId: "$0"
