@@ -345,4 +345,25 @@ to contain the corresponding functions."
   (interactive)
   (find-file "~/org/now.org"))
 
+(defun my/org-duration-from-minutes (num)
+  "Format to duration string, retain a possible negative sign in NUM."
+  (let* ((anum (abs num))
+         (str (org-duration-from-minutes anum)))
+    (if (< num 0)
+        (format "-%s" str)
+      str)))
+
+(defun my/org-clock-table-timediff (clocktable goal &optional rowname)
+  "Get a time from CLOCKTABLE using ROWNAME and substract GOAL from it."
+  (let* ((entry  (-find
+                  (lambda(sl)
+                    (string-equal (-first-item sl) (or rowname "Timesheet")))
+                  clocktable))
+         (total (string-trim (-second-item entry)))
+         (goald (org-duration-string-to-minutes goal))
+         (totald (org-duration-string-to-minutes total))
+         (diff (- totald goald)))
+    `(:total ,total :goal ,goal :diff ,(my/org-duration-from-minutes diff))))
+
 (provide 'mylib)
+;;; mylib ends here
