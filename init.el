@@ -636,6 +636,7 @@
      (scala . t)
      (python . t)
      (sql . t)
+     (jdbcsh . t)
      (sqlite . t)
      (gnuplot . t)
      (ditaa . t)
