@@ -1,0 +1,9 @@
+# name: redshift template; requires a redshift-dev executable
+# key: redshift-dev
+# --
+
+#+header: :cmdline redshift-dev
+#+begin_src jdbcsh :exports both
+select distinct tablename from pg_table_def
+where schemaname = 'public' and tablename like '%user%' limit 20;$0
+#+end_src
