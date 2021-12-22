@@ -352,9 +352,31 @@ to contain the corresponding functions."
     (if (< num 0)
         (format "-%s" str)
       str)))
+(defun my/org-duration-string-to-minutes (str)
+  "Convert duration string STR to minutes supporting negative values."
+  (if (s-starts-with-p "-" str)
+      (* -1 (org-duration-string-to-minutes (substring str 1)))
+    (org-duration-string-to-minutes str)))
 
-(defun my/org-clock-table-timediff (clocktable goal &optional rowname)
-  "Get a time from CLOCKTABLE using ROWNAME and substract GOAL from it."
+(defun my/find-last-diff-minutes (file &optional result-name col-name)
+  "Return column COL-NAME in the result table of RESULT-NAME in FILE.
+
+It is expected to be a 2-row table."
+  (with-temp-buffer
+    (insert-file-contents-literally file)
+    (goto-char 1)
+    (org-babel-goto-named-result (or result-name (or col-name "week-total")))
+    (forward-line 1)
+    (let* ((table (org-table-to-lisp))
+           (colidx (-find-index (lambda (name) (string-equal name "Running")) (-first-item table)))
+           (entry (-last-item (-select-column colidx table))))
+      (my/org-duration-string-to-minutes entry))))
+
+(defun my/org-clock-table-timediff (clocktable goal &optional rowname lastfile)
+  "Get a time from CLOCKTABLE using ROWNAME and substract GOAL from it.
+
+If LASTFILE is present it uses it to find the last diff for
+calculating the running diff."
   (let* ((entry  (-find
                   (lambda(sl)
                     (string-equal (-first-item sl) (or rowname "Timesheet")))
@@ -362,8 +384,25 @@ to contain the corresponding functions."
          (total (string-trim (-second-item entry)))
          (goald (org-duration-string-to-minutes goal))
          (totald (org-duration-string-to-minutes total))
-         (diff (- totald goald)))
-    `(:total ,total :goal ,goal :diff ,(my/org-duration-from-minutes diff))))
+         (diff (- totald goald))
+         (last-diff   (if lastfile
+                              (my/find-last-diff-minutes lastfile)
+                            0))
+         (running-diff (+ diff last-diff)))
+    `(:total ,total
+             :goal ,goal
+             :diff ,(my/org-duration-from-minutes diff)
+             :last-diff ,(my/org-duration-from-minutes last-diff)
+             :running-diff ,(my/org-duration-from-minutes running-diff))))
+
+(defun my/previous-file ()
+  "Using current buffer filename, gets the file before this using alphanum. ordering."
+  (let* ((thisname (buffer-file-name))
+         (dir (f-parent thisname))
+         (found)
+         (all (sort (f-entries dir) 'string<)))
+    (-last-item (-take-while (lambda (el)
+                               (not (string-equal thisname el))) all))))
 
 (provide 'mylib)
 ;;; mylib ends here
