@@ -388,8 +388,9 @@
   :bind (("C-x C-d" . dired-jump)
 	 ("C-x d" . dired-jump))
   :config
-  (setq dired-listing-switches "-alh")
+  (setq dired-listing-switches "-AGhlv --group-directories-first --time-style=long-iso")
   (setq dired-dwim-target t)
+  ;;(setq dired-kill-when-opening-new-dired-buffer t) Emacs 28
   (use-package dired-filter
     :config
     (bind-key "f" dired-filter-mark-map dired-mode-map)))
@@ -402,12 +403,20 @@
   :bind (:map dired-mode-map
 	      ("i" . dired-subtree-cycle)))
 
-(use-package stripe-buffer
-  :disabled t
-  :commands (turn-on-stripe-buffer-mode stripe-listify-buffer)
-  :init
-  (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
-  (add-hook 'dired-mode-hook 'stripe-listify-buffer))
+(use-package all-the-icons-dired
+  :after dired
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+
+(use-package dired-sidebar
+  :bind (("C-x C-g" . dired-sidebar-toggle-sidebar))
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  (setq dired-sidebar-should-follow-file t)
+  (setq dired-sidebar-close-sidebar-on-file-open t)
+  ;;(setq dired-sidebar-subtree-line-prefix "··")
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-theme 'icons))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1039,6 +1048,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package treemacs
   :commands (treemacs)
+  :disabled t
   :bind (("<f8>" . treemacs)
          ("C-z C-z" . treemacs)
          (:map treemacs-mode-map
@@ -1375,8 +1385,8 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package kaolin-themes
     :config
-    (load-theme 'kaolin-aurora t)
-    ;;(set-background-color "#191919")
+    (load-theme 'kaolin-blossom t)
+    ;(set-background-color "#191919")
     (set-transparency)
     (setq rainbow-delimiters-max-face-count 3))
 
