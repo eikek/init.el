@@ -58,6 +58,9 @@
         (forward-line 1)
         (insert "-\n")
         (setq header-delim "-")
+        (goto-char (point-min))
+        (while (search-forward "|" nil t)
+          (replace-match "¦"))
         (write-file out-file)))
 
     (with-temp-buffer
