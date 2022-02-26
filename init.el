@@ -1346,8 +1346,9 @@ rich-text version of what is assumed to be an org mode body."
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
 (defun transparency (value)
-   "Set the transparency value of the frame window, `VALUE' may be
-0=transparent to 100=opaque."
+   "Set the transparency value of the frame window.
+
+The `VALUE' may be 0=transparent to 100=opaque."
    (interactive "nTransparency Value 0 - 100 opaque:")
    (set-frame-parameter (selected-frame) 'alpha value))
 
@@ -1385,7 +1386,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package kaolin-themes
     :config
-    (load-theme 'kaolin-blossom t)
+    (load-theme 'kaolin-mono-dark t)
     ;(set-background-color "#191919")
     (set-transparency)
     (setq rainbow-delimiters-max-face-count 3))
