@@ -1244,7 +1244,8 @@ rich-text version of what is assumed to be an org mode body."
       (elm-compile-buffer)))
   (bind-key "C-c C-c" 'my/elm-compile-buffer elm-mode-map)
   (bind-key "C-c h" 'my/elm-compile-buffer-html elm-mode-map)
-  (setq elm-tags-on-save nil))
+  (setq elm-tags-on-save t)
+  (setq indent-tabs-mode nil))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
