@@ -381,6 +381,15 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ds4e
+
+(use-package ds4e-search
+  :commands (ds4e-search)
+  :init
+  (setq ds4e-dsc-executable "/home/eike/workspace/projects/dsc/target/debug/dsc"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; dired
 
 (use-package dired
@@ -418,6 +427,11 @@
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-theme 'icons))
 
+(use-package ds4e-dired
+  :after dired
+  :bind (:map dired-mode-map
+              ("C-d u" . ds4e-dired-upload)
+              ("C-d o" . ds4e-dired-open-browser)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; magit
@@ -588,13 +602,17 @@
 
 (use-package dashboard
   :config
+  (use-package ds4e-dashboard
+    :config
+    (ds4e-dashboard-register))
+  (add-to-list 'dashboard-item-shortcuts '(docspell . "d"))
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-center-content t)
-  (setq dashboard-items '((agenda . 5)
+  (setq dashboard-items '((projects . 5)
+                          (docspell . 5)
                           (recents  . 5)
-                          (bookmarks . 5)
-                          (projects . 5)
-                          (registers . 5)))
+                          (agenda . 5)
+                          (bookmarks . 5)))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-footer "Have a nice day!")
   (setq show-week-agenda-p t)
@@ -821,32 +839,6 @@
        html))
     (browse-url (concat "file://" tmpfile))))
 
-(defun my/mu4e-msgv-action-import-docspell (msg attachnum)
-  "Import the attachment given as ATTACHNUM from MSG to docspell."
-  (interactive)
-  (mu4e-view-open-attachment-with msg attachnum "dsc upload"))
-
-(defun my/mu4e-msgv-action-import-mail-docspell (msg)
-  "Import the complete MSG to docspell."
-  (interactive)
-  (let* ((ds-cmd "dsc")
-         (subj (mu4e-message-field msg :subject))
-         (path (mu4e-message-field msg :path))
-         (subject (s-trim
-                   (s-replace-regexp "[ \t\r\n]+" " "
-                                     (s-replace-regexp "[^ a-zA-Z0-9._\\-]" ""
-                                                       (s-replace-all '( ("/" . "-")) subj)))))
-         (temp (expand-file-name (concat "/tmp/" subject ".eml"))))
-    ;; need to copy it, because curl has problems with maildir
-    ;; filenames; it also is nicer, since the name is then the subject
-    ;; and not some cryptic crap
-    (copy-file path temp 1)
-    (shell-command-to-string
-	     (concat ds-cmd " upload "
-	       (shell-quote-argument temp)
-	       " 2> /dev/null"))
-    (delete-file temp)))
-
 (eval-and-compile
   (defvar my/mu4e-find-load-path
     (let ((cand '("~/.nix-profile/share/emacs/site-lisp/mu4e"
@@ -854,6 +846,7 @@
       (-find 'file-exists-p cand))))
 
 (defun my/mu4e-make-contexts ()
+  "Make my email contexts."
   `(,(make-mu4e-context
       :name "posteo.de"
       :enter-func (lambda () (mu4e-message "Switch to posteo.de context"))
@@ -902,6 +895,12 @@
   :load-path my/mu4e-find-load-path
   :bind (("<f5>" . mu4e))
   :config
+
+  (use-package ds4e-mu4e
+    :config
+    (ds4e-mu4e-register))
+
+  
   (setq mu4e-context-policy 'pick-first)
   ;;(setq mu4e-compose-context-policy nil)
 
@@ -923,10 +922,6 @@
     (imagemagick-register-types))
   (add-to-list 'mu4e-view-actions
                '("View in browser" . my/mu4e-msgv-action-view-in-browser) t)
-  (add-to-list 'mu4e-view-actions
-               '("Import Docspell" . my/mu4e-msgv-action-import-mail-docspell) t)
-  (add-to-list 'mu4e-view-attachment-actions
-               '("Docspell" . my/mu4e-msgv-action-import-docspell))
 
   ;; see https://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries
   (add-to-list 'mu4e-bookmarks
@@ -984,10 +979,11 @@ rich-text version of what is assumed to be an org mode body."
 
 ;; Enable nice rendering of diagnostics like compile errors.
 (use-package flycheck
-  :init (global-flycheck-mode)
   :bind (:map flycheck-mode-map
               ("M-n" . flycheck-next-error)
-              ("M-p" . flycheck-previous-error)))
+              ("M-p" . flycheck-previous-error))
+  :hook
+  (emacs-lisp-mode . flycheck-mode))
 
 (use-package scala-mode
   :mode "\\.s\\(cala\\|bt\\|c\\)$")
@@ -1014,6 +1010,7 @@ rich-text version of what is assumed to be an org mode body."
   :hook
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
+  (lsp-mode . flycheck-mode)
   (scala-mode . lsp)
   (elm-mode . lsp)
 
@@ -1387,7 +1384,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
               120))
       (fontname (if (my/host-starts-with-p "Eikes")
                     "Anonymous Pro"
-                  "AnonymousPro")))
+                  "Anonymous Pro")))
   (set-face-attribute 'default nil
                           :font fontname
                           :height size))
