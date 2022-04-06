@@ -385,8 +385,9 @@
 
 (use-package ds4e-search
   :commands (ds4e-search)
-  :init
-  (setq ds4e-dsc-executable "/home/eike/workspace/projects/dsc/target/debug/dsc"))
+  :config
+  ;(setq ds4e-dsc-executable "/home/eike/workspace/projects/dsc/target/debug/dsc")
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -604,6 +605,8 @@
   :config
   (use-package ds4e-dashboard
     :config
+    (setq ds4e-dashboard-section-name "Offene Aufgaben")
+    (setq ds4e-dashboard-query '(:bookmark "Offene Aufgaben"))
     (ds4e-dashboard-register))
   (add-to-list 'dashboard-item-shortcuts '(docspell . "d"))
   (setq dashboard-startup-banner 'logo)
