@@ -29,7 +29,7 @@
          (dbpassword (org-babel-find-db-connection-param params :dbpassword))
          (colnames-p (not (equal "no" (cdr (assq :colnames params))))))
     (format "%s %s %s %s %s --out %s %s"
-            (or cmdline "")
+            (or cmdline "jdbcsh")
             (if colnames-p "--show-header" "")
             (if dburl (format "--jdbc-url '%s'" dburl) "")
             (if dbuser (format "--jdbc-user '%s'" dbuser) "")
