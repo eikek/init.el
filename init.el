@@ -1363,8 +1363,9 @@ The `VALUE' may be 0=transparent to 100=opaque."
    (set-frame-parameter (selected-frame) 'alpha value))
 
 (defun set-transparency ()
+  "Set transparent background."
   (when (display-graphic-p)
-    (transparency 95))
+    (transparency 90))
   (unless (display-graphic-p)
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 
@@ -1392,14 +1393,14 @@ The `VALUE' may be 0=transparent to 100=opaque."
                           :font fontname
                           :height size))
 
-(use-package doom-themes)
-
-(use-package kaolin-themes
-    :config
-    (load-theme 'kaolin-mono-dark t)
+(use-package doom-themes
+  :config
+    (load-theme 'doom-homage-black t)
     ;(set-background-color "#191919")
     (set-transparency)
     (setq rainbow-delimiters-max-face-count 3))
+
+(use-package kaolin-themes)
 
 ;; must run: `M-x' `all-the-icons-install-fonts'
 (use-package all-the-icons)
