@@ -599,6 +599,18 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; imenu-list
+
+;; https://github.com/bmag/imenu-list
+(use-package imenu-list
+  :bind (("C-ß" . imenu-list-smart-toggle))
+  :init
+  (setq imenu-list-focus-after-activation t)
+  :config
+  (imenu-list-minor-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; dashboard
 
 (use-package dashboard
@@ -1014,8 +1026,8 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
-  (scala-mode . lsp)
-  (elm-mode . lsp)
+;;  (scala-mode . lsp)
+;;  (elm-mode . lsp)
 
   :config
   (setq lsp-prefer-flymake nil)
@@ -1233,7 +1245,11 @@ rich-text version of what is assumed to be an org mode body."
   :mode "\\.elm"
   :config
 ;  (add-to-list 'company-backends 'company-elm)
+  (setq elm-mode-hook '(elm-indent-simple-mode))
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+  (add-hook 'elm-mode-hook
+            (lambda ()
+              (setq indent-tabs-mode nil)))
   (defun my/elm-compile-buffer ()
     (interactive)
     (let ((elm-compile-arguments '("--output=/dev/null")))
@@ -1244,8 +1260,7 @@ rich-text version of what is assumed to be an org mode body."
       (elm-compile-buffer)))
   (bind-key "C-c C-c" 'my/elm-compile-buffer elm-mode-map)
   (bind-key "C-c h" 'my/elm-compile-buffer-html elm-mode-map)
-  (setq elm-tags-on-save t)
-  (setq indent-tabs-mode nil))
+  (setq elm-tags-on-save t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1326,6 +1341,7 @@ rich-text version of what is assumed to be an org mode body."
   :if (not (display-graphic-p))
   :config
   (global-clipetty-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ansible
