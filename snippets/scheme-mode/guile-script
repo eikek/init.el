@@ -1,0 +1,25 @@
+# name: guile script starter
+# key: script
+# --
+#!/bin/sh
+exec guile -e '($1) main' -s \$0 "$@"
+!#
+
+;; if you want to load sibling files
+;;(add-to-load-path (dirname (current-filename)))
+
+(define-module ($1)
+  #:use-module (json)
+  #:use-module (ice-9 rdelim)
+  #:export (main))
+
+(fluid-set! %default-port-encoding "UTF-8")
+
+
+(define (main args)
+  (display "Hello world!")
+  (newline))
+
+;; Local Variables:
+;; mode: scheme
+;; End:
