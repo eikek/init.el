@@ -11,9 +11,21 @@ exec guile -e '($1) main' -s \$0 "$@"
 (define-module ($1)
   #:use-module (json)
   #:use-module (ice-9 rdelim)
+  #:use-module (ice-9 format)
   #:export (main))
 
 (fluid-set! %default-port-encoding "UTF-8")
+
+;; Macro for executing system commands and making this program exit in
+;; case of failure.
+(define-syntax sysexec
+  (syntax-rules ()
+    ((sysexec exp ...)
+     (let ((rc  (apply system* (list exp ...))))
+       (unless (eqv? rc EXIT_SUCCESS)
+         (format (current-error-port) "> '~a …' failed with: ~#*~1:*~d~%" exp ... rc)
+         (exit 1))
+       #t))))
 
 
 (define (main args)
