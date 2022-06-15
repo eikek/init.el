@@ -1,0 +1,11 @@
+# name: template for db access locally aegg
+# key: jdbcsh-aegg
+# --
+
+#+header: :cmdline jdbcsh --jdbc-url jdbc:postgresql://localhost:5432/catalog_service --jdbc-user aegg --jdbc-pass aegg
+#+begin_src jdbcsh :exports both
+  with stats(market_id, market_brand_id, cnt) as
+    (select marketplace_id, marketplace_brand_id, count(*)
+     from brand_listings2 group by 1,2)
+  select * from stats where cnt > 1;
+#+end_src
