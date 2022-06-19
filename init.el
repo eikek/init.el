@@ -632,6 +632,15 @@
   (setq dashboard-footer "Have a nice day!")
   (setq show-week-agenda-p t)
   (setq dashboard-set-file-icons t)
+
+  (dashboard-insert-startupify-lists)
+
+  (defun my/dashboard-activate ()
+    (interactive)
+    (switch-to-buffer dashboard-buffer-name)
+    (goto-char (point-min))
+    (dashboard-mode)
+    (redisplay))
   (dashboard-setup-startup-hook))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
