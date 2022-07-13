@@ -1,0 +1,10 @@
+# name: local database config template for mariadb
+# key: mariadb
+# --
+
+#+header: :engine mysql
+#+header: :dbhost 127.0.0.1 :database $1 :dbuser dev
+#+header: :dbpassword dev
+#+begin_src sql :exports both
+$0
+#+end_src
