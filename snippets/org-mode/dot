@@ -1,0 +1,17 @@
+# name: dot
+# key: dot
+# --
+#+begin_src plantuml :exports results :file test.png
+  @startdot
+  digraph base {
+    graph [label = "My Graph"]
+    node [shape=box]; NodeBox
+    node [shape=cylinder]; NodeDB;
+    node [shape=octagon]; OtherNode;
+    edge [arrowhead=normal,color=gray,fontsize=10]
+
+    NodeBox->NodeDB
+  }
+
+  @enddot
+#+end_src
