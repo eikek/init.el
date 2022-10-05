@@ -704,6 +704,7 @@
      (dot . t)
      (elvish . t)
      (rust . t)
+     (sparql . t)
      (C . t)
      (R . t)))
   ;; running scala code with ammonite
@@ -1323,6 +1324,14 @@ rich-text version of what is assumed to be an org mode body."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; sparql-mode
+(use-package sparql-mode
+  :mode (("\\.sparql" . sparql-mode)
+         ("\\.rq" . sparql-mode))
+  :config
+  (add-hook 'sparql-mode-hook 'company-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; fish-mode / shell things
 (use-package fish-mode)
 
@@ -1418,7 +1427,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
   (setq minions-direct '(projectile-mode)))
 
 (let ((size (if (display-graphic-p)
-                130
+                145
               120))
       (fontname (if (my/host-starts-with-p "Eikes")
                     "Anonymous Pro"
