@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: sparql
+# key: sparql
+# --
+
+#+begin_src sparql :exports both :url http://localhost:3030/${1:path} :format text/csv
+$0
+#+end_src
