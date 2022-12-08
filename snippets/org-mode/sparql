@@ -4,5 +4,14 @@
 # --
 
 #+begin_src sparql :exports both :url http://localhost:3030/${1:path} :format text/csv
-$0
+  PREFIX schema: <http://schema.org/>
+  PREFIX renku: <https://swissdatasciencecenter.github.io/renku-ontology#>
+
+  select ?g
+  where {
+    graph ?g {
+      ?s ?p ?o .
+    }
+  }
+  limit 30
 #+end_src
