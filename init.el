@@ -656,7 +656,6 @@
 ;;; fill-column helper
 
 (use-package fill-column-indicator)
-(use-package hl-fill-column)
 (use-package visual-fill-column)
 
 
