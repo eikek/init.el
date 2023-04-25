@@ -1032,7 +1032,9 @@ rich-text version of what is assumed to be an org mode body."
   (substitute-key-definition
    'minibuffer-complete-word
    'self-insert-command
-   minibuffer-local-completion-map))
+   minibuffer-local-completion-map)
+   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+   (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 
 ;;; https://scalameta.org/metals/docs/editors/emacs.html
@@ -1044,7 +1046,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
-;;  (scala-mode . lsp)
+  (scala-mode . lsp)
 ;;  (elm-mode . lsp)
 
   :config
@@ -1059,6 +1061,7 @@ rich-text version of what is assumed to be an org mode body."
   (setq gc-cons-threshold 300000000) ;; 100mb
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
   (setq lsp-idle-delay 0.500)
+  (setq lsp-keep-workspace-alive nil)
   ;;       (setq lsp-log-io nil)
   ;;       (setq lsp-completion-provider :capf)
   )
