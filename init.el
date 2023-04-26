@@ -1391,7 +1391,7 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package work
   :load-path "lisp"
-  :if (my/host-starts-with-p "Eikes")
+  :if (my/host-starts-with-p "staff")
   :demand t)
 
 
