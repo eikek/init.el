@@ -679,7 +679,7 @@
   (setq org-log-into-drawer t)
   (setq org-src-fontify-natively t)
   (setq org-loop-over-headlines-in-active-region t)
-  (setq org-ellipsis " ⤵");; ⤵ ≫
+  ;(setq org-ellipsis " ⤵");; ⤵ ≫
   (setq org-startup-folded t)
   (use-package ob-restclient
     :commands (org-babel-execute:restclient))
@@ -738,10 +738,20 @@
            "** Mittag BC   :lebensbedarf:\n %^{date}p %^{chf}p" :prepend t :empty-lines 1))))
 
 (use-package org-bullets
+  :disabled t
   :if window-system
   :commands org-bullets-mode
   :init
   (add-hook 'org-mode-hook 'org-bullets-mode))
+
+(use-package org-modern
+  :config
+  (setq
+   org-ellipsis "…"
+   org-pretty-entities t
+   org-hide-emphasis-markers t)
+  :init
+  (global-org-modern-mode))
 
 (use-package org-indent
   :if window-system
@@ -800,7 +810,21 @@
     (interactive)
     (my/org-clock-id "e51a4e26-302f-4353-8e6e-504cb383bfd0")))
 
-(use-package ob-mongo)
+(use-package svg-tag-mode
+  :disabled t
+  :config
+  (setq svg-tag-tags
+        '(("\\(:[A-Za-z0-9]+:\\)" . ((lambda (tag)
+                               (svg-tag-make tag :beg 1 :end -1))))
+          ("\\(:[A-Z]+\\)\|[a-zA-Z#0-9]+:" . ((lambda (tag)
+                                                (svg-tag-make tag :beg 1 :inverse t
+                                                              :margin 0 :crop-right t))))
+          (":[A-Za-z]+\\(\|[a-zA-Z#0-9]+:\\)" . ((lambda (tag)
+                                                (svg-tag-make tag :beg 1 :end -1
+                                                              :margin 0 :crop-left t)))))))
+
+(use-package ob-mongo
+  :disabled t)
 
 (use-package ox-koma-letter
   :config (add-to-list 'org-latex-packages-alist '("AUTO" "babel" t) t)
@@ -1440,7 +1464,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
 
 (use-package doom-themes
   :config
-    (load-theme 'doom-homage-black t)
+    (load-theme 'boron t)
     ;(set-background-color "#191919")
     (set-transparency)
     (setq rainbow-delimiters-max-face-count 3))
