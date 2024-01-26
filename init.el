@@ -1043,7 +1043,13 @@ rich-text version of what is assumed to be an org mode body."
   (emacs-lisp-mode . flycheck-mode))
 
 (use-package scala-mode
-  :mode "\\.s\\(cala\\|bt\\|c\\)$")
+  :mode "\\.s\\(cala\\|bt\\|c\\)$"
+  :config
+  (setq
+    scala-indent:align-forms t
+    scala-indent:align-parameters t
+    scala-indent:indent-value-expression t
+    scala-indent:default-run-on-strategy 0))
 
 (use-package cc-mode
   :mode ("\\.java" . java-mode))
@@ -1060,6 +1066,19 @@ rich-text version of what is assumed to be an org mode body."
    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
    (setq sbt:program-options '("-Dsbt.supershell=false")))
 
+(use-package treesit
+  :init
+  (setq treesit-language-source-alist
+        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (markdon "https://github.com/ikatyang/tree-sitter-markdown")
+          (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+          (scala "https://github.com/tree-sitter/tree-sitter-scala"))))
 
 ;;; https://scalameta.org/metals/docs/editors/emacs.html
 (use-package lsp-mode
@@ -1071,7 +1090,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
   (scala-mode . lsp)
-;;  (elm-mode . lsp)
+  ;;  (elm-mode . lsp)
 
   :config
   (setq lsp-prefer-flymake nil)
@@ -1081,8 +1100,8 @@ rich-text version of what is assumed to be an org mode body."
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bloop\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.elm-stuff\\'")
   (setq lsp-file-watch-threshold 1500)
- ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  (setq gc-cons-threshold 300000000) ;; 100mb
+  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+  (setq gc-cons-threshold 300000000)           ;; 100mb
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
   (setq lsp-idle-delay 0.500)
   (setq lsp-keep-workspace-alive nil)
