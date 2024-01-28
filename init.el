@@ -262,7 +262,7 @@
 
 
 (global-prettify-symbols-mode)
-(-each '(scala-mode-hook java-mode-hook js2-mode-hook)
+(-each '(scala-mode-hook scala-ts-mode-hook java-ts-mode-hook js2-mode-hook)
   (lambda (hook)
     (add-hook hook (lambda ()
                      (add-to-list 'prettify-symbols-alist '("!=" . ?≠))
@@ -1043,7 +1043,6 @@ rich-text version of what is assumed to be an org mode body."
   (emacs-lisp-mode . flycheck-mode))
 
 (use-package scala-mode
-  :mode "\\.s\\(cala\\|bt\\|c\\)$"
   :config
   (setq
     scala-indent:align-forms t
@@ -1051,7 +1050,10 @@ rich-text version of what is assumed to be an org mode body."
     scala-indent:indent-value-expression t
     scala-indent:default-run-on-strategy 0))
 
-(use-package cc-mode
+(use-package scala-ts-mode
+  :mode "\\.s\\(cala\\|bt\\|c\\)$")
+
+(use-package java-ts-mode
   :mode ("\\.java" . java-mode))
 
 (use-package sbt-mode
@@ -1075,10 +1077,13 @@ rich-text version of what is assumed to be an org mode body."
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
           (json "https://github.com/tree-sitter/tree-sitter-json")
-          (markdon "https://github.com/ikatyang/tree-sitter-markdown")
+          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+          (nix "https://github.com/nix-community/tree-sitter-nix")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (scala "https://github.com/tree-sitter/tree-sitter-scala"))))
+
 
 ;;; https://scalameta.org/metals/docs/editors/emacs.html
 (use-package lsp-mode
@@ -1089,7 +1094,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
-  (scala-mode . lsp)
+  (scala-ts-mode . lsp)
   ;;  (elm-mode . lsp)
 
   :config
@@ -1330,10 +1335,11 @@ rich-text version of what is assumed to be an org mode body."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; nix
 
-(use-package nix-mode
-  :mode "\\.nix"
-  :config
+(use-package nix-ts-mode
+  :mode "\\.nix")
 
+(use-package nix-mode
+  :config
   (use-package company-nixos-options
     :disabled t
     :commands (company-nixos-options)
