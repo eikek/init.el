@@ -750,6 +750,14 @@
    org-ellipsis "…"
    org-pretty-entities t
    org-hide-emphasis-markers t)
+  ;; workaround for table formatting with dates
+  ;; https://github.com/minad/org-modern/issues/5#issuecomment-1704023036
+  :custom
+  (org-modern-block-fringe 10)
+  :custom-face
+  (org-modern-label
+   ((t :height 1.0 :weight semi-bold
+       :underline nil :inherit default)))
   :init
   (global-org-modern-mode))
 
