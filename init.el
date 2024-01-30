@@ -419,6 +419,7 @@
   (dired-mode . all-the-icons-dired-mode))
 
 (use-package dired-sidebar
+  :disabled t
   :bind (("C-x C-g" . dired-sidebar-toggle-sidebar))
   :commands (dired-sidebar-toggle-sidebar)
   :config
@@ -1146,7 +1147,6 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package treemacs
   :commands (treemacs)
-  :disabled t
   :bind (("<f8>" . treemacs)
          ("C-z C-z" . treemacs)
          (:map treemacs-mode-map
