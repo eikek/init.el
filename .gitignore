@@ -25,3 +25,4 @@ emojis/
 .edbi-*
 network-security.data
 /.cache
+tree-sitter/

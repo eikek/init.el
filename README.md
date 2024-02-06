@@ -8,39 +8,17 @@ Packages are taken from the
 [nixpkgs](https://github.com/NixOS/nixpkgs) collection, which creates
 them from melpa and other sources.
 
-Emacs and its packages are defined in `default.nix`. It can be build using
-
-```
-nix-build default.nix
-```
-
-After that completes, emacs is here: `./result/bin/emacs`.
-
-To integrate it with `nix-env`, add something like the following to
-`~/.nixpkgs/config`:
-
-
-``` nix
-let
-  emacs =
-    let
-      dotemacs = builtins.filter builtins.pathExists [
-         ../.emacs.d/default.nix
-         ../workspace/projects/dot-emacs/default.nix
-      ];
-    in
-    p: if (dotemacs == []) then {}
-       else { myemacs = (import (builtins.head dotemacs) { pkgs = p; }); };
-in
-{
-  packageOverrides = emacs;
-}
-```
-
-The list of paths to `default.nix` must be adjusted as appropriate.
-Then using `nix-env -iA myemacs` (or `nix-env -iA nixos.myemacs`)
-installs this specific emacs in your local environment.
-
-More information about how to install emacs this way is in
-the
+Emacs and its packages are defined in my [nix
+config](https://github.com/eikek/confnix/tree/nixos-23.11/pkgs/emacs).
+More information about how to install emacs this way is in the
 [manual](https://nixos.org/nixos/manual/index.html#module-services-emacs).
+
+A list of packages can be generated with `list-emacs-pkgs.sh`
+(requires `nix` to be installed):
+
+```
+./list-emacs-pkgs.sh counsel | jq
+```
+
+Then [use-package](https://github.com/jwiegley/use-package) is used to
+configure emacs.
