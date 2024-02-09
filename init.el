@@ -1522,7 +1522,9 @@ The `VALUE' may be 0=transparent to 100=opaque."
       (if args (browse-url-firefox url)
         (eaf-open-browser url)))
     (setq browse-url-browser-function 'my/open-browser))
-  (use-package eaf-pdf-viewer))
+  (use-package eaf-pdf-viewer)
+  (use-package eaf-markdown-previewer)
+  (use-package eaf-org-previewer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; MacOS tweaks
