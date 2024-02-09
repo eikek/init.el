@@ -1510,6 +1510,19 @@ The `VALUE' may be 0=transparent to 100=opaque."
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; emacs application framework (eaf) - browser, pdf-viewer
+(use-package eaf
+  :config
+  (setq eaf-browser-default-search-engine "duckduckgo")
+  (use-package eaf-browser
+    :config
+    (defun my/open-browser (url &optional args)
+      (interactive "p")
+      (if args (browse-url-firefox url)
+        (eaf-open-browser url)))
+    (setq browse-url-browser-function 'my/open-browser))
+  (use-package eaf-pdf-viewer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; MacOS tweaks
