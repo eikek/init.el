@@ -375,6 +375,7 @@
 ;;; editorconfig
 
 (use-package editorconfig
+  :disabled t
   :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
