@@ -197,7 +197,12 @@
 ;;; golden-ratio-mode
 
 (use-package golden-ratio-mode
-  :commands (golden-ratio-mode golden-ratio))
+  :diminish golden-ratio-mode
+  :commands (golden-ratio-mode golden-ratio)
+  :config
+  (golden-ratio-mode 1)
+  (remove-hook 'window-configuration-change-hook 'golden-ratio)
+  (add-to-list 'golden-ratio-extra-commands 'avy-goto-char-timer))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
