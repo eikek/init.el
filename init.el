@@ -1136,7 +1136,9 @@ rich-text version of what is assumed to be an org mode body."
   :bind (:map lsp-mode-map
               ("M-s f" . lsp-ivy-workspace-symbol)))
 
-(use-package lsp-metals)
+(use-package lsp-metals
+  :bind (:map lsp-mode-map
+              ("C-z i" . lsp-java-add-import)))
 
 (use-package lsp-ui
   :bind (:map lsp-ui-mode-map
