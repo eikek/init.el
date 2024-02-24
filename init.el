@@ -1527,7 +1527,8 @@ The `VALUE' may be 0=transparent to 100=opaque."
   (setq eaf-browser-default-search-engine "duckduckgo")
   (use-package eaf-browser
     :bind (:map eaf-mode-map
-                  ("M-<left>" . eaf-py-proxy-history_backward))
+                ("f" . eaf-py-proxy-open_link)
+                ("M-<left>" . eaf-py-proxy-history_backward))
     :config
     (defun my/open-browser (url &optional args)
       (interactive "p")
