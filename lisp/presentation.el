@@ -16,7 +16,7 @@
 (defvar-local my/hide-mode-line nil)
 
 (defun my/set-fringe-background ()
-  "Sets the fringe background to the current background."
+  "Set the fringe background to the current background."
   (interactive)
   (custom-set-faces
    `(fringe ((t (:background ,(face-attribute 'default :background)))))))
@@ -51,7 +51,7 @@
 
   (text-scale-adjust 3)
   (delete-other-windows)
-  (my/hidden-mode-line-mode)
+  ;;(my/hidden-mode-line-mode)
   (org-display-inline-images)
   (org-tree-slide-mode))
 
@@ -60,7 +60,8 @@
   (set-fringe-style nil)
   (org-toggle-inline-images)
   (org-tree-slide-mode 0)
-  (my/hidden-mode-line-mode 0))
+  ;;(my/hidden-mode-line-mode 0)
+  )
 
 (define-minor-mode my/presentation-mode
   "Minor mode combining org-tree-slide with some ui tweaks for
