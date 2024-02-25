@@ -1439,9 +1439,17 @@ rich-text version of what is assumed to be an org mode body."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; solr helpers
+
+(use-package solr
+  :load-path "lisp"
+  :commands (solr-minor-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ansible
 
 (use-package ansible
+  :disabled t
   :commands (ansible))
 
 
@@ -1467,11 +1475,11 @@ rich-text version of what is assumed to be an org mode body."
 ;; needs a compositing wm, e.g.
 ;; compton  --backend glx --paint-on-overlay --glx-no-stencil  -b
 (defun transparency (value)
-   "Set the transparency value of the frame window.
+  "Set the transparency value of the frame window.
 
 The `VALUE' may be 0=transparent to 100=opaque."
-   (interactive "nTransparency Value 0 - 100 opaque:")
-   (set-frame-parameter (selected-frame) 'alpha value))
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
 
 (defun set-transparency ()
   "Set transparent background."
