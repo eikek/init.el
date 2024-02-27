@@ -20,12 +20,12 @@
 You need to wrap documents into a json array. The buffer as send
 as-is."
   (interactive)
-  (let* ((query (or q (string-clean-whitespace (buffer-string))))
+  (let* ((documents (or q (string-clean-whitespace (buffer-string))))
          (url (url-encode-url (format "%s/solr/%s/update?wt=json&overwrite=true&commitWithin=%d"
                                       solr/base-url solr/core-name solr/commit-within)))
          (url-request-method "POST")
          (url-request-extra-headers '(("Content-Type" . "application/json")))
-         (url-request-data query)
+         (url-request-data documents)
          (result (url-retrieve-synchronously url nil t 30)))
     (save-excursion
       (with-current-buffer result
@@ -43,15 +43,38 @@ documents."
          (cmd (format "{'delete': {'query':'%s'}}" query)))
     (solr/update-documents cmd)))
 
-(defun solr/query ()
-  "Query solr for documents."
+(defun solr/query-string ()
+  "Query solr for documents using buffer as query string."
   (interactive)
   (let* ((query (string-clean-whitespace (buffer-string)))
          (url (url-encode-url
                (format "%s/solr/%s/select?wt=json&indent=true&fl=%s&q=%s"
                        solr/base-url solr/core-name solr/query-fl query)))
          (url-request-method "GET")
+         (result-buffer (url-retrieve-synchronously url nil t 30)))
+    (with-current-buffer result-buffer
+      (goto-char (point-min))
+      ;; remove header, only show results. only if 200
+      (when (thing-at-point-looking-at solr/--http-ok)
+        (while (not (string-equal "\n" (thing-at-point 'line)))
+          (delete-line))
+        (delete-line)))
+    (solr/--copy-to-result-buffer result-buffer)
+    (save-excursion
+      (delete-other-windows)
+      (split-window-vertically)
+      (pop-to-buffer (solr/--make-result-buffer)))))
+
+(defun solr/query-json ()
+  "Query solr for documents using buffer as json."
+  (interactive)
+  (let* ((query (string-clean-whitespace (buffer-string)))
+         (url (url-encode-url
+               (format "%s/solr/%s/query?wt=json&indent=true"
+                       solr/base-url solr/core-name)))
+         (url-request-method "POST")
          (url-request-extra-headers '(("Content-Type" . "application/json")))
+         (url-request-data query)
          (result-buffer (url-retrieve-synchronously url nil t 30)))
     (with-current-buffer result-buffer
       (goto-char (point-min))
@@ -94,7 +117,8 @@ documents."
   :keymap
   `((,(kbd "C-c C-u") . solr/update-documents)
     (,(kbd "C-c C-d") . solr/delete-documents)
-    (,(kbd "C-c C-c") . solr/query)))
+    (,(kbd "C-c C-j") . solr/query-json)
+    (,(kbd "C-c C-c") . solr/query-string)))
 
 (provide 'solr)
 ;;; solr.el ends here
