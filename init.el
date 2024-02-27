@@ -606,11 +606,13 @@
 
 (use-package vterm-toggle
   :bind (("<f6>" . vterm-toggle)
+         ("<f7>" . vterm-toggle)
          ("C-<f6>" . vterm-toggle-cd)
          (:map vterm-mode-map
-               ("s-n" . vterm-toggle-forward)
-               ("s-p" . vterm-toggle-backward)
-               ("<f6>" . vterm-toggle-cd)))
+               ("M-n" . vterm-toggle-forward)
+               ("M-p" . vterm-toggle-backward)
+               ("<f6>" . vterm-toggle)
+               ("<f7>" . vterm-toggle)))
   :init
   (setq vterm-toggle-fullscreen-p nil))
 
