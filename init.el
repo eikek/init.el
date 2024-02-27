@@ -609,8 +609,7 @@
          ("<f7>" . vterm-toggle)
          ("C-<f6>" . vterm-toggle-cd)
          (:map vterm-mode-map
-               ("M-n" . vterm-toggle-forward)
-               ("M-p" . vterm-toggle-backward)
+               ("C-c n" . vterm-toggle-forward)
                ("<f6>" . vterm-toggle)
                ("<f7>" . vterm-toggle)))
   :init
