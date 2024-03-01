@@ -15,12 +15,12 @@
 (defvar solr/--http-ok "HTTP/1.1 200 OK")
 (defvar solr/--result-buffer-name "*SOLR Result*")
 
-(defun solr/update-documents (&optional q)
-  "Send Q or the current buffer to solr's update endpoint.
+(defun solr/update-documents (&optional data)
+  "Send DATA or the current buffer to solr's update endpoint.
 You need to wrap documents into a json array. The buffer as send
 as-is."
   (interactive)
-  (let* ((documents (or q (string-clean-whitespace (buffer-string))))
+  (let* ((documents (or data (string-clean-whitespace (buffer-string))))
          (url (url-encode-url (format "%s/solr/%s/update?wt=json&overwrite=true&commitWithin=%d"
                                       solr/base-url solr/core-name solr/commit-within)))
          (url-request-method "POST")
@@ -65,10 +65,10 @@ documents."
       (split-window-vertically)
       (pop-to-buffer (solr/--make-result-buffer)))))
 
-(defun solr/query-json ()
-  "Query solr for documents using buffer as json."
+(defun solr/query-json (&optional data)
+  "Query solr for documents using DATA or buffer as json."
   (interactive)
-  (let* ((query (string-clean-whitespace (buffer-string)))
+  (let* ((query (or data (string-clean-whitespace (buffer-string))))
          (url (url-encode-url
                (format "%s/solr/%s/query?wt=json&indent=true"
                        solr/base-url solr/core-name)))
@@ -109,16 +109,55 @@ documents."
     (insert-buffer-substring response)
     (goto-char (point-min))))
 
+(defun solr/--paragraph-at-point ()
+  "Return begin and end position of paragraph at point."
+  (let* ((curr-point (point))
+         (curly-close (search-forward-regexp "^\\]\\|^}"))
+         (curly-open (and curly-close (search-backward-regexp "^\\[\\|^{")))
+         (result (when curly-open `(:start ,curly-open :end ,curly-close))))
+    (when curly-open
+      ;; (set-mark curly-open)
+      ;; (goto-char curly-close)
+      (goto-char curr-point)
+      result)))
+
+(defun solr/--request-data-at-point ()
+  "Return request data at point."
+  (let* ((par (solr/--paragraph-at-point))
+         (beg (plist-get par :start))
+         (end (plist-get par :end))
+         (str (buffer-substring-no-properties beg end))
+         (type (if (string-prefix-p "[" str) :update :query))
+         (comment-start-regexp (concat "^.*" (or comment-start "//")))
+         (cnt (seq-filter
+               (lambda (line) (not (string-match-p comment-start-regexp line)))
+               (string-lines str t))))
+    (message "SOLR request: %s" cnt)
+    `(:type ,type :content ,(string-join cnt "\n"))))
+
+(defun solr/execute-at-point ()
+  "Run query or update of block at point."
+  (interactive)
+  (let* ((request (solr/--request-data-at-point))
+         (type (plist-get request :type)))
+    (cond ((eq type :update)
+           (solr/update-documents (plist-get request :content)))
+          ((eq type :query)
+           (solr/query-json (plist-get request :content))))))
 
 (define-minor-mode solr-minor-mode
   "Toggle solr minor mode."
   :init-value nil
   :lighter " SOLR"
   :keymap
-  `((,(kbd "C-c C-u") . solr/update-documents)
-    (,(kbd "C-c C-d") . solr/delete-documents)
-    (,(kbd "C-c C-j") . solr/query-json)
-    (,(kbd "C-c C-c") . solr/query-string)))
+  `((,(kbd "C-c C-d") . solr/delete-documents)
+    (,(kbd "C-c C-c") . solr/execute-at-point)))
+
+(define-derived-mode solr-client-mode
+  json-ts-mode "SOLR client"
+  "Major mode for SOLR client."
+  (define-key solr-client-mode-map (kbd "C-c C-c") 'solr/execute-at-point)
+  )
 
 (provide 'solr)
 ;;; solr.el ends here
