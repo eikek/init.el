@@ -116,8 +116,6 @@ documents."
          (curly-open (and curly-close (search-backward-regexp "^\\[\\|^{")))
          (result (when curly-open `(:start ,curly-open :end ,curly-close))))
     (when curly-open
-      ;; (set-mark curly-open)
-      ;; (goto-char curly-close)
       (goto-char curr-point)
       result)))
 
@@ -128,7 +126,8 @@ documents."
          (end (plist-get par :end))
          (str (buffer-substring-no-properties beg end))
          (type (if (string-prefix-p "[" str) :update :query))
-         (comment-start-regexp (concat "^.*" (or comment-start "//")))
+         (comment-start-regexp
+          (rx line-start (* white) (literal (or comment-start "//"))))
          (cnt (seq-filter
                (lambda (line) (not (string-match-p comment-start-regexp line)))
                (string-lines str t))))
