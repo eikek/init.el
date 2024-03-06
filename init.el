@@ -506,6 +506,11 @@
 (use-package restclient
   :commands (restclient-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; solr client
+(use-package solr
+  :load-path "lisp"
+  :commands (solr-client-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; paredit
@@ -1121,7 +1126,7 @@ rich-text version of what is assumed to be an org mode body."
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bloop\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.elm-stuff\\'")
-  (setq lsp-file-watch-threshold 1500)
+  (setq lsp-file-watch-threshold nil)
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
   (setq gc-cons-threshold 300000000)           ;; 100mb
   (setq read-process-output-max (* 1024 1024)) ;; 1mb

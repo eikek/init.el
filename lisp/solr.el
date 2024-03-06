@@ -43,6 +43,13 @@ documents."
          (cmd (format "{'delete': {'query':'%s'}}" query)))
     (solr/update-documents cmd)))
 
+(defun solr/delete-document-by-id (id)
+  "Delete documents by ID or current buffer.
+The ID will be wrapped into a delete command send to the update endpoint."
+  (interactive "MId: ")
+  (let* ((cmd (format "{'delete': {'id':'%s'}}" id)))
+    (solr/update-documents cmd)))
+
 (defun solr/query-string ()
   "Query solr for documents using buffer as query string."
   (interactive)
