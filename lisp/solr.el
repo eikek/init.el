@@ -102,7 +102,8 @@ The ID will be wrapped into a delete command send to the update endpoint."
     (with-current-buffer b
       (unless (eq major-mode 'json-ts-mode)
         (json-ts-mode)
-        (define-key json-ts-mode-map (kbd "C-c C-q")
+        (read-only-mode)
+        (define-key json-ts-mode-map (kbd "q")
                     (lambda ()
                       (interactive)
                       (bury-buffer)
@@ -112,9 +113,10 @@ The ID will be wrapped into a delete command send to the update endpoint."
 (defun solr/--copy-to-result-buffer (response)
   "Copy contents from the buffer RESPONSE to the result buffer."
   (with-current-buffer (solr/--make-result-buffer)
-    (erase-buffer)
-    (insert-buffer-substring response)
-    (goto-char (point-min))))
+    (let ((inhibit-read-only t))
+      (erase-buffer)
+      (insert-buffer-substring response)
+      (goto-char (point-min)))))
 
 (defun solr/--paragraph-at-point ()
   "Return begin and end position of paragraph at point."
@@ -162,8 +164,7 @@ The ID will be wrapped into a delete command send to the update endpoint."
 (define-derived-mode solr-client-mode
   json-ts-mode "SOLR client"
   "Major mode for SOLR client."
-  (define-key solr-client-mode-map (kbd "C-c C-c") 'solr/execute-at-point)
-  )
+  (define-key solr-client-mode-map (kbd "C-c C-c") 'solr/execute-at-point))
 
 (provide 'solr)
 ;;; solr.el ends here
