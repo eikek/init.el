@@ -826,7 +826,7 @@
   (setq org-todo-keywords
         '((sequence "WAIT(w@/!)" "BUG(b)" "TODO(t)" "WORKING(k!)" "|"
                     "DONE(d!)" "WONTFIX(n@)" "CANCELLED(c@)")))
-  (setq org-todo-keyword-faces
+  (setq org-todo-keyword-s
         '(("TODO" . "#8b0000")
           ("BUG" . "#8b0000")
           ("DONE" . "#6b8e23")))
@@ -1245,7 +1245,10 @@ rich-text version of what is assumed to be an org mode body."
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
           (nix "https://github.com/nix-community/tree-sitter-nix")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
-          (scala "https://github.com/tree-sitter/tree-sitter-scala"))))
+          (scala "https://github.com/tree-sitter/tree-sitter-scala")))
+  :config
+  ;; see https://github.com/KaranAhlawat/scala-ts-mode/issues/12
+  (setq treesit-font-lock-level 4))
 
 
 ;;; https://scalameta.org/metals/docs/editors/emacs.html
@@ -1656,11 +1659,11 @@ The `VALUE' may be 0=transparent to 100=opaque."
 
 (use-package doom-themes
   :config
-    (load-theme 'doom-1337 t)
+    (load-theme 'doom-lantern t)
     ;; change dirvish highlighted line color for theme doom-1337
-    (set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
+    ;;(set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
     (set-transparency)
-    (setq rainbow-delimiters-max-face-count 3))
+    (setq rainbow-delimiters-max-face-count 4))
 
 (use-package kaolin-themes)
 
