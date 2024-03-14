@@ -26,3 +26,8 @@ emojis/
 network-security.data
 /.cache
 tree-sitter/
+/eaf
+/eln-cache/
+/places
+/projects
+/var/

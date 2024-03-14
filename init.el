@@ -132,33 +132,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ivy / counsel / swiper
-
-;; (use-package ivy
-;;   :demand t
-;;   :diminish (ivy-mode)
-;;   :config
-;;   (ivy-mode 1)
-;;   (setq ivy-height 15)
-;;   (setq ivy-use-selectable-prompt t)
-;;   (setq ivy-use-virtual-buffers t))
-
-;; (use-package swiper
-;;   :bind (("C-s" . swiper)
-;;          ("C-c C-r" . ivy-resume)))
-
-;; (use-package counsel
-;;   :bind (("C-x C-f" . counsel-find-file)
-;;          ("C-x b" . counsel-switch-buffer)
-;;          ("C-x C-b" . counsel-ibuffer)
-;;          ("M-x" . counsel-M-x)
-;;          ("C-x l" . counsel-locate)
-;;          ("C-h f" . counsel-describe-function)
-;;          ("C-h v" . counsel-describe-variable)
-;;          (:map counsel-find-file-map
-;;                ("C-." . counsel-up-directory))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; consult / embark / marginalia / vertico
 
 (use-package consult
@@ -168,11 +141,6 @@
 ;;         ("C-c k" . consult-kmacro)
          ("C-c m" . consult-man)
          
-         ("C-c p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-         ("C-c p p" . consult-projectile-switch-project)
-         ("C-c p f" . consult-projectile-find-file)
-
-         ;;         ("C-c i" . consult-info)
          ([remap Info-search] . consult-info)
          ;; C-x bindings in `ctl-x-map'
  ;;        ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
@@ -204,6 +172,7 @@
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
          ("M-s l" . consult-line)
+         ("C-s" . consult-line)
          ("M-s L" . consult-line-multi)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
@@ -223,9 +192,7 @@
   ;; relevant when you use the default completion UI.
   :hook (completion-list-mode . consult-preview-at-point-mode)
 
-  ;; The :init configuration is always executed (Not lazy)
   :init
-
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
   ;; `consult-register-store' and the Emacs built-ins.
@@ -271,8 +238,7 @@
   ;; By default `consult-project-function' uses `project-root' from project.el.
   ;; Optionally configure a different project root function.
   (autoload 'projectile-project-root "projectile")
-  (setq consult-project-function (lambda (_) (projectile-project-root)))
-)
+  (setq consult-project-function (lambda (_) (projectile-project-root))))
 
 (use-package marginalia
   :config
@@ -626,7 +592,13 @@
 ;;; projectile
 
 (use-package projectile
-  :bind (("C-c pp" . consult-projectile-switch-project))
+;;  :bind (("C-c pp" . consult-projectile-switch-project))
+  :bind ("C-c p" . projectile-command-map)
+  :bind (:map projectile-command-map
+              ("p" . consult-projectile-switch-project)
+              ("b" . consult-projectile-switch-to-buffer)
+              ("d" . consult-projectile-find-dir)
+              ("f" . consult-projectile-find-file))
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-indexing-method 'alien)
@@ -826,10 +798,6 @@
   (setq org-todo-keywords
         '((sequence "WAIT(w@/!)" "BUG(b)" "TODO(t)" "WORKING(k!)" "|"
                     "DONE(d!)" "WONTFIX(n@)" "CANCELLED(c@)")))
-  (setq org-todo-keyword-s
-        '(("TODO" . "#8b0000")
-          ("BUG" . "#8b0000")
-          ("DONE" . "#6b8e23")))
   (setq org-deadline-warning-days 10)
   (setq org-log-into-drawer t)
   (setq org-src-fontify-natively t)
@@ -1659,7 +1627,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
 
 (use-package doom-themes
   :config
-    (load-theme 'doom-lantern t)
+    (load-theme 'doom-badger t)
     ;; change dirvish highlighted line color for theme doom-1337
     ;;(set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
     (set-transparency)
