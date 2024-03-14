@@ -598,7 +598,8 @@
               ("p" . consult-projectile-switch-project)
               ("b" . consult-projectile-switch-to-buffer)
               ("d" . consult-projectile-find-dir)
-              ("f" . consult-projectile-find-file))
+              ("f" . consult-projectile-find-file)
+              ("s s" . consult-ripgrep))
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-indexing-method 'alien)
