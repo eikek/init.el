@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fcc
+# key: fcc
+# --
+final case class $1($2)
