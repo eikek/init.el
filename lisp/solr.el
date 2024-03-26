@@ -100,14 +100,9 @@ The ID will be wrapped into a delete command send to the update endpoint."
   "Get or create the result buffer."
   (let ((b (get-buffer-create solr/--result-buffer-name)))
     (with-current-buffer b
-      (unless (eq major-mode 'json-ts-mode)
-        (json-ts-mode)
-        (read-only-mode)
-        (define-key json-ts-mode-map (kbd "q")
-                    (lambda ()
-                      (interactive)
-                      (bury-buffer)
-                      (delete-window)))))
+      (unless (eq major-mode 'solr-client-result-mode)
+        (solr-client-result-mode)
+        (read-only-mode)))
     b))
 
 (defun solr/--copy-to-result-buffer (response)
@@ -165,6 +160,15 @@ The ID will be wrapped into a delete command send to the update endpoint."
   json-ts-mode "SOLR client"
   "Major mode for SOLR client."
   (define-key solr-client-mode-map (kbd "C-c C-c") 'solr/execute-at-point))
+
+(define-derived-mode solr-client-result-mode
+  json-ts-mode "SOLR Results"
+  "Major mode for SOLR results."
+  (define-key solr-client-result-mode-map (kbd "q")
+              (lambda ()
+                (interactive)
+                (bury-buffer)
+                (delete-window))))
 
 (provide 'solr)
 ;;; solr.el ends here
