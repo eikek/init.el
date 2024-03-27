@@ -39,8 +39,8 @@ as-is."
 Q is just a solr query, it is wrapped into a command to delete
 documents."
   (interactive)
-  (let* ((query (or q (string-clean-whitespace (buffer-string))))
-         (cmd (format "{'delete': {'query':'%s'}}" query)))
+  (let* ((query (or q (format "{'query': '%s'}" (string-clean-whitespace (buffer-string)))))
+         (cmd (format "{'delete': %s}" query)))
     (solr/update-documents cmd)))
 
 (defun solr/delete-document-by-id (id)
@@ -148,6 +148,16 @@ The ID will be wrapped into a delete command send to the update endpoint."
           ((eq type :query)
            (solr/query-json (plist-get request :content))))))
 
+(defun solr/delete-at-point ()
+  "Delete documents using the query at point."
+  (interactive)
+  (let* ((request (solr/--request-data-at-point))
+         (type (plist-get request :type)))
+    (when (eq type :update)
+      (user-error "Thing at point is not a query, but seems to be an update block"))
+    (solr/delete-documents (plist-get request :content))))
+
+
 (define-minor-mode solr-minor-mode
   "Toggle solr minor mode."
   :init-value nil
@@ -159,7 +169,8 @@ The ID will be wrapped into a delete command send to the update endpoint."
 (define-derived-mode solr-client-mode
   json-ts-mode "SOLR client"
   "Major mode for SOLR client."
-  (define-key solr-client-mode-map (kbd "C-c C-c") 'solr/execute-at-point))
+  (define-key solr-client-mode-map (kbd "C-c C-c") 'solr/execute-at-point)
+  (define-key solr-client-mode-map (kbd "C-c C-d") 'solr/delete-at-point))
 
 (define-derived-mode solr-client-result-mode
   json-ts-mode "SOLR Results"
