@@ -1053,11 +1053,7 @@
               (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/posteo.de" "mailhost"))
               (smtpmail-smtp-user . ,(my/password-store-get-key "email/posteo.de" "user"))
-              (smtpmail-smtp-service . 587)
-              (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/posteo.de" "mailhost")
-                                             587
-                                             ,(my/password-store-get-key "email/posteo.de" "user")
-                                             ,(password-store-get "email/posteo.de")))))
+              (smtpmail-smtp-service . 587)))
     ,(make-mu4e-context
       :name "gmx.de"
       :enter-func (lambda () (mu4e-message "Switch to gmx.de context"))
@@ -1066,8 +1062,7 @@
                       (mu4e-message-contact-field-matches msg
                                                           '(:to :cc :bcc)
                                                           "@gmx.de$")))
-      :vars `((user-mail-address . "blueslike@gmx.de")
-              (user-full-name . "Eike Kettner")
+      :vars `((user-full-name . "Eike Kettner")
               (mu4e-maildir . "~/Mail")
               (mu4e-sent-folder . "/gmx/Gesendet")
               (mu4e-trash-folder . "/gmx/Trash")
@@ -1075,11 +1070,7 @@
               (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/gmx.de" "smtphost"))
               (smtpmail-smtp-user . ,(my/password-store-get-key "email/gmx.de" "user"))
-              (smtpmail-smtp-service . 587)
-              (smtpmail-auth-credentials . '(,(my/password-store-get-key "email/gmx.de" "smtphost")
-                                             587
-                                             ,(my/password-store-get-key "email/gmx.de" "user")
-                                             ,(password-store-get "email/gmx.de")))))))
+              (smtpmail-smtp-service . 587)))))
 (use-package mu4e
   :load-path my/mu4e-find-load-path
   :bind (("<f5>" . mu4e))
