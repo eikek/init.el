@@ -21,7 +21,7 @@ You need to wrap documents into a json array. The buffer as send
 as-is."
   (interactive)
   (let* ((documents (or data (string-clean-whitespace (buffer-string))))
-         (url (url-encode-url (format "%s/solr/%s/update?wt=json&overwrite=true&commitWithin=%d"
+         (url (url-encode-url (format "%s/solr/%s/update?wt=json&versions=true&overwrite=true&commitWithin=%d"
                                       solr/base-url solr/core-name solr/commit-within)))
          (url-request-method "POST")
          (url-request-extra-headers '(("Content-Type" . "application/json")))
@@ -31,7 +31,7 @@ as-is."
       (with-current-buffer result
         (goto-char (point-min))
         (if (thing-at-point-looking-at solr/--http-ok)
-            (message "Solr update successful.")
+            (pop-to-buffer result);; (message "Solr update successful.")
           (pop-to-buffer result))))))
 
 (defun solr/delete-documents (&optional q)
