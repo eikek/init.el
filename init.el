@@ -1044,8 +1044,7 @@
                       (mu4e-message-contact-field-matches msg
                                                           '(:to :cc :bcc)
                                                           "@posteo.de$")))
-      :vars `((user-mail-address . "eike.kettner@posteo.de")
-              (user-full-name . "Eike Kettner")
+      :vars `((user-full-name . "Eike Kettner")
               (mu4e-maildir . "~/Mail")
               (mu4e-sent-folder . "/posteo/Sent")
               (mu4e-trash-folder . "/posteo/Trash")
