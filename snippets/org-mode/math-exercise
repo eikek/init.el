@@ -1,0 +1,18 @@
+# name: simple math exercises
+# key: _mathex
+# --
+#+title: Übungen
+#+options: num:nil toc:nil author:nil date:nil title:nil
+#+latex_header: \setlength{\parindent}{0}
+#+latex_header: \usepackage[a4paper,left=3cm,right=3cm,top=1cm,bottom=1cm]{geometry}
+#+latex_header: \usepackage[utf8x]{inputenc}
+#+latex_header: \usepackage[fontsize=23pt]{fontsize}
+
+%% left aligned equation
+\begin{flalign}
+76140 : 4 = &&
+\end{flalign}
+\pagebreak
+\begin{flalign}
+56552 : 8 = &&
+\end{flalign}
