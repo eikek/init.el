@@ -1566,7 +1566,8 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package work
   :load-path "lisp"
-  :if (my/host-starts-with-p "staff")
+  :if (or (my/host-starts-with-p "poros")
+          (string-equal user-login-name "sdsc"))
   :demand t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
