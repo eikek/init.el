@@ -1052,6 +1052,7 @@
               (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/posteo.de" "mailhost"))
               (smtpmail-smtp-user . ,(my/password-store-get-key "email/posteo.de" "user"))
+              (smtpmail-stream-type 'starttls)
               (smtpmail-smtp-service . 587)))
     ,(make-mu4e-context
       :name "gmx.de"
