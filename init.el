@@ -1269,6 +1269,7 @@ rich-text version of what is assumed to be an org mode body."
   :bind (("<f8>" . treemacs)
          ("C-z C-z" . treemacs)
          (:map treemacs-mode-map
+               ("M" . treemacs-mark-or-unmark-path-at-point)
                ("<f8>" . treemacs-quit))))
 
 
