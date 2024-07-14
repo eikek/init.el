@@ -31,3 +31,5 @@ tree-sitter/
 /places
 /projects
 /var/
+.yas-compiled-snippets.el
+forge-database*

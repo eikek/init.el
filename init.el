@@ -1619,15 +1619,21 @@ The `VALUE' may be 0=transparent to 100=opaque."
                           :font fontname
                           :height size))
 
-(use-package doom-themes
-  :config
-    (load-theme 'doom-badger t)
-    ;; change dirvish highlighted line color for theme doom-1337
-    ;;(set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
-    (set-transparency)
-    (setq rainbow-delimiters-max-face-count 4))
+(use-package doom-themes)
 
 (use-package kaolin-themes)
+
+(defun my/theme-setup ()
+  "Setup Emacs theme, including some tweaks."
+  (load-theme 'kaolin-blossom t)
+  (setq rainbow-delimiters-max-face-count 4)
+  ;; change dirvish highlighted line color for theme doom-1337
+  ;;(set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
+  (set-transparency)
+  (set-background-color "gray8")
+  (set-cursor-color "orange"))
+
+(my/theme-setup)
 
 ;; must run: `M-x' `all-the-icons-install-fonts'
 (use-package all-the-icons)
