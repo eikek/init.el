@@ -562,7 +562,7 @@
      ("n" "/mnt/nas"  "NAS")))
   :config
   (setq dirvish-attributes
-        '(all-the-icons file-time file-size collapse subtree-state vc-state git-msg))
+        '(file-time file-size collapse subtree-state vc-state git-msg))
   :bind
   ((:map dirvish-mode-map
          ("a" . dirvish-quick-access)
