@@ -555,8 +555,33 @@
 (use-package dirvish
   :init
   ;; Let Dirvish take over Dired globally
-  (dirvish-override-dired-mode))
+  (dirvish-override-dired-mode)
+  :custom
+  (dirvish-quick-access-entries
+   '(("h" "~/"    "Home")
+     ("n" "/mnt/nas"  "NAS")))
+  :config
+  (setq dirvish-attributes
+        '(all-the-icons file-time file-size collapse subtree-state vc-state git-msg))
+  :bind
+  ((:map dirvish-mode-map
+         ("a" . dirvish-quick-access)
+         ("f" . dirvish-file-info-menu)
+         ("y" . dirvish-yank-menu)
+         ("N" . dirvish-narrow)
+         ;;("^" . dirvish-history-last)
+         ("h"   . dirvish-history-jump)
+         ("TAB" . dirvish-subtree-toggle)
+         ("M-f" . dirvish-history-go-forward)
+         ("M-b" . dirvish-history-go-backward)
+         ("M-m" . dirvish-mark-menu)
+         ("M-t" . dirvish-layout-toggle)
+         ("M-s" . dirvish-setup-menu)
+         ("M-e" . dirvish-emerge-menu)
+         ("M-j" . dirvish-fd-jump))))
 
+(use-package dirvish-yank)
+(use-package dirvish-vc)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; magit
