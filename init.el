@@ -564,7 +564,8 @@
   (setq dirvish-attributes
         '(file-time file-size collapse subtree-state vc-state git-msg))
   :bind
-  ((:map dirvish-mode-map
+  ((("C-z C-z" . dirvish-side)
+    :map dirvish-mode-map
          ("a" . dirvish-quick-access)
          ("f" . dirvish-file-info-menu)
          ("y" . dirvish-yank-menu)
@@ -1290,6 +1291,7 @@ rich-text version of what is assumed to be an org mode body."
 ;;; treemacs
 
 (use-package treemacs
+  :disabled t
   :commands (treemacs)
   :bind (("<f8>" . treemacs)
          ("C-z C-z" . treemacs)
