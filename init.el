@@ -1236,6 +1236,10 @@ rich-text version of what is assumed to be an org mode body."
 (use-package scala-ts-mode
   :mode "\\.s\\(cala\\|bt\\|c\\)$")
 
+(use-package scala-play
+  :load-path "lisp"
+  :commands scala-play-minor-mode)
+
 (use-package java-ts-mode
   :mode ("\\.java" . java-mode))
 
