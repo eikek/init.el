@@ -1318,7 +1318,16 @@ rich-text version of what is assumed to be an org mode body."
 (use-package lsp-ui
   :bind (:map lsp-ui-mode-map
               ("C-q" . lsp-ui-doc-show)
-              ("M-RET" . lsp-ui-sideline-apply-code-actions))
+              ("M-e" . lsp-ui-imenu)
+              ("M-RET" . lsp-ui-sideline-apply-code-actions)
+         :map lsp-ui-imenu-mode-map
+              ("C-<return>" . my/lsp-ui-imenu-visit-kill))
+  :init
+  (defun my/lsp-ui-imenu-visit-kill ()
+    (interactive)
+    (lsp-ui-imenu--visit)
+    (with-current-buffer "*lsp-ui-imenu*"
+      (lsp-ui-imenu--kill)))
   :config
   (lsp-ui-doc-mode nil)
   (setq lsp-ui-doc-use-childframe (display-graphic-p)))
