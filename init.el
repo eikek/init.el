@@ -1255,6 +1255,9 @@ rich-text version of what is assumed to be an org mode body."
    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
    (setq sbt:program-options '("-Dsbt.supershell=false")))
 
+(use-package python-ts-mode
+  :mode ("\\.py" . python-ts-mode))
+
 (use-package treesit
   :init
   (setq treesit-language-source-alist
@@ -1266,6 +1269,7 @@ rich-text version of what is assumed to be an org mode body."
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (python "https://github.com/tree-sitter/tree-sitter-python")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
           (nix "https://github.com/nix-community/tree-sitter-nix")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
@@ -1285,6 +1289,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
   (scala-ts-mode . lsp)
+  (python-ts-mode . lsp)
   ;;  (elm-mode . lsp)
 
   :config
