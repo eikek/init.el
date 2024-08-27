@@ -1258,6 +1258,11 @@ rich-text version of what is assumed to be an org mode body."
 (use-package python-ts-mode
   :mode ("\\.py" . python-ts-mode))
 
+(use-package lsp-pyright
+  :hook (python-ts-mode . (lambda ()
+                            (require 'lsp-pyright)
+                            (lsp))))
+
 (use-package treesit
   :init
   (setq treesit-language-source-alist
