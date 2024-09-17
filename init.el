@@ -1698,7 +1698,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
 (let ((size (if (display-graphic-p)
                 130
               120))
-      (fontname "Hack"))
+      (fontname "source code pro medium"))
   (set-face-attribute 'default nil
                           :font fontname
                           :height size))
