@@ -72,7 +72,7 @@ The ID will be wrapped into a delete command send to the update endpoint."
       (split-window-vertically)
       (pop-to-buffer (solr/--make-result-buffer)))))
 
-(defun solr/query-json (&optional data)
+(defun solr/query-json (&optional data suppress-pop)
   "Query solr for documents using DATA or buffer as json."
   (interactive)
   (let* ((query (or data (string-clean-whitespace (buffer-string))))
@@ -91,10 +91,11 @@ The ID will be wrapped into a delete command send to the update endpoint."
           (delete-line))
         (delete-line)))
     (solr/--copy-to-result-buffer result-buffer)
-    (save-excursion
-      (delete-other-windows)
-      (split-window-vertically)
-      (pop-to-buffer (solr/--make-result-buffer)))))
+    (unless suppress-pop
+      (save-excursion
+        (delete-other-windows)
+        (split-window-vertically)
+        (pop-to-buffer (solr/--make-result-buffer))))))
 
 (defun solr/--make-result-buffer ()
   "Get or create the result buffer."

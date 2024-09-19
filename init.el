@@ -652,6 +652,9 @@
   :load-path "lisp"
   :commands (solr-client-mode))
 
+(use-package ob-solr
+  :load-path "lisp")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; paredit
 

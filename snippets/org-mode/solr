@@ -1,0 +1,12 @@
+# name: solr client source block
+# key: src-solr
+# --
+
+#+header: :solr-url http://localhost:8983
+#+header: :solr-core testcore
+#+header: :solr-action :query
+#+begin_src solr-client :exports both :wrap src json-ts
+{
+  "query": "*:*"
+} $0
+#+end_src
