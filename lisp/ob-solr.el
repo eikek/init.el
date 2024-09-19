@@ -24,5 +24,5 @@
       (with-current-buffer (solr/--make-result-buffer) (buffer-string)))))
 
 
-(provide ob-solr.el)
+(provide 'ob-solr.el)
 ;;; ob-solr.el ends here

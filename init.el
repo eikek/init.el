@@ -653,7 +653,9 @@
   :commands (solr-client-mode))
 
 (use-package ob-solr
+  :after solr
   :load-path "lisp")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; paredit
@@ -1246,17 +1248,17 @@ rich-text version of what is assumed to be an org mode body."
 (use-package java-ts-mode
   :mode ("\\.java" . java-mode))
 
-(use-package sbt-mode
-  :commands sbt-start sbt-command
-  :config
-  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-  ;; allows using SPACE when in the minibuffer
-  (substitute-key-definition
-   'minibuffer-complete-word
-   'self-insert-command
-   minibuffer-local-completion-map)
-   ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
-   (setq sbt:program-options '("-Dsbt.supershell=false")))
+;; (use-package sbt-mode
+;;   :commands sbt-start sbt-command
+;;   :config
+;;   ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+;;   ;; allows using SPACE when in the minibuffer
+;;   (substitute-key-definition
+;;    'minibuffer-complete-word
+;;    'self-insert-command
+;;    minibuffer-local-completion-map)
+;;    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+;;    (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 (use-package python-ts-mode
   :mode ("\\.py" . python-ts-mode))
@@ -1316,8 +1318,6 @@ rich-text version of what is assumed to be an org mode body."
   ;;       (setq lsp-log-io nil)
   ;;       (setq lsp-completion-provider :capf)
   )
-
-(use-package lsp-metals)
 
 ;; (use-package lsp-ivy
 ;;   :commands lsp-ivy-workspace-symbol
