@@ -11,18 +11,15 @@
          (solr/base-url (or (cdr (assq :solr-url pp)) "http://localhost:8983"))
          (solr/core-name (or (cdr (assq :solr-core pp)) "solr"))
          (action (or (cdr (assq :solr-action pp)) :query))
-         (is-query (or (eq action :query) (equal action "query")))
-         (is-delete (or (eq action :delete) (equal action "delete"))))
+         (is-query (equal action "query"))
+         (is-delete (equal action "delete")))
     (with-temp-buffer
       (solr-client-mode)
       (insert (org-babel-expand-body:generic body params))
       (goto-char (point-min))
       (cond (is-query (solr/query-json nil t))
-            (is-delete (solr/delete-at-point))
-            (t (solr/execute-at-point))))
-    (when is-query
-      (with-current-buffer (solr/--make-result-buffer) (buffer-string)))))
+            (is-delete (solr/delete-at-point t))
+            (t (solr/execute-at-point t))))))
 
-
-(provide 'ob-solr.el)
+(provide 'ob-solr)
 ;;; ob-solr.el ends here

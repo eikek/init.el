@@ -4,9 +4,9 @@
 
 #+header: :solr-url http://localhost:8983
 #+header: :solr-core testcore
-#+header: :solr-action :query
+#+header: :solr-action query
 #+begin_src solr-client :exports both :wrap src json-ts
-{
+{ $0
   "query": "*:*"
-} $0
+}
 #+end_src

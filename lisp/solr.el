@@ -15,10 +15,11 @@
 (defvar solr/--http-ok "HTTP/1.1 200 OK")
 (defvar solr/--result-buffer-name "*SOLR Result*")
 
-(defun solr/update-documents (&optional data)
+(defun solr/update-documents (&optional data inhibit-result-window)
   "Send DATA or the current buffer to solr's update endpoint.
 You need to wrap documents into a json array. The buffer as send
-as-is."
+as-is. If INHIBIT-RESULT-WINDOW is non-nil, the response is
+returned as string, otherwise it is presented in a window."
   (interactive)
   (let* ((documents (or data (string-clean-whitespace (buffer-string))))
          (url (url-encode-url (format "%s/solr/%s/update?wt=json&versions=true&overwrite=true&commitWithin=%d"
@@ -27,31 +28,34 @@ as-is."
          (url-request-extra-headers '(("Content-Type" . "application/json")))
          (url-request-data documents)
          (result (url-retrieve-synchronously url nil t 30)))
-    (save-excursion
-      (with-current-buffer result
-        (goto-char (point-min))
-        (if (thing-at-point-looking-at solr/--http-ok)
-            (pop-to-buffer result);; (message "Solr update successful.")
-          (pop-to-buffer result))))))
+    (if inhibit-result-window
+        (with-current-buffer result
+          (buffer-substring-no-properties (point-min) (point-max)))
+      (solr/--show-result result))))
 
-(defun solr/delete-documents (&optional q)
+(defun solr/delete-documents (&optional q inhibit-result-window)
   "Delete documents via Q or current buffer.
 Q is just a solr query, it is wrapped into a command to delete
-documents."
+documents. With INHIBIT-RESULT-WINDOW non-nil, the result is
+returned as a string and not shown in a window."
   (interactive)
   (let* ((query (or q (format "{'query': '%s'}" (string-clean-whitespace (buffer-string)))))
          (cmd (format "{'delete': %s}" query)))
-    (solr/update-documents cmd)))
+    (solr/update-documents cmd inhibit-result-window)))
 
-(defun solr/delete-document-by-id (id)
+(defun solr/delete-document-by-id (id &optional inhibit-result-window)
   "Delete documents by ID or current buffer.
-The ID will be wrapped into a delete command send to the update endpoint."
+The ID will be wrapped into a delete command send to the update
+endpoint. With INHIBIT-RESULT-WINDOW non-nil, the result is
+returned as a string and not shown in a window."
   (interactive "MId: ")
   (let* ((cmd (format "{'delete': {'id':'%s'}}" id)))
-    (solr/update-documents cmd)))
+    (solr/update-documents cmd inhibit-result-window)))
 
-(defun solr/query-string ()
-  "Query solr for documents using buffer as query string."
+(defun solr/query-string (&optional inhibit-result-window)
+  "Query solr for documents using buffer as query string.
+With INHIBIT-RESULT-WINDOW non-nil, the result is returned as a
+string and not shown in a window."
   (interactive)
   (let* ((query (string-clean-whitespace (buffer-string)))
          (url (url-encode-url
@@ -66,14 +70,16 @@ The ID will be wrapped into a delete command send to the update endpoint."
         (while (not (string-equal "\n" (thing-at-point 'line)))
           (delete-line))
         (delete-line)))
-    (solr/--copy-to-result-buffer result-buffer)
-    (save-excursion
-      (delete-other-windows)
-      (split-window-vertically)
-      (pop-to-buffer (solr/--make-result-buffer)))))
+    (if inhibit-result-window
+        (with-current-buffer result-buffer
+          (buffer-substring-no-properties (point-min) (point-max)))
+      (solr/--show-result result-buffer))))
 
-(defun solr/query-json (&optional data suppress-pop)
-  "Query solr for documents using DATA or buffer as json."
+(defun solr/query-json (&optional data inhibit-result-window)
+  "Query solr for documents using DATA or buffer as json.
+
+When INHIBIT-RESULT-WINDOW is non-nil, the result is returned
+otherwise it is presented in a window."
   (interactive)
   (let* ((query (or data (string-clean-whitespace (buffer-string))))
          (url (url-encode-url
@@ -90,12 +96,20 @@ The ID will be wrapped into a delete command send to the update endpoint."
         (while (not (string-equal "\n" (thing-at-point 'line)))
           (delete-line))
         (delete-line)))
+    (if inhibit-result-window
+        (with-current-buffer result-buffer
+          (buffer-substring-no-properties (point-min) (point-max)))
+      (solr/--show-result result-buffer))))
+
+(defun solr/--show-result (result-buffer)
+  "Copies the contents from the url RESULT-BUFFER into a new buffer.
+The new buffer is better prepared to present the result to the user."
+  (let ((buf (solr/--make-result-buffer)))
     (solr/--copy-to-result-buffer result-buffer)
-    (unless suppress-pop
-      (save-excursion
-        (delete-other-windows)
-        (split-window-vertically)
-        (pop-to-buffer (solr/--make-result-buffer))))))
+    (save-excursion
+      (delete-other-windows)
+      (split-window-horizontally)
+      (pop-to-buffer buf))))
 
 (defun solr/--make-result-buffer ()
   "Get or create the result buffer."
@@ -139,24 +153,28 @@ The ID will be wrapped into a delete command send to the update endpoint."
     (message "SOLR request: %s" cnt)
     `(:type ,type :content ,(string-join cnt "\n"))))
 
-(defun solr/execute-at-point ()
-  "Run query or update of block at point."
+(defun solr/execute-at-point (&optional inhibit-result-window)
+  "Run query or update of block at point.
+With INHIBIT-RESULT-WINDOW non-nil, the result is returned as a
+string and not shown in a window."
   (interactive)
   (let* ((request (solr/--request-data-at-point))
          (type (plist-get request :type)))
     (cond ((eq type :update)
-           (solr/update-documents (plist-get request :content)))
+           (solr/update-documents (plist-get request :content) inhibit-result-window))
           ((eq type :query)
-           (solr/query-json (plist-get request :content))))))
+           (solr/query-json (plist-get request :content) inhibit-result-window)))))
 
-(defun solr/delete-at-point ()
-  "Delete documents using the query at point."
+(defun solr/delete-at-point (&optional inhibit-result-window)
+  "Delete documents using the query at point.
+With INHIBIT-RESULT-WINDOW non-nil, the result is returned as a
+string and not shown in a window."
   (interactive)
   (let* ((request (solr/--request-data-at-point))
          (type (plist-get request :type)))
     (when (eq type :update)
       (user-error "Thing at point is not a query, but seems to be an update block"))
-    (solr/delete-documents (plist-get request :content))))
+    (solr/delete-documents (plist-get request :content) inhibit-result-window)))
 
 
 (define-minor-mode solr-minor-mode
