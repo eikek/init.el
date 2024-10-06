@@ -15,7 +15,7 @@
     devshell-tools,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = nixpkgs.legacyPackages.\${system};
       devshellPkgs = with pkgs; [
         jq
         scala-cli
