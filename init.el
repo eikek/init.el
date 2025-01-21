@@ -1266,7 +1266,9 @@ rich-text version of what is assumed to be an org mode body."
 (use-package lsp-pyright
   :hook (python-ts-mode . (lambda ()
                             (require 'lsp-pyright)
-                            (lsp))))
+                            (lsp)))
+  :config
+  (setq lsp-pyright-langserver-command "basedpyright"))
 
 (use-package treesit
   :init
