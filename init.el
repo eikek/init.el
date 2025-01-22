@@ -1270,6 +1270,8 @@ rich-text version of what is assumed to be an org mode body."
   :config
   (setq lsp-pyright-langserver-command "basedpyright"))
 
+(use-package elpy)
+
 (use-package treesit
   :init
   (setq treesit-language-source-alist
