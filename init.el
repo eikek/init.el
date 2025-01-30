@@ -1264,13 +1264,14 @@ rich-text version of what is assumed to be an org mode body."
   :mode ("\\.py" . python-ts-mode))
 
 (use-package lsp-pyright
+  :custom (lsp-pyright-langserver-command "basedpyright")
   :hook (python-ts-mode . (lambda ()
                             (require 'lsp-pyright)
-                            (lsp)))
-  :config
-  (setq lsp-pyright-langserver-command "basedpyright"))
+                            (lsp-deferred))))
 
 (use-package elpy)
+(use-package ruff-format
+  )
 
 (use-package treesit
   :init
@@ -1302,9 +1303,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
-  (scala-ts-mode . lsp)
-  (python-ts-mode . lsp)
-  ;;  (elm-mode . lsp)
+  (scala-ts-mode . lsp-deferred)
 
   :config
   (setq lsp-prefer-flymake nil)
