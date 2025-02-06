@@ -1231,6 +1231,7 @@ rich-text version of what is assumed to be an org mode body."
   (emacs-lisp-mode . flycheck-mode))
 
 (use-package scala-mode
+  :disabled t
   :config
   (setq
     scala-indent:align-forms t
@@ -1270,8 +1271,7 @@ rich-text version of what is assumed to be an org mode body."
                             (lsp-deferred))))
 
 (use-package elpy)
-(use-package ruff-format
-  )
+(use-package ruff-format)
 
 (use-package treesit
   :init
@@ -1336,7 +1336,8 @@ rich-text version of what is assumed to be an org mode body."
               ("C-q" . lsp-ui-doc-show)
               ("M-e" . lsp-ui-imenu)
               ("M-RET" . lsp-ui-sideline-apply-code-actions)
-         :map lsp-ui-imenu-mode-map
+              ("M-g f" . consult-lsp-symbols)
+              :map lsp-ui-imenu-mode-map
               ("C-<return>" . my/lsp-ui-imenu-visit-kill))
   :init
   (defun my/lsp-ui-imenu-visit-kill ()
