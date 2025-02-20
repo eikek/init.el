@@ -1703,7 +1703,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
   (setq minions-direct '(projectile-mode)))
 
 (let ((size (if (display-graphic-p)
-                130
+                135
               120))
       (fontname "source code pro medium"))
   (set-face-attribute 'default nil
