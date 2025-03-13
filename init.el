@@ -1054,6 +1054,8 @@ shell exits, the buffer is killed."
 
     (setq org-koma-letter-default-class "my-letter")))
 
+(use-package ox-reveal)
+
 (use-package presentation
   :load-path "lisp"
   :commands (my/presentation-enable my/presentation-disable my/presentation-mode))
