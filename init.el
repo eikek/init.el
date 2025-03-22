@@ -1473,13 +1473,22 @@ rich-text version of what is assumed to be an org mode body."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; mermaid support
+
+(use-package mermaid
+  :commands (my/mermaid-compile-file my/mermaid-compile-markdown-code)
+  :load-path "lisp"
+  :bind (:map markdown-mode-map
+              ("C-c C-c r" . my/mermaid-compile-markdown-code)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; impatient-mode
 (use-package impatient-mode
   :commands (impatient-mode)
   :config
-  ;;; Start the server with M-x httpd-start
-  ;;; Tell impatient mode to use it: M-x imp-set-user-filter RET
-  ;;; my/imp-markdown-html RET.
+;;; Start the server with M-x httpd-start
+;;; Tell impatient mode to use it: M-x imp-set-user-filter RET
+;;; my/imp-markdown-html RET.
   (defun my/imp-markdown-html (buffer)
     (princ (with-current-buffer buffer
              (format "<!DOCTYPE html><html><title>Impatient Markdown</title><xmp theme=\"united\" style=\"display:none;\"> %s  </xmp><script src=\"http://strapdownjs.com/v/0.2/strapdown.js\"></script></html>" (buffer-substring-no-properties (point-min) (point-max))))
