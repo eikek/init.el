@@ -1070,6 +1070,15 @@ shell exits, the buffer is killed."
   (setq org-expenses/files "~/org/expenses/"))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ekg
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package ekg
+  :bind (([f11] . ekg-capture))
+  :config
+  (require 'ekg-auto-save)
+  (add-hook 'ekg-capture-mode-hook #'ekg-auto-save-mode)
+  (add-hook 'ekg-edit-mode-hook #'ekg-auto-save-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1080,7 +1089,7 @@ shell exits, the buffer is killed."
 ;;; mu4e
 
 ;; from emacs wiki: http://www.emacswiki.org/emacs/mu4e
- ;;; message view action
+;;; message view action
 (defun my/mu4e-msgv-action-view-in-browser (msg)
   "View the body of the message MSG in a web browser."
   (interactive)
