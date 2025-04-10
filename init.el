@@ -1074,11 +1074,33 @@ shell exits, the buffer is killed."
 ;;; ekg
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package ekg
-  :bind (([f11] . ekg-capture))
+  :bind (([f11] . ekg-capture)
+         (:map ekg-edit-mode-map
+               ("C-c C-t" . ek/ekg-edit-insert-tag)))
+  :commands (ekg-show-notes-latest-captured ekg-show-notes-for-today)
+  :custom-face
+  (ekg-tag
+   ((t :height 1.0 :weight semi-bold
+       :box (:line-width (1 . 1) :color "DeepSkyBlue1")
+       :foreground "DeepSkyBlue1"
+       :underline nil :inherit default)))
   :config
+  (setq ekg-db-file "~/org/triples.db")
   (require 'ekg-auto-save)
   (add-hook 'ekg-capture-mode-hook #'ekg-auto-save-mode)
-  (add-hook 'ekg-edit-mode-hook #'ekg-auto-save-mode))
+  (add-hook 'ekg-edit-mode-hook #'ekg-auto-save-mode)
+  (defun ek/ekg-edit-insert-tag ()
+    "Insert a TAG at point."
+    (interactive)
+    (let ((tag (completing-read "Tag: " (ekg-tags) nil t)))
+      (goto-char (pos-eol))
+      (re-search-backward "[^ \t\r]")
+      (if (looking-at-p ",")
+          (forward-char)
+        (progn
+            (forward-char)
+            (insert ",")))
+      (insert " " tag))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
