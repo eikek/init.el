@@ -1089,6 +1089,7 @@ shell exits, the buffer is killed."
   (require 'ekg-auto-save)
   (add-hook 'ekg-capture-mode-hook #'ekg-auto-save-mode)
   (add-hook 'ekg-edit-mode-hook #'ekg-auto-save-mode)
+  (add-to-list 'ekg-command-regex-for-narrowing "org-element-at-point" t)
   (defun ek/ekg-edit-insert-tag ()
     "Insert a TAG at point."
     (interactive)
@@ -1098,8 +1099,8 @@ shell exits, the buffer is killed."
       (if (looking-at-p ",")
           (forward-char)
         (progn
-            (forward-char)
-            (insert ",")))
+          (forward-char)
+          (insert ",")))
       (insert " " tag))))
 
 
