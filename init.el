@@ -1304,6 +1304,13 @@ rich-text version of what is assumed to be an org mode body."
                             (require 'lsp-pyright)
                             (lsp-deferred))))
 
+(use-package python-pytest
+  :config
+  (transient-append-suffix 'python-pytest-dispatch "-s"
+    '("-N" "No coverage" "--no-cov"))
+  (transient-append-suffix 'python-pytest-dispatch "-N"
+    '("-w" "No warnings" "-p no:warnings")))
+
 (use-package elpy)
 (use-package ruff-format)
 
