@@ -1766,7 +1766,7 @@ The `VALUE' may be 0=transparent to 100=opaque."
 
 (defun my/theme-setup ()
   "Setup Emacs theme, including some tweaks."
-  (load-theme 'doom-sourcerer t)
+  (load-theme 'doom-monokai-ristretto t)
   (setq rainbow-delimiters-max-face-count 4)
   ;; change dirvish highlighted line color for theme doom-1337
   ;;(set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
@@ -1846,6 +1846,10 @@ The `VALUE' may be 0=transparent to 100=opaque."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("30d174000ea9cbddecd6cc695943afb7dba66b302a14f9db5dd65074e70cc744"
+     "b754d3a03c34cfba9ad7991380d26984ebd0761925773530e24d8dd8b6894738"
+     default))
  '(mml-secure-openpgp-sign-with-sender t)
  '(send-mail-function 'smtpmail-send-it))
 
@@ -1874,3 +1878,9 @@ The `VALUE' may be 0=transparent to 100=opaque."
 ;;; init.el ends here
 
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil)))))
