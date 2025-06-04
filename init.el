@@ -1274,7 +1274,8 @@ rich-text version of what is assumed to be an org mode body."
     scala-indent:default-run-on-strategy 0))
 
 (use-package scala-ts-mode
-  :mode "\\.s\\(cala\\|bt\\|c\\)$")
+  :mode ("\\.s\\(cala\\|bt\\|c\\)$"
+         "\\.mill"))
 
 (use-package scala-play
   :load-path "lisp"
