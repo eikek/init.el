@@ -1077,7 +1077,7 @@ shell exits, the buffer is killed."
   :bind (([f11] . ekg-capture)
          (:map ekg-edit-mode-map
                ("C-c C-t" . ek/ekg-edit-insert-tag)))
-  :commands (ekg-show-notes-latest-captured ekg-show-notes-for-today)
+  :commands (ekg-show-notes-latest-captured ekg-show-notes-for-today ekg-show-notes-with-tag)
   :custom-face
   (ekg-tag
    ((t :height 1.0 :weight semi-bold
