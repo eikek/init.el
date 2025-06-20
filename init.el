@@ -1089,6 +1089,7 @@ shell exits, the buffer is killed."
   (require 'ekg-auto-save)
   (add-hook 'ekg-capture-mode-hook #'ekg-auto-save-mode)
   (add-hook 'ekg-edit-mode-hook #'ekg-auto-save-mode)
+  (add-hook 'ekg-notes-mode-hook (lambda () (org--set-tab-width))) ;; necessary because sometimes org blows up
   (add-to-list 'ekg-command-regex-for-narrowing "org-element-at-point" t)
   (defun ek/ekg-edit-insert-tag ()
     "Insert a TAG at point."
