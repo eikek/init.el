@@ -1768,10 +1768,10 @@ The `VALUE' may be 0=transparent to 100=opaque."
 
 (defun my/theme-setup ()
   "Setup Emacs theme, including some tweaks."
-  (load-theme 'doom-dracula t)
+  (load-theme 'doom-1337 t)
   (setq rainbow-delimiters-max-face-count 4)
   ;; change dirvish highlighted line color for theme doom-1337
-  ;;(set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
+  (set-face-attribute 'dirvish-hl-line nil :background "DodgerBlue2")
   (set-transparency)
   (set-background-color "gray8")
   (set-cursor-color "orange"))
