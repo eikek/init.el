@@ -35,6 +35,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; configure emacs look&feel
 
+;; don't need lock files
+;;(setq create-lockfiles nil)
+
+;; put lockfiles in /tmp, I'm the only user here
+(progn
+  (make-directory "/tmp/emacs-locks" t)
+  (setq lock-file-name-transforms
+      '(("\\`/.*/\\([^/]+\\)\\'" "/tmp/emacs-locks/\\1" t))))
+
+
 ;; backup stuff
 (use-package files
   :config
