@@ -1341,6 +1341,8 @@ rich-text version of what is assumed to be an org mode body."
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
           (nix "https://github.com/nix-community/tree-sitter-nix")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
+          (go  "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
           (scala "https://github.com/tree-sitter/tree-sitter-scala")))
   :config
   ;; see https://github.com/KaranAhlawat/scala-ts-mode/issues/12
@@ -1357,6 +1359,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
   (scala-ts-mode . lsp-deferred)
+  (go-ts-mode . lsp-deferred)
 
   :config
   (setq lsp-prefer-flymake nil)
@@ -1364,6 +1367,7 @@ rich-text version of what is assumed to be an org mode body."
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]target\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bloop\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]out")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.elm-stuff\\'")
   (setq lsp-file-watch-threshold nil)
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
