@@ -1326,6 +1326,12 @@ rich-text version of what is assumed to be an org mode body."
 (use-package elpy)
 (use-package ruff-format)
 
+(use-package go-ts-mode
+  :mode ("\\.go" . go-ts-mode))
+
+(use-package go-mod-ts-mode
+  :mode ("go.mod" . go-mod-ts-mode))
+
 (use-package treesit
   :init
   (setq treesit-language-source-alist
