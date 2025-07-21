@@ -1723,7 +1723,7 @@ rich-text version of what is assumed to be an org mode body."
 ;;; ess
 
 (use-package ess-site
-  :mode (("\\.R" . ess-mode)))
+  :mode (("\\.R" . ess-r-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
