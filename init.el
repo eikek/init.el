@@ -1364,6 +1364,7 @@ rich-text version of what is assumed to be an org mode body."
   (lsp-mode . lsp-lens-mode)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode . flycheck-mode)
+  (lsp-mode . lsp-treemacs-sync-mode)
   (scala-ts-mode . lsp-deferred)
   (go-ts-mode . lsp-deferred)
 
@@ -1418,13 +1419,14 @@ rich-text version of what is assumed to be an org mode body."
 ;;; treemacs
 
 (use-package treemacs
-  :disabled t
   :commands (treemacs)
   :bind (("<f8>" . treemacs)
-         ("C-z C-z" . treemacs)
-         (:map treemacs-mode-map
+           (:map treemacs-mode-map
                ("M" . treemacs-mark-or-unmark-path-at-point)
                ("<f8>" . treemacs-quit))))
+
+(use-package lsp-treemacs
+  :commands (lsp-treemacs-sync-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
