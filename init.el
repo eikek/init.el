@@ -61,7 +61,12 @@
 
 (use-package window
   :bind* (("C-–" . other-window)
-          ("C-•" . other-window)))
+          ("C-•" . other-window)
+          ("C-," . other-window)))
+
+(use-package winner
+  :bind* (("C-x <" . winner-undo)
+          ("C-x >" . winner-redo)))
 
 ;; some emacs gui tweaks
 (setq use-file-dialog nil)
@@ -641,7 +646,6 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-indexing-method 'alien)
   (setq projectile-completion-system 'auto)
-  (setq projectile-remember-window-configs t)
   (setq projectile-find-dir-includes-top-level t)
   (setq projectile-mode-line-prefix " Ƥ"))
 
