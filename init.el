@@ -1220,7 +1220,7 @@ shell exits, the buffer is killed."
 
   ;; see https://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries
   (add-to-list 'mu4e-bookmarks
-               `(,(concat "date:2w..now AND NOT m:/eknet/spam AND NOT "
+               `(,(concat "date:12w..now AND NOT m:/eknet/spam AND NOT "
                           "m:/eknet/LearnSpam AND NOT "
                           "m:/eknet/lists* ")
                  "No mailinglists, no spam" ?c))
