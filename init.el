@@ -1339,6 +1339,9 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package treesit
   :init
+
+  ;; update with
+  ;; (-each (-map 'car treesit-language-source-alist) 'treesit-install-language-grammar)
   (setq treesit-language-source-alist
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
           (css "https://github.com/tree-sitter/tree-sitter-css")
