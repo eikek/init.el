@@ -413,6 +413,7 @@
 (use-package display-line-numbers
   :commands (display-line-numbers-mode)
   :init
+  (setq display-line-numbers-type 'relative)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 
@@ -1515,7 +1516,9 @@ rich-text version of what is assumed to be an org mode body."
 
 (use-package yaml-mode
   :mode "\\.yml\\'"
-  :config (setq yaml-indent-offset 2))
+  :config
+  (setq yaml-indent-offset 2)
+  (add-hook 'yaml-mode-hook 'display-line-numbers-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; goto-chg
