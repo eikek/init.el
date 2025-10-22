@@ -880,6 +880,7 @@ shell exits, the buffer is killed."
   (setq org-todo-keywords
         '((sequence "WAIT(w@/!)" "BUG(b)" "TODO(t)" "WORKING(k!)" "|"
                     "DONE(d!)" "WONTFIX(n@)" "CANCELLED(c@)")))
+  (setq org-use-sub-superscripts nil)
   (setq org-deadline-warning-days 10)
   (setq org-log-into-drawer t)
   (setq org-src-fontify-natively t)
