@@ -913,7 +913,7 @@ shell exits, the buffer is killed."
      (C . t)
      (R . t)))
   ;; running scala code with ammonite
-  (setq org-babel-scala-command "amm")
+  (setq org-babel-scala-command "scala-cli")
   (setq org-babel-scala-wrapper-method "%s")
   (setq org-babel-clojure-backend 'cider)
 
