@@ -118,6 +118,7 @@
 (display-time-mode t)
 (setq-default tab-width 2
               indent-tabs-mode nil)
+(setq-default electric-indent-inhibit t)
 
 (add-to-list 'exec-path "~/bin")
 
@@ -1334,7 +1335,9 @@ rich-text version of what is assumed to be an org mode body."
 (use-package ruff-format)
 
 (use-package go-ts-mode
-  :mode ("\\.go" . go-ts-mode))
+  :mode ("\\.go" . go-ts-mode)
+  :config
+  (setq go-ts-mode-indent-offset 2))
 
 (use-package go-mod-ts-mode
   :mode ("go.mod" . go-mod-ts-mode))
