@@ -1167,7 +1167,6 @@ shell exits, the buffer is killed."
               (mu4e-sent-folder . "/posteo/Sent")
               (mu4e-trash-folder . "/posteo/Trash")
               (mu4e-drafts-folder . "/posteo/Drafts")
-              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/posteo.de" "mailhost"))
               (smtpmail-smtp-user . ,(my/password-store-get-key "email/posteo.de" "user"))
               (smtpmail-stream-type . starttls)
@@ -1185,7 +1184,6 @@ shell exits, the buffer is killed."
               (mu4e-sent-folder . "/gmx/Gesendet")
               (mu4e-trash-folder . "/gmx/Trash")
               (mu4e-drafts-folder . "/gmx/Entw&APw-rfe")
-              (mu4e-compose-signature . ,(concat "GPG/PGP: AD7AC35E\nhttps://docspell.org"))
               (smtpmail-smtp-server . ,(my/password-store-get-key "email/gmx.de" "smtphost"))
               (smtpmail-smtp-user . ,(my/password-store-get-key "email/gmx.de" "user"))
               (smtpmail-smtp-service . 587)))))
@@ -1891,6 +1889,43 @@ The `VALUE' may be 0=transparent to 100=opaque."
      "b754d3a03c34cfba9ad7991380d26984ebd0761925773530e24d8dd8b6894738"
      default))
  '(mml-secure-openpgp-sign-with-sender t)
+ '(package-selected-packages
+   '(acm adoc-mode all-the-icons-dired all-the-icons-ivy ansible
+         arduino-cli-mode autumn-light-theme badger-theme beacon
+         boron-theme buffer-move burly chee cider clipetty
+         clojure-ts-mode company-arduino company-auctex
+         company-nixos-options company-quickhelp consult-company
+         consult-dir consult-flycheck consult-lsp consult-projectile
+         consult-yasnippet counsel-org-clock counsel-projectile
+         csv-mode darcula-theme darktooth-theme dashboard denote
+         dhall-mode dictcc diminish dired-filter dired-rainbow
+         dired-ranger dired-sidebar dirvish docker docker-compose-mode
+         dockerfile-mode doom-modeline doom-themes edit-server
+         editorconfig elm-mode elpy elvish-mode embark-consult ement
+         emmet-mode envrc eshell-git-prompt ess exec-path-from-shell
+         expand-region eyebrowse fill-column-indicator fish-completion
+         fish-mode flycheck-kotlin flycheck-rust flymd forge
+         geiser-guile ggtags git-gutter-fringe git-timemachine
+         golden-ratio goto-chg groovy-mode gruvbox-theme helm
+         hide-lines humanoid-themes imenu-extra imenu-list
+         impatient-mode inkpot-theme js2-mode kaolin-themes keycast
+         kotlin-mode kubernetes kv leuven-theme logview lsp-bridge
+         lsp-java lsp-metals lsp-pyright lsp-ui magnatune marginalia
+         minions modus-themes monroe move-text multiple-cursors
+         nameless nerd-icons-dired nix-haskell-mode nix-ts-mode
+         nyan-mode ob-elvish ob-mongo ob-restclient ob-rust orderless
+         org-bullets org-contrib org-journal org-modern org-tree-slide
+         ox-asciidoc ox-gfm ox-reveal paredit pass pdf-tools
+         plantuml-mode platformio-mode plz-event-source poetry poly-R
+         psc-ide psci python-pytest rainbow-delimiters rainbow-mode
+         reykjavik-theme rfc-mode ruff-format rustic sass-mode
+         sbt-mode scad-mode sexy-monochrome-theme slime
+         soft-charcoal-theme soft-stone-theme solaire-mode
+         solarized-theme spacemacs-theme sparql-mode sqlite3
+         stimmung-themes stumpwm-mode sublime-themes svg-tag-mode
+         use-package vertico visual-fill-column vterm-toggle vue-mode
+         web-mode wgrep which-key whitespace-cleanup-mode
+         zenburn-theme))
  '(send-mail-function 'smtpmail-send-it))
 
 
