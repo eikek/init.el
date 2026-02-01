@@ -518,7 +518,7 @@
 (use-package ds4e-search
   :commands (ds4e-search)
   :config
-  ;(setq ds4e-dsc-executable "/home/eike/workspace/projects/dsc/target/debug/dsc")
+  (setq ds4e-dsc-executable "/home/eike/bin/dsc")
   )
 
 
