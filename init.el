@@ -1089,6 +1089,24 @@ shell exits, the buffer is killed."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; gptel
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package gptel
+  :config
+  (setq
+   gptel-model "qwen2.5-coder"
+   gptel-use-curl t
+   gptel-use-tools t
+   gptel-confirm-tool-calls 'always
+   gptel-backend (gptel-make-openai "llm.daheim.site"
+                   :protocol "https"
+                   :host "llm.daheim.site"
+                   :key (auth-source-pass-get "llm.daheim.site" "api-key")
+                   :endpoint "/api/chat/completions"
+                   :stream t
+                   :models '("qwen2.5-coder:7b" "gemma3:latest"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ekg
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package ekg
