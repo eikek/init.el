@@ -1094,17 +1094,17 @@ shell exits, the buffer is killed."
 (use-package gptel
   :config
   (setq
-   gptel-model "qwen2.5-coder"
+   gptel-model 'qwen2.5-coder:7b
    gptel-use-curl t
    gptel-use-tools t
    gptel-confirm-tool-calls 'always
    gptel-backend (gptel-make-openai "llm.daheim.site"
                    :protocol "https"
                    :host "llm.daheim.site"
-                   :key (auth-source-pass-get "llm.daheim.site" "api-key")
+                   :key (password-store-get-field "home/llm.daheim.site" "api-key")
                    :endpoint "/api/chat/completions"
                    :stream t
-                   :models '("qwen2.5-coder:7b" "gemma3:latest"))))
+                   :models '("qwen2.5-coder:7b" "gemma3:latest" "mistral:latest" "gemma4:latest"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ekg
@@ -1127,6 +1127,20 @@ shell exits, the buffer is killed."
   (add-hook 'ekg-edit-mode-hook #'ekg-auto-save-mode)
   (add-hook 'ekg-notes-mode-hook (lambda () (org--set-tab-width))) ;; necessary because sometimes org blows up
   (add-to-list 'ekg-command-regex-for-narrowing "org-element-at-point" t)
+
+  (require 'llm-openai)
+  (require 'ekg-llm)
+  (require 'ekg-embedding)
+  (ekg-embedding-generate-on-save)
+  (let ((my-prov (make-llm-openai-compatible
+                  :url "https://llm.daheim.site/ollama/v1"
+                  :key (password-store-get-field "home/llm.daheim.site" "api-key")
+                  :embedding-model "mistral:latest"
+                  :chat-model "mistral:latest")))
+    (setq ekg-llm-provider my-prov
+          ekg-embedding-provider my-prov))
+  
+
   (defun ek/ekg-edit-insert-tag ()
     "Insert a TAG at point."
     (interactive)
